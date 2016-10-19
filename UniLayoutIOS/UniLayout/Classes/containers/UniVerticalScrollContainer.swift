@@ -8,22 +8,22 @@
 
 import UIKit
 
-class UniVerticalScrollContainer: UIScrollView, UniLayoutView {
+open class UniVerticalScrollContainer: UIScrollView, UniLayoutView {
     
     // ---
     // MARK: Members
     // ---
 
-    var layoutProperties = UniLayoutProperties()
+    public var layoutProperties = UniLayoutProperties()
     private var _contentView: UIView?
-    var fillContent: Bool = false
+    public var fillContent: Bool = false
 
 
     // ---
     // MARK: Set content view
     // ---
 
-    var contentView: UIView? {
+    public var contentView: UIView? {
         get {
             return _contentView
         }
@@ -132,15 +132,15 @@ class UniVerticalScrollContainer: UIScrollView, UniLayoutView {
         return measuredSize
     }
     
-    internal func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
+    open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         return performLayout(sizeSpec: sizeSpec, widthSpec: widthSpec, heightSpec: heightSpec, adjustFrames: false)
     }
     
-    internal override func layoutSubviews() {
+    open override func layoutSubviews() {
         performLayout(sizeSpec: frame.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
     }
     
-    internal override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
    

@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum UniMeasureSpec {
+public enum UniMeasureSpec {
     
     case unspecified
     case limitSize
@@ -16,47 +16,47 @@ enum UniMeasureSpec {
     
 }
 
-protocol UniLayoutView {
+public protocol UniLayoutView {
     
     var layoutProperties: UniLayoutProperties { get set }
     func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize
     
 }
 
-class UniLayoutProperties {
+public class UniLayoutProperties {
     
     // ---
     // MARK: Constants for measuring
     // ---
 
-    static let unspecified: Int = 0
-    static let limitSize: Int = 1
-    static let exactSize: Int = 2
+    public static let unspecified: Int = 0
+    public static let limitSize: Int = 1
+    public static let exactSize: Int = 2
 
 
     // ---
     // MARK: Constants for automatic sizing
     // ---
 
-    static let stretchToParent: CGFloat = -1
-    static let fitContent: CGFloat = -2
+    public static let stretchToParent: CGFloat = -1
+    public static let fitContent: CGFloat = -2
     
 
     // ---
     // MARK: Properties for layout
     // ---
 
-    var padding = UIEdgeInsetsMake(0, 0, 0, 0)
-    var margin = UIEdgeInsetsMake(0, 0, 0, 0)
-    var minWidth: CGFloat = 0
-    var maxWidth: CGFloat = 0xFFFFFF
-    var minHeight: CGFloat = 0
-    var maxHeight: CGFloat = 0xFFFFFF
-    var width: CGFloat = UniLayoutProperties.fitContent
-    var height: CGFloat = UniLayoutProperties.fitContent
-    var horizontalGravity: CGFloat = 0
-    var verticalGravity: CGFloat = 0
-    var weight: CGFloat = 0
-    var hiddenTakesSpace = false
+    public var padding = UIEdgeInsetsMake(0, 0, 0, 0)
+    public var margin = UIEdgeInsetsMake(0, 0, 0, 0)
+    public var minWidth: CGFloat = 0
+    public var maxWidth: CGFloat = 0xFFFFFF
+    public var minHeight: CGFloat = 0
+    public var maxHeight: CGFloat = 0xFFFFFF
+    public var width: CGFloat = UniLayoutProperties.fitContent
+    public var height: CGFloat = UniLayoutProperties.fitContent
+    public var horizontalGravity: CGFloat = 0
+    public var verticalGravity: CGFloat = 0
+    public var weight: CGFloat = 0
+    public var hiddenTakesSpace = false
 
 }

@@ -8,20 +8,20 @@
 
 import UIKit
 
-class UniView: UIView, UniLayoutView {
+open class UniView: UIView, UniLayoutView {
 
     // ---
     // MARK: Members
     // ---
 
-    var layoutProperties = UniLayoutProperties()
+    public var layoutProperties = UniLayoutProperties()
     
 
     // ---
     // MARK: Custom layout
     // ---
     
-    internal func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
+    open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         var result = CGSize(width: layoutProperties.padding.left + layoutProperties.padding.right, height: layoutProperties.padding.top + layoutProperties.padding.bottom)
         if widthSpec == .exactSize {
             result.width = sizeSpec.width
@@ -36,7 +36,7 @@ class UniView: UIView, UniLayoutView {
         return result
     }
 
-    internal override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
     

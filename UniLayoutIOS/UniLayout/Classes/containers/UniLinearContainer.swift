@@ -8,21 +8,21 @@
 
 import UIKit
 
-enum UniLinearContainerOrientation: String {
+public enum UniLinearContainerOrientation: String {
     
     case vertical = "vertical"
     case horizontal = "horizontal"
     
 }
 
-class UniLinearContainer: UIView, UniLayoutView {
+open class UniLinearContainer: UIView, UniLayoutView {
 
     // ---
     // MARK: Members
     // ---
     
-    var layoutProperties = UniLayoutProperties()
-    var orientation = UniLinearContainerOrientation.vertical
+    public var layoutProperties = UniLayoutProperties()
+    public var orientation = UniLinearContainerOrientation.vertical
 
     
     // ---
@@ -371,14 +371,14 @@ class UniLinearContainer: UIView, UniLayoutView {
         return measuredSize
     }
 
-    internal func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
+    open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         if orientation == .vertical {
             return performVerticalLayout(sizeSpec: sizeSpec, widthSpec: widthSpec, heightSpec: heightSpec, adjustFrames: false)
         }
         return performHorizontalLayout(sizeSpec: sizeSpec, widthSpec: widthSpec, heightSpec: heightSpec, adjustFrames: false)
     }
     
-    internal override func layoutSubviews() {
+    open override func layoutSubviews() {
         if orientation == .vertical {
             performVerticalLayout(sizeSpec: frame.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
         } else {
@@ -386,7 +386,7 @@ class UniLinearContainer: UIView, UniLayoutView {
         }
     }
     
-    internal override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
     

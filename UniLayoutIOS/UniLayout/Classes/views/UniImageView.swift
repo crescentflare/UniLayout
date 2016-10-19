@@ -8,13 +8,13 @@
 
 import UIKit
 
-class UniImageView: UIView, UniLayoutView {
+public class UniImageView: UIView, UniLayoutView {
 
     // ---
     // MARK: Members
     // ---
 
-    var layoutProperties = UniLayoutProperties()
+    public var layoutProperties = UniLayoutProperties()
     private var imageView = UIImageView()
     
 
@@ -22,7 +22,7 @@ class UniImageView: UIView, UniLayoutView {
     // MARK: UIImageView properties
     // ---
     
-    var image: UIImage? {
+    public var image: UIImage? {
         get {
             return imageView.image
         }
@@ -31,7 +31,7 @@ class UniImageView: UIView, UniLayoutView {
         }
     }
     
-    var highlightedImage: UIImage? {
+    public var highlightedImage: UIImage? {
         get {
             return imageView.highlightedImage
         }
@@ -40,7 +40,7 @@ class UniImageView: UIView, UniLayoutView {
         }
     }
     
-    var animationDuration: TimeInterval {
+    public var animationDuration: TimeInterval {
         get {
             return imageView.animationDuration
         }
@@ -49,7 +49,7 @@ class UniImageView: UIView, UniLayoutView {
         }
     }
     
-    var animationImages: [UIImage]? {
+    public var animationImages: [UIImage]? {
         get {
             return imageView.animationImages
         }
@@ -58,7 +58,7 @@ class UniImageView: UIView, UniLayoutView {
         }
     }
     
-    var highlightedAnimationImages: [UIImage]? {
+    public var highlightedAnimationImages: [UIImage]? {
         get {
             return imageView.highlightedAnimationImages
         }
@@ -67,7 +67,7 @@ class UniImageView: UIView, UniLayoutView {
         }
     }
     
-    var animationRepeatCount: Int {
+    public var animationRepeatCount: Int {
         get {
             return imageView.animationRepeatCount
         }
@@ -76,13 +76,13 @@ class UniImageView: UIView, UniLayoutView {
         }
     }
     
-    var isAnimating: Bool {
+    public var isAnimating: Bool {
         get {
             return imageView.isAnimating
         }
     }
     
-    var internalImageView: UIImageView {
+    public var internalImageView: UIImageView {
         get {
             return imageView
         }
@@ -93,12 +93,12 @@ class UniImageView: UIView, UniLayoutView {
     // MARK: Initialization
     // ---
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
@@ -112,7 +112,7 @@ class UniImageView: UIView, UniLayoutView {
     // MARK: Custom layout
     // ---
 
-    internal func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
+    public func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         var result = CGSize(width: layoutProperties.padding.left + layoutProperties.padding.right, height: layoutProperties.padding.top + layoutProperties.padding.bottom)
         if let image = imageView.image {
             result.width += image.size.width
@@ -131,16 +131,16 @@ class UniImageView: UIView, UniLayoutView {
         return result
     }
     
-    internal override func layoutSubviews() {
+    public override func layoutSubviews() {
         let padding = layoutProperties.padding
         imageView.frame = CGRect(x: padding.left, y: padding.top, width: max(0, frame.width - padding.left - padding.right), height: max(0, frame.height - padding.top - padding.bottom))
     }
     
-    internal override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    public override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
     
-    internal override var intrinsicContentSize : CGSize {
+    public override var intrinsicContentSize : CGSize {
         return imageView.intrinsicContentSize
     }
 
