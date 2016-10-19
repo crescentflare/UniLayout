@@ -1,0 +1,9 @@
+use_frameworks!
+
+target 'UniLayout_Example' do
+  pod 'UniLayout', :path => '../../'
+
+  target 'UniLayout_Tests' do
+    inherit! :search_paths
+  end
+end

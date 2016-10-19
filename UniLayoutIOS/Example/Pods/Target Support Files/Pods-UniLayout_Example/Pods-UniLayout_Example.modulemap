@@ -1,0 +1,6 @@
+framework module Pods_UniLayout_Example {
+  umbrella header "Pods-UniLayout_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
