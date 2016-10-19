@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion '23.0.2'
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0.0"
+        applicationId "com.crescentflare.unilayoutexample"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("./example.jks")
+            storePassword "example"
+            keyAlias "Example"
+            keyPassword "example"
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            testCoverageEnabled false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile project(':UniLayoutLib')
+}
