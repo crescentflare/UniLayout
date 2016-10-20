@@ -13,7 +13,7 @@ import com.crescentflare.unilayout.helpers.UniLayoutParams;
  * UniLayout container: an overlapping view container
  * Overlaps and aligns views within the container
  */
-public class UniFrameContainer extends FrameLayout
+public class UniFrameContainer extends ViewGroup
 {
     // ---
     // Initialization

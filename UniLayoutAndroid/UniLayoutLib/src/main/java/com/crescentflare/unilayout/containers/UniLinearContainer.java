@@ -16,8 +16,23 @@ import java.util.List;
  * UniLayout container: a vertically or horizontally aligned view container
  * Stacks views below or to the right of each other
  */
-public class UniLinearContainer extends LinearLayout
+public class UniLinearContainer extends ViewGroup
 {
+    // ---
+    // Constants
+    // ---
+
+    public static final int VERTICAL = LinearLayout.VERTICAL;
+    public static final int HORIZONTAL = LinearLayout.HORIZONTAL;
+
+
+    // ---
+    // Members
+    // ---
+
+    int orientation = VERTICAL;
+
+
     // ---
     // Initialization
     // ---
@@ -45,7 +60,21 @@ public class UniLinearContainer extends LinearLayout
 
     private void init(AttributeSet attrs)
     {
-        setOrientation(VERTICAL);
+    }
+
+
+    // ---
+    // Adjust properties
+    // ---
+
+    public int getOrientation()
+    {
+        return orientation;
+    }
+
+    public void setOrientation(int orientation)
+    {
+        this.orientation = orientation;
     }
 
 
