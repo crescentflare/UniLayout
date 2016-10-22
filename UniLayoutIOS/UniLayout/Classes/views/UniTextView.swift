@@ -15,6 +15,19 @@ public class UniTextView: UILabel, UniLayoutView {
     // ---
 
     public var layoutProperties = UniLayoutProperties()
+
+    
+    // ---
+    // MARK: Hook layout into text changes
+    // ---
+    
+    public override var text: String? {
+        set {
+            super.text = newValue
+            setNeedsLayout()
+        }
+        get { return super.text }
+    }
     
 
     // ---
@@ -64,6 +77,13 @@ public class UniTextView: UILabel, UniLayoutView {
     
     public override func drawText(in rect: CGRect) {
         super.drawText(in: UIEdgeInsetsInsetRect(rect, layoutProperties.padding))
+    }
+    
+    public override func setNeedsLayout() {
+        super.setNeedsLayout()
+        if superview is UniLayoutView {
+            superview?.setNeedsLayout()
+        }
     }
 
 }

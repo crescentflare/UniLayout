@@ -8,14 +8,14 @@
 
 import UIKit
 
-public class UniImageView: UIView, UniLayoutView {
+open class UniImageView: UIView, UniLayoutView {
 
     // ---
     // MARK: Members
     // ---
 
     public var layoutProperties = UniLayoutProperties()
-    private var imageView = UIImageView()
+    private var imageView = UniNotifiyingImageView()
     
 
     // ---
@@ -112,7 +112,7 @@ public class UniImageView: UIView, UniLayoutView {
     // MARK: Custom layout
     // ---
 
-    public func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
+    open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         var result = CGSize(width: layoutProperties.padding.left + layoutProperties.padding.right, height: layoutProperties.padding.top + layoutProperties.padding.bottom)
         if let image = imageView.image {
             result.width += image.size.width
@@ -131,17 +131,47 @@ public class UniImageView: UIView, UniLayoutView {
         return result
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         let padding = layoutProperties.padding
         imageView.frame = CGRect(x: padding.left, y: padding.top, width: max(0, frame.width - padding.left - padding.right), height: max(0, frame.height - padding.top - padding.bottom))
     }
     
-    public override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
     
-    public override var intrinsicContentSize : CGSize {
+    open override var intrinsicContentSize : CGSize {
         return imageView.intrinsicContentSize
+    }
+
+    open override func setNeedsLayout() {
+        super.setNeedsLayout()
+        if superview is UniLayoutView {
+            superview?.setNeedsLayout()
+        }
+    }
+
+}
+
+class UniNotifiyingImageView: UIImageView {
+
+    // ---
+    // MARK: Hook layout into image changes
+    // ---
+    
+    override var image: UIImage? {
+        set {
+            super.image = newValue
+            setNeedsLayout()
+        }
+        get { return super.image }
+    }
+
+    override func setNeedsLayout() {
+        super.setNeedsLayout()
+        if superview is UniLayoutView {
+            superview?.setNeedsLayout()
+        }
     }
 
 }

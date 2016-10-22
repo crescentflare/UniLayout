@@ -389,5 +389,12 @@ open class UniLinearContainer: UIView, UniLayoutView {
     open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
-    
+ 
+    open override func setNeedsLayout() {
+        super.setNeedsLayout()
+        if superview is UniLayoutView {
+            superview?.setNeedsLayout()
+        }
+    }
+
 }
