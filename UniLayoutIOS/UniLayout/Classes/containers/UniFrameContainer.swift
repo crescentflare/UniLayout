@@ -119,6 +119,19 @@ open class UniFrameContainer: UIView, UniLayoutView {
     open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
+    
+    
+    // ---
+    // MARK: Improve layout needed behavior
+    // ---
+
+    open override func willRemoveSubview(_ subview: UIView) {
+        setNeedsLayout()
+    }
+    
+    open override func didAddSubview(_ subview: UIView) {
+        setNeedsLayout()
+    }
  
     open override func setNeedsLayout() {
         super.setNeedsLayout()
