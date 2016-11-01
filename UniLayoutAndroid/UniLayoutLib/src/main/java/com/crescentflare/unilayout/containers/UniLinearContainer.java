@@ -214,7 +214,7 @@ public class UniLinearContainer extends ViewGroup
                     int viewWidthSize = paddedWidthSize;
                     int viewHeightSize = remainingHeight;
                     viewWidthSize = Math.max(0, viewWidthSize - uniLayoutParams.leftMargin - uniLayoutParams.rightMargin);
-                    viewHeightSize = Math.max(0, viewHeightSize - uniLayoutParams.topMargin - uniLayoutParams.bottomMargin);
+                    viewHeightSize = Math.max(0, viewHeightSize);
                     if (widthSpec == MeasureSpec.EXACTLY && uniLayoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT)
                     {
                         viewWidthSize = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, uniLayoutParams.maxWidth));
@@ -238,7 +238,6 @@ public class UniLinearContainer extends ViewGroup
                     int resultHeight = view.getMeasuredHeight();
                     resultWidth = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, resultWidth));
                     resultHeight = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, resultHeight));
-                    remainingHeight -= uniLayoutParams.topMargin + uniLayoutParams.bottomMargin;
                     measuredChildSizes.get(i).set(resultWidth, adjustLayout ? resultHeight : Math.min(viewHeightSize, uniLayoutParams.minHeight));
                     remainingHeight -= resultHeight;
                     totalWeight -= uniLayoutParams.weight;
@@ -435,7 +434,7 @@ public class UniLinearContainer extends ViewGroup
                     int viewHeightSpec = heightSpec == MeasureSpec.UNSPECIFIED ? MeasureSpec.UNSPECIFIED : MeasureSpec.AT_MOST;
                     int viewWidthSize = remainingWidth;
                     int viewHeightSize = paddedHeightSize;
-                    viewWidthSize = Math.max(0, viewWidthSize - uniLayoutParams.leftMargin - uniLayoutParams.rightMargin);
+                    viewWidthSize = Math.max(0, viewWidthSize);
                     viewHeightSize = Math.max(0, viewHeightSize - uniLayoutParams.topMargin - uniLayoutParams.bottomMargin);
                     viewWidthSize = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, Math.min(wantWidth, uniLayoutParams.maxWidth)));
                     viewWidthSpec = MeasureSpec.EXACTLY;
@@ -460,7 +459,6 @@ public class UniLinearContainer extends ViewGroup
                     int resultHeight = view.getMeasuredHeight();
                     resultWidth = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, resultWidth));
                     resultHeight = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, resultHeight));
-                    remainingWidth -= uniLayoutParams.leftMargin + uniLayoutParams.rightMargin;
                     measuredChildSizes.get(i).set(adjustLayout ? resultWidth : Math.min(viewWidthSize, uniLayoutParams.minWidth), resultHeight);
                     remainingWidth -= resultWidth;
                     totalWeight -= uniLayoutParams.weight;
