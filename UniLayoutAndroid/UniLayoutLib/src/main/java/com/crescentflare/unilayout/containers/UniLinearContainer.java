@@ -236,14 +236,10 @@ public class UniLinearContainer extends ViewGroup
                     view.measure(MeasureSpec.makeMeasureSpec(viewWidthSize, viewWidthSpec), MeasureSpec.makeMeasureSpec(viewHeightSize, viewHeightSpec));
                     int resultWidth = view.getMeasuredWidth();
                     int resultHeight = view.getMeasuredHeight();
-                    if (!adjustLayout)
-                    {
-                        resultHeight = 0;
-                    }
                     resultWidth = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, resultWidth));
                     resultHeight = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, resultHeight));
                     remainingHeight -= uniLayoutParams.topMargin + uniLayoutParams.bottomMargin;
-                    measuredChildSizes.get(i).set(resultWidth, resultHeight);
+                    measuredChildSizes.get(i).set(resultWidth, adjustLayout ? resultHeight : Math.min(viewHeightSize, uniLayoutParams.minHeight));
                     remainingHeight -= resultHeight;
                     totalWeight -= uniLayoutParams.weight;
                 }
@@ -462,14 +458,10 @@ public class UniLinearContainer extends ViewGroup
                     view.measure(MeasureSpec.makeMeasureSpec(viewWidthSize, viewWidthSpec), MeasureSpec.makeMeasureSpec(viewHeightSize, viewHeightSpec));
                     int resultWidth = view.getMeasuredWidth();
                     int resultHeight = view.getMeasuredHeight();
-                    if (!adjustLayout)
-                    {
-                        resultWidth = 0;
-                    }
                     resultWidth = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, resultWidth));
                     resultHeight = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, resultHeight));
                     remainingWidth -= uniLayoutParams.leftMargin + uniLayoutParams.rightMargin;
-                    measuredChildSizes.get(i).set(resultWidth, resultHeight);
+                    measuredChildSizes.get(i).set(adjustLayout ? resultWidth : Math.min(viewWidthSize, uniLayoutParams.minWidth), resultHeight);
                     remainingWidth -= resultWidth;
                     totalWeight -= uniLayoutParams.weight;
                 }
