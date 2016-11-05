@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class UniVerticalScrollContainer: UIScrollView, UniLayoutView {
+open class UniVerticalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPaddedView {
     
     // ---
     // MARK: Members

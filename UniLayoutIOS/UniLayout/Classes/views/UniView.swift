@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class UniView: UIView, UniLayoutView {
+open class UniView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---
     // MARK: Members

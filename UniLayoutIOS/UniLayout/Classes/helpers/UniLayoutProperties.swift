@@ -3,7 +3,7 @@
 //  UniLayout Pod
 //
 //  Library helper: layout properties
-//  Used in combination with each UniLayout component to customize layout behavior
+//  Used in combination with each UniLayout view, container or component to customize layout behavior
 //
 
 import UIKit
@@ -13,6 +13,12 @@ public enum UniMeasureSpec {
     case unspecified
     case limitSize
     case exactSize
+    
+}
+
+public protocol UniLayoutPaddedView {
+    
+    var padding: UIEdgeInsets { get set }
     
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class UniTextView: UILabel, UniLayoutView {
+public class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
 
     // ---
     // MARK: Members

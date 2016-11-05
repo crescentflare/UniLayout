@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class UniButtonView: UIButton, UniLayoutView {
+public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
 
     // ---
     // MARK: Members

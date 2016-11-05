@@ -15,7 +15,7 @@ public enum UniLinearContainerOrientation: String {
     
 }
 
-open class UniLinearContainer: UIView, UniLayoutView {
+open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---
     // MARK: Members
