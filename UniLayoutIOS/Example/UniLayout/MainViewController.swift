@@ -44,20 +44,35 @@ class MainViewController: UIViewController {
         explainingText.text = "Press on the buttons below to view several examples of layouts built with UniLayout"
         verticalLayout.addSubview(explainingText)
         
+        // Add a button container, the buttons inside will all have the same width
+        let buttonContainer = UniLinearContainer()
+        buttonContainer.orientation = .vertical
+        verticalLayout.addSubview(buttonContainer)
+        
         // Add a button with the first example
         let firstButton = UniButtonView()
         firstButton.layoutProperties.margin.top = 16
+        firstButton.layoutProperties.width = UniLayoutProperties.stretchToParent
+        firstButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
         firstButton.setTitle("First example", for: .normal)
         firstButton.setTitleColor(self.view.tintColor, for: .normal)
-        verticalLayout.addSubview(firstButton)
+        firstButton.layer.cornerRadius = 8
+        firstButton.layer.borderWidth = 1
+        firstButton.layer.borderColor = self.view.tintColor.cgColor
+        buttonContainer.addSubview(firstButton)
         firstButton.addTarget(self, action: #selector(showFirstExample), for: .touchUpInside)
 
         // Add a button with the second example
         let secondButton = UniButtonView()
         secondButton.layoutProperties.margin.top = 6
+        secondButton.layoutProperties.width = UniLayoutProperties.stretchToParent
+        secondButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
         secondButton.setTitle("Second example", for: .normal)
         secondButton.setTitleColor(self.view.tintColor, for: .normal)
-        verticalLayout.addSubview(secondButton)
+        secondButton.layer.cornerRadius = 8
+        secondButton.layer.borderWidth = 1
+        secondButton.layer.borderColor = self.view.tintColor.cgColor
+        buttonContainer.addSubview(secondButton)
         secondButton.addTarget(self, action: #selector(showSecondExample), for: .touchUpInside)
     }
     
