@@ -23,6 +23,7 @@ open class UniLinearContainer: UIView, UniLayoutView {
     
     public var layoutProperties = UniLayoutProperties()
     public var orientation = UniLinearContainerOrientation.vertical
+    public var padding = UIEdgeInsets.zero
 
     
     // ---
@@ -31,8 +32,8 @@ open class UniLinearContainer: UIView, UniLayoutView {
 
     @discardableResult internal func performVerticalLayout(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec, adjustFrames: Bool) -> CGSize {
         // Determine available size without padding
-        var paddedSize = CGSize(width: max(0, sizeSpec.width - layoutProperties.padding.left - layoutProperties.padding.right), height: max(0, sizeSpec.height - layoutProperties.padding.top - layoutProperties.padding.bottom))
-        var measuredSize = CGSize(width: layoutProperties.padding.left, height: layoutProperties.padding.top)
+        var paddedSize = CGSize(width: max(0, sizeSpec.width - padding.left - padding.right), height: max(0, sizeSpec.height - padding.top - padding.bottom))
+        var measuredSize = CGSize(width: padding.left, height: padding.top)
         if widthSpec == .unspecified {
             paddedSize.width = 0xFFFFFF
         }
@@ -144,7 +145,7 @@ open class UniLinearContainer: UIView, UniLayoutView {
         }
         
         // Start doing layout
-        var y = layoutProperties.padding.top
+        var y = padding.top
         for i in 0..<min(subviews.count, subviewSizes.count) {
             // Skip hidden views if they are not part of the layout
             let view = subviews[i]
@@ -154,7 +155,7 @@ open class UniLinearContainer: UIView, UniLayoutView {
             
             // Continue with the others
             let size = subviewSizes[i]
-            var x = layoutProperties.padding.left
+            var x = padding.left
             var nextY = y
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
                 x += viewLayoutProperties.margin.left
@@ -176,8 +177,8 @@ open class UniLinearContainer: UIView, UniLayoutView {
         }
 
         // Adjust final measure with padding and limitations
-        measuredSize.width += layoutProperties.padding.right
-        measuredSize.height += layoutProperties.padding.bottom
+        measuredSize.width += padding.right
+        measuredSize.height += padding.bottom
         if widthSpec == .exactSize {
             measuredSize.width = sizeSpec.width
         } else if widthSpec == .limitSize {
@@ -193,8 +194,8 @@ open class UniLinearContainer: UIView, UniLayoutView {
 
     @discardableResult internal func performHorizontalLayout(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec, adjustFrames: Bool) -> CGSize {
         // Determine available size without padding
-        var paddedSize = CGSize(width: max(0, sizeSpec.width - layoutProperties.padding.left - layoutProperties.padding.right), height: max(0, sizeSpec.height - layoutProperties.padding.top - layoutProperties.padding.bottom))
-        var measuredSize = CGSize(width: layoutProperties.padding.left, height: layoutProperties.padding.top)
+        var paddedSize = CGSize(width: max(0, sizeSpec.width - padding.left - padding.right), height: max(0, sizeSpec.height - padding.top - padding.bottom))
+        var measuredSize = CGSize(width: padding.left, height: padding.top)
         if widthSpec == .unspecified {
             paddedSize.width = 0xFFFFFF
         }
@@ -306,7 +307,7 @@ open class UniLinearContainer: UIView, UniLayoutView {
         }
         
         // Start doing layout
-        var x = layoutProperties.padding.left
+        var x = padding.left
         for i in 0..<min(subviews.count, subviewSizes.count) {
             // Skip hidden views if they are not part of the layout
             let view = subviews[i]
@@ -316,7 +317,7 @@ open class UniLinearContainer: UIView, UniLayoutView {
             
             // Continue with the others
             let size = subviewSizes[i]
-            var y = layoutProperties.padding.top
+            var y = padding.top
             var nextX = x
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
                 x += viewLayoutProperties.margin.left
@@ -338,8 +339,8 @@ open class UniLinearContainer: UIView, UniLayoutView {
         }
         
         // Adjust final measure with padding and limitations
-        measuredSize.width += layoutProperties.padding.right
-        measuredSize.height += layoutProperties.padding.bottom
+        measuredSize.width += padding.right
+        measuredSize.height += padding.bottom
         if widthSpec == .exactSize {
             measuredSize.width = sizeSpec.width
         } else if widthSpec == .limitSize {

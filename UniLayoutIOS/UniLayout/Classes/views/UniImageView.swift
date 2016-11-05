@@ -15,7 +15,8 @@ open class UniImageView: UIView, UniLayoutView {
     // ---
 
     public var layoutProperties = UniLayoutProperties()
-    private var imageView = UniNotifiyingImageView()
+    public var padding = UIEdgeInsets.zero
+    private var imageView = UniNotifyingImageView()
     
 
     // ---
@@ -113,7 +114,7 @@ open class UniImageView: UIView, UniLayoutView {
     // ---
 
     open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
-        var result = CGSize(width: layoutProperties.padding.left + layoutProperties.padding.right, height: layoutProperties.padding.top + layoutProperties.padding.bottom)
+        var result = CGSize(width: padding.left + padding.right, height: padding.top + padding.bottom)
         if let image = imageView.image {
             result.width += image.size.width
             result.height += image.size.height
@@ -132,7 +133,6 @@ open class UniImageView: UIView, UniLayoutView {
     }
     
     open override func layoutSubviews() {
-        let padding = layoutProperties.padding
         imageView.frame = CGRect(x: padding.left, y: padding.top, width: max(0, frame.width - padding.left - padding.right), height: max(0, frame.height - padding.top - padding.bottom))
     }
     
@@ -153,7 +153,7 @@ open class UniImageView: UIView, UniLayoutView {
 
 }
 
-class UniNotifiyingImageView: UIImageView {
+class UniNotifyingImageView: UIImageView {
 
     // ---
     // MARK: Hook layout into image changes

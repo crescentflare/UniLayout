@@ -1,36 +1,40 @@
 //
-//  UniTextView.swift
+//  UniButtonView.swift
 //  UniLayout Pod
 //
-//  Library view: a view with simple text
-//  Extends UILabel to support properties for UniLayout containers, padding and defaults to multiple lines
+//  Library view: a simple button
+//  Extends UIButton to support properties for UniLayout containers and more control over padding
 //
 
 import UIKit
 
-public class UniTextView: UILabel, UniLayoutView {
+public class UniButtonView: UIButton, UniLayoutView {
 
     // ---
     // MARK: Members
     // ---
 
     public var layoutProperties = UniLayoutProperties()
-    public var padding = UIEdgeInsets.zero
 
     
     // ---
-    // MARK: Hook layout into text changes
+    // MARK: Change padding
     // ---
     
-    public override var text: String? {
+    public var padding: UIEdgeInsets {
+        get { return contentEdgeInsets }
         set {
-            super.text = newValue
-            setNeedsLayout()
+            contentEdgeInsets = newValue
+            if contentEdgeInsets.top == 0 {
+                contentEdgeInsets.top = 0.01
+            }
+            if contentEdgeInsets.bottom == 0 {
+                contentEdgeInsets.bottom = 0.01
+            }
         }
-        get { return super.text }
     }
-    
 
+    
     // ---
     // MARK: Initialization
     // ---
@@ -46,7 +50,7 @@ public class UniTextView: UILabel, UniLayoutView {
     }
     
     private func setup() {
-        numberOfLines = 0
+        padding = UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
     
@@ -55,10 +59,8 @@ public class UniTextView: UILabel, UniLayoutView {
     // ---
 
     public func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
-        let paddedSize = CGSize(width: max(0, sizeSpec.width - padding.left - padding.right), height: max(0, sizeSpec.height - padding.top - padding.bottom))
-        var result = super.systemLayoutSizeFitting(paddedSize, withHorizontalFittingPriority: widthSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired, verticalFittingPriority: heightSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired)
-        result.width += padding.left + padding.right
-        result.height += padding.top + padding.bottom
+        let limitedSize = CGSize(width: max(0, sizeSpec.width), height: max(0, sizeSpec.height))
+        var result = super.systemLayoutSizeFitting(limitedSize, withHorizontalFittingPriority: widthSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired, verticalFittingPriority: heightSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired)
         if widthSpec == .exactSize {
             result.width = sizeSpec.width
         } else if widthSpec == .limitSize {
@@ -74,10 +76,6 @@ public class UniTextView: UILabel, UniLayoutView {
 
     public override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
-    }
-    
-    public override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, padding))
     }
     
     public override func setNeedsLayout() {

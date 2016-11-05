@@ -15,6 +15,7 @@ open class UniView: UIView, UniLayoutView {
     // ---
 
     public var layoutProperties = UniLayoutProperties()
+    public var padding = UIEdgeInsets.zero
     
 
     // ---
@@ -22,7 +23,7 @@ open class UniView: UIView, UniLayoutView {
     // ---
     
     open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
-        var result = CGSize(width: layoutProperties.padding.left + layoutProperties.padding.right, height: layoutProperties.padding.top + layoutProperties.padding.bottom)
+        var result = CGSize(width: padding.left + padding.right, height: padding.top + padding.bottom)
         if widthSpec == .exactSize {
             result.width = sizeSpec.width
         } else if widthSpec == .limitSize {

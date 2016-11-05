@@ -15,8 +15,9 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView {
     // ---
 
     public var layoutProperties = UniLayoutProperties()
-    private var _contentView: UIView?
+    public var padding = UIEdgeInsets.zero
     public var fillContent: Bool = false
+    private var _contentView: UIView?
 
 
     // ---
@@ -45,8 +46,8 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView {
 
     @discardableResult internal func performLayout(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec, adjustFrames: Bool) -> CGSize {
         // Determine available size without padding
-        var paddedSize = CGSize(width: max(0, sizeSpec.width - layoutProperties.padding.left - layoutProperties.padding.right), height: max(0, sizeSpec.height - layoutProperties.padding.top - layoutProperties.padding.bottom))
-        var measuredSize = CGSize(width: layoutProperties.padding.left, height: layoutProperties.padding.top)
+        var paddedSize = CGSize(width: max(0, sizeSpec.width - padding.left - padding.right), height: max(0, sizeSpec.height - padding.top - padding.bottom))
+        var measuredSize = CGSize(width: padding.left, height: padding.top)
         if widthSpec == .unspecified {
             paddedSize.width = 0xFFFFFF
         }
@@ -89,8 +90,8 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView {
                 if fillContent && heightSpec == .exactSize {
                     result.height = max(result.height, paddedSize.height)
                 }
-                var x = layoutProperties.padding.left
-                var y = layoutProperties.padding.top
+                var x = padding.left
+                var y = padding.top
                 if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
                     result.width = min(viewSizeSpec.width, max(viewLayoutProperties.minWidth, result.width))
                     result.height = max(viewLayoutProperties.minHeight, result.height)
@@ -114,8 +115,8 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView {
         }
         
         // Adjust final measure with padding and limitations
-        measuredSize.width += layoutProperties.padding.right
-        measuredSize.height += layoutProperties.padding.bottom
+        measuredSize.width += padding.right
+        measuredSize.height += padding.bottom
         if adjustFrames {
             contentSize = CGSize(width: measuredSize.width, height: measuredSize.height)
         }
