@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
 
     override func loadView() {
         view = UniVerticalScrollContainer()
-        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        view.backgroundColor = UIColor(white: 1, alpha: 1)
         edgesForExtendedLayout = UIRectEdge()
     }
 
@@ -50,42 +50,40 @@ class MainViewController: UIViewController {
         verticalLayout.addSubview(buttonContainer)
         
         // Add a button with the first example
-        let firstButton = UniButtonView()
-        firstButton.layoutProperties.margin.top = 16
-        firstButton.layoutProperties.width = UniLayoutProperties.stretchToParent
-        firstButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
-        firstButton.setTitle("First example", for: .normal)
-        firstButton.setTitleColor(self.view.tintColor, for: .normal)
-        firstButton.layer.cornerRadius = 8
-        firstButton.layer.borderWidth = 1
-        firstButton.layer.borderColor = self.view.tintColor.cgColor
-        buttonContainer.addSubview(firstButton)
-        firstButton.addTarget(self, action: #selector(showFirstExample), for: .touchUpInside)
+        let nestedLayoutButton = UniButtonView()
+        nestedLayoutButton.layoutProperties.margin.top = 16
+        nestedLayoutButton.layoutProperties.width = UniLayoutProperties.stretchToParent
+        nestedLayoutButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
+        nestedLayoutButton.setTitle("Nested layouts", for: .normal)
+        nestedLayoutButton.setTitleColor(self.view.tintColor, for: .normal)
+        nestedLayoutButton.layer.cornerRadius = 8
+        nestedLayoutButton.layer.borderWidth = 1
+        nestedLayoutButton.layer.borderColor = self.view.tintColor.cgColor
+        buttonContainer.addSubview(nestedLayoutButton)
+        nestedLayoutButton.addTarget(self, action: #selector(showNestedLayouts), for: .touchUpInside)
 
         // Add a button with the second example
-        let secondButton = UniButtonView()
-        secondButton.layoutProperties.margin.top = 6
-        secondButton.layoutProperties.width = UniLayoutProperties.stretchToParent
-        secondButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
-        secondButton.setTitle("Second example", for: .normal)
-        secondButton.setTitleColor(self.view.tintColor, for: .normal)
-        secondButton.layer.cornerRadius = 8
-        secondButton.layer.borderWidth = 1
-        secondButton.layer.borderColor = self.view.tintColor.cgColor
-        buttonContainer.addSubview(secondButton)
-        secondButton.addTarget(self, action: #selector(showSecondExample), for: .touchUpInside)
+        let tableViewButton = UniButtonView()
+        tableViewButton.layoutProperties.margin.top = 8
+        tableViewButton.layoutProperties.width = UniLayoutProperties.stretchToParent
+        tableViewButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
+        tableViewButton.setTitle("Table view", for: .normal)
+        tableViewButton.setTitleColor(self.view.tintColor, for: .normal)
+        tableViewButton.layer.cornerRadius = 8
+        tableViewButton.layer.borderWidth = 1
+        tableViewButton.layer.borderColor = self.view.tintColor.cgColor
+        buttonContainer.addSubview(tableViewButton)
+        tableViewButton.addTarget(self, action: #selector(showTableView), for: .touchUpInside)
     }
     
-    func showFirstExample() {
-        let alert = UIAlertController(title: "Not implemented", message: "This example is not implemented yet", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    func showNestedLayouts() {
+        navigationController?.pushViewController(NestedLayoutsViewController(), animated: true)
     }
 
-    func showSecondExample() {
-        let alert = UIAlertController(title: "Not implemented", message: "This example is not implemented yet", preferredStyle: UIAlertControllerStyle.alert)
+    func showTableView() {
+        let alert = UIAlertController(title: "Not implemented", message: "The table view example is not implemented yet", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
 }
