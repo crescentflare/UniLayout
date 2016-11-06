@@ -5,14 +5,14 @@
 [![Version](https://img.shields.io/cocoapods/v/UniLayout.svg?style=flat)](http://cocoapods.org/pods/UniLayout)
 [![Version](https://img.shields.io/bintray/v/crescentflare/maven/UniLayoutLib.svg?style=flat)](https://bintray.com/crescentflare/maven/UniLayoutLib)
 
-A uniform layout system for both iOS and Android. Based on the layout container system from Android (like LinearLayout and FrameLayout)
+UniLayout is a project to make multi-platform development easier for iOS and Android regarding layouts. The goal is to have a uniform layout system to port the flexibility of Android layouts to iOS while adding more features to Android. Based on the layout container system from Android (like LinearLayout and FrameLayout).
 
 
 ### Features
 
 * Ports the Android layout capabilities to iOS, including Linear Layout, Frame Layout and Scroll View
 * For iOS, the scroll view automatically updates its content size
-* Adds additional capabilities like minimum and maximum sizes
+* Adds additional capabilities like minimum and maximum sizes and more flexibility in alignment (through gravity)
 
 
 ### iOS integration guide
