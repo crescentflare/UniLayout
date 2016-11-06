@@ -36,11 +36,10 @@ class NestedLayoutsViewController: UIViewController {
         let verticalLayout = UniLinearContainer()
         verticalLayout.orientation = .vertical
         verticalLayout.layoutProperties.width = UniLayoutProperties.stretchToParent
-        verticalLayout.padding = UIEdgeInsetsMake(8, 0, 8, 0)
         containerView.contentView = verticalLayout
         
         // Add the layout sets and divider lines
-        verticalLayout.addSubview(generateLayoutView(imageName: "linearcontainer", title: "Linear Container", text: "These containers are made to arrange views horizontally or vertically depending on their orientation. The size depends on its contents. Nest them to create structured layouts."))
+        verticalLayout.addSubview(generateLayoutView(imageName: "linearcontainer", title: "Linear Container", text: "These containers are made to arrange views horizontally or vertically depending on their orientation. The size depends on its content. Nest them to create structured layouts."))
         verticalLayout.addSubview(generateDividerLine())
         verticalLayout.addSubview(generateLayoutView(imageName: "framecontainer", title: "Frame Container", text: "These containers are used as the most simple container but can also be used to stack views on top of each other for complex layouts."))
     }
@@ -50,11 +49,11 @@ class NestedLayoutsViewController: UIViewController {
         let horizontalLayout = UniLinearContainer()
         horizontalLayout.orientation = .horizontal
         horizontalLayout.layoutProperties.width = UniLayoutProperties.stretchToParent
-        horizontalLayout.padding = UIEdgeInsetsMake(8, 8, 8, 8)
+        horizontalLayout.padding = UIEdgeInsetsMake(16, 8, 16, 8)
         
         // Add the image
         let imageView = UniImageView()
-        imageView.layoutProperties.margin.right = 6
+        imageView.layoutProperties.margin.right = 8
         imageView.image = UIImage(named: imageName)
         horizontalLayout.addSubview(imageView)
         

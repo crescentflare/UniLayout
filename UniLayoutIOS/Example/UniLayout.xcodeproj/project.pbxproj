@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04326C631DCF7D1F00C23580 /* NestedLayoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04326C601DCF7D1F00C23580 /* NestedLayoutsViewController.swift */; };
+		04326C641DCF7D1F00C23580 /* ReusingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04326C621DCF7D1F00C23580 /* ReusingContainerViewController.swift */; };
+		04326C701DCF7FE600C23580 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04326C6D1DCF7FE600C23580 /* DividerView.swift */; };
+		04326C711DCF7FE600C23580 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04326C6E1DCF7FE600C23580 /* ItemView.swift */; };
+		04326C721DCF7FE600C23580 /* SectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04326C6F1DCF7FE600C23580 /* SectionView.swift */; };
+		04326C751DCF803100C23580 /* ReusingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04326C741DCF803100C23580 /* ReusingContainerView.swift */; };
 		0479B51C1DCDDCF2009DE6CC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479B51B1DCDDCF1009DE6CC /* MainViewController.swift */; };
-		0479B5201DCE1401009DE6CC /* NestedLayoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479B51F1DCE1401009DE6CC /* NestedLayoutsViewController.swift */; };
 		37F0E96D30C93FEBC6387649 /* Pods_UniLayout_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100BA9DD4EBD3741A32ED194 /* Pods_UniLayout_Example.framework */; };
 		458C6D31B10B06F89B9CF3AA /* Pods_UniLayout_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C853DB47181D86C9BAFA109 /* Pods_UniLayout_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -28,10 +33,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04326C601DCF7D1F00C23580 /* NestedLayoutsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedLayoutsViewController.swift; sourceTree = "<group>"; };
+		04326C621DCF7D1F00C23580 /* ReusingContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusingContainerViewController.swift; sourceTree = "<group>"; };
+		04326C6D1DCF7FE600C23580 /* DividerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		04326C6E1DCF7FE600C23580 /* ItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		04326C6F1DCF7FE600C23580 /* SectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionView.swift; sourceTree = "<group>"; };
+		04326C741DCF803100C23580 /* ReusingContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusingContainerView.swift; sourceTree = "<group>"; };
 		044E6E711DB7972500F02D54 /* UniLayout.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = UniLayout.podspec; path = ../../UniLayout.podspec; sourceTree = "<group>"; };
 		044E6E731DB7973B00F02D54 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		0479B51B1DCDDCF1009DE6CC /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		0479B51F1DCE1401009DE6CC /* NestedLayoutsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedLayoutsViewController.swift; sourceTree = "<group>"; };
 		100BA9DD4EBD3741A32ED194 /* Pods_UniLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniLayout_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C853DB47181D86C9BAFA109 /* Pods_UniLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniLayout_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* UniLayout_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniLayout_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +79,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04326C5F1DCF7D1F00C23580 /* NestedLayouts */ = {
+			isa = PBXGroup;
+			children = (
+				04326C601DCF7D1F00C23580 /* NestedLayoutsViewController.swift */,
+			);
+			path = NestedLayouts;
+			sourceTree = "<group>";
+		};
+		04326C611DCF7D1F00C23580 /* ReusingContainer */ = {
+			isa = PBXGroup;
+			children = (
+				04326C6C1DCF7FE600C23580 /* ReusableViews */,
+				04326C731DCF803100C23580 /* Views */,
+				04326C621DCF7D1F00C23580 /* ReusingContainerViewController.swift */,
+			);
+			path = ReusingContainer;
+			sourceTree = "<group>";
+		};
+		04326C6C1DCF7FE600C23580 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				04326C6D1DCF7FE600C23580 /* DividerView.swift */,
+				04326C6E1DCF7FE600C23580 /* ItemView.swift */,
+				04326C6F1DCF7FE600C23580 /* SectionView.swift */,
+			);
+			path = ReusableViews;
+			sourceTree = "<group>";
+		};
+		04326C731DCF803100C23580 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				04326C741DCF803100C23580 /* ReusingContainerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5357F172ACF3D9D806C27996 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,9 +148,10 @@
 		607FACD21AFB9204008FA782 /* Example for UniLayout */ = {
 			isa = PBXGroup;
 			children = (
+				04326C5F1DCF7D1F00C23580 /* NestedLayouts */,
+				04326C611DCF7D1F00C23580 /* ReusingContainer */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				0479B51B1DCDDCF1009DE6CC /* MainViewController.swift */,
-				0479B51F1DCE1401009DE6CC /* NestedLayoutsViewController.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -360,8 +407,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04326C751DCF803100C23580 /* ReusingContainerView.swift in Sources */,
 				0479B51C1DCDDCF2009DE6CC /* MainViewController.swift in Sources */,
-				0479B5201DCE1401009DE6CC /* NestedLayoutsViewController.swift in Sources */,
+				04326C631DCF7D1F00C23580 /* NestedLayoutsViewController.swift in Sources */,
+				04326C721DCF7FE600C23580 /* SectionView.swift in Sources */,
+				04326C641DCF7D1F00C23580 /* ReusingContainerViewController.swift in Sources */,
+				04326C711DCF7FE600C23580 /* ItemView.swift in Sources */,
+				04326C701DCF7FE600C23580 /* DividerView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

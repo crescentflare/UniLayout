@@ -63,27 +63,25 @@ class MainViewController: UIViewController {
         nestedLayoutButton.addTarget(self, action: #selector(showNestedLayouts), for: .touchUpInside)
 
         // Add a button with the second example
-        let tableViewButton = UniButtonView()
-        tableViewButton.layoutProperties.margin.top = 8
-        tableViewButton.layoutProperties.width = UniLayoutProperties.stretchToParent
-        tableViewButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
-        tableViewButton.setTitle("Table view", for: .normal)
-        tableViewButton.setTitleColor(self.view.tintColor, for: .normal)
-        tableViewButton.layer.cornerRadius = 8
-        tableViewButton.layer.borderWidth = 1
-        tableViewButton.layer.borderColor = self.view.tintColor.cgColor
-        buttonContainer.addSubview(tableViewButton)
-        tableViewButton.addTarget(self, action: #selector(showTableView), for: .touchUpInside)
+        let reusingContainerButton = UniButtonView()
+        reusingContainerButton.layoutProperties.margin.top = 8
+        reusingContainerButton.layoutProperties.width = UniLayoutProperties.stretchToParent
+        reusingContainerButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
+        reusingContainerButton.setTitle("Reusing container", for: .normal)
+        reusingContainerButton.setTitleColor(self.view.tintColor, for: .normal)
+        reusingContainerButton.layer.cornerRadius = 8
+        reusingContainerButton.layer.borderWidth = 1
+        reusingContainerButton.layer.borderColor = self.view.tintColor.cgColor
+        buttonContainer.addSubview(reusingContainerButton)
+        reusingContainerButton.addTarget(self, action: #selector(showReusingContainer), for: .touchUpInside)
     }
     
     func showNestedLayouts() {
         navigationController?.pushViewController(NestedLayoutsViewController(), animated: true)
     }
 
-    func showTableView() {
-        let alert = UIAlertController(title: "Not implemented", message: "The table view example is not implemented yet", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        present(alert, animated: true, completion: nil)
+    func showReusingContainer() {
+        navigationController?.pushViewController(ReusingContainerViewController(), animated: true)
     }
 
 }

@@ -13,11 +13,6 @@
       "idiom" : "universal",
       "filename" : "framecontainer@3x.png",
       "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "framecontainer@4x.png",
-      "scale" : "4x"
     }
   ],
   "info" : {
