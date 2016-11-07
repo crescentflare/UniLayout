@@ -1,0 +1,33 @@
+<com.crescentflare.unilayout.containers.UniVerticalScrollContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.crescentflare.unilayoutexample.NestedLayoutsActivity">
+    <com.crescentflare.unilayout.containers.UniLinearContainer
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+        <com.crescentflare.unilayout.containers.UniLinearContainer
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+        </com.crescentflare.unilayout.containers.UniLinearContainer>
+        <com.crescentflare.unilayout.views.UniView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#e0e0e0"/>
+        <com.crescentflare.unilayout.containers.UniLinearContainer
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+        </com.crescentflare.unilayout.containers.UniLinearContainer>
+    </com.crescentflare.unilayout.containers.UniLinearContainer>
+</com.crescentflare.unilayout.containers.UniVerticalScrollContainer>
