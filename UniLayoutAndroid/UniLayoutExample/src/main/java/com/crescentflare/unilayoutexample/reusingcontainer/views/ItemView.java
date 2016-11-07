@@ -24,6 +24,7 @@ public class ItemView extends UniLinearContainer
     private TextView titleView;
     private TextView additionalView;
     private TextView valueView;
+    private View divider;
 
 
     // ---
@@ -34,15 +35,13 @@ public class ItemView extends UniLinearContainer
     {
         super(context);
 
-        int verticalPadding = (int)(getResources().getDisplayMetrics().density * 4);
-        int sidePadding = (int)(getResources().getDisplayMetrics().density * 8);
         LayoutInflater.from(getContext()).inflate(R.layout.view_item, this, true);
-        setPadding(sidePadding, verticalPadding, sidePadding, verticalPadding);
         setBackgroundColor(Color.WHITE);
-        setOrientation(HORIZONTAL);
+        setOrientation(VERTICAL);
         titleView = (TextView)findViewById(R.id.view_item_title);
         additionalView = (TextView)findViewById(R.id.view_item_additional);
         valueView = (TextView)findViewById(R.id.view_item_value);
+        divider = findViewById(R.id.view_item_divider);
     }
 
     @Override
@@ -73,5 +72,10 @@ public class ItemView extends UniLinearContainer
     {
         valueView.setText(text);
         valueView.setVisibility(text.length() > 0 ? VISIBLE : GONE);
+    }
+
+    public void showDivider(boolean show)
+    {
+        divider.setVisibility(show ? VISIBLE : GONE);
     }
 }

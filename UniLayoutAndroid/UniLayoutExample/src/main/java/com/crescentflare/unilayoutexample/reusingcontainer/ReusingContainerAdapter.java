@@ -99,6 +99,11 @@ public class ReusingContainerAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
         ReusableItem item = items.get(position);
+        ReusableItem nextItem = null;
+        if (position + 1 < items.size())
+        {
+            nextItem = items.get(position + 1);
+        }
         switch (item.getType())
         {
             case Section:
@@ -108,6 +113,7 @@ public class ReusingContainerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 ((ItemView)holder.itemView).setTitle(item.getTitle());
                 ((ItemView)holder.itemView).setAdditional(item.getAdditional());
                 ((ItemView)holder.itemView).setValue(item.getValue());
+                ((ItemView)holder.itemView).showDivider(nextItem != null && nextItem.getType() == ReusableItem.Type.Item);
                 break;
         }
     }
