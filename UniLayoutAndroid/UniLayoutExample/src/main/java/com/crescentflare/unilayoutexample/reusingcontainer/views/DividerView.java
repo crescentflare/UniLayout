@@ -32,9 +32,17 @@ public class DividerView extends UniFrameContainer
 
         LayoutInflater.from(getContext()).inflate(R.layout.view_divider, this, true);
         lineView = (UniView)findViewById(R.id.view_divider_line);
-        if (bottom)
+        if (!bottom)
         {
             ((UniLayoutParams)lineView.getLayoutParams()).verticalGravity = 1;
         }
+    }
+
+    @Override
+    public void setLayoutParams(LayoutParams params)
+    {
+        params.width = LayoutParams.MATCH_PARENT;
+        params.height = (int)(getResources().getDisplayMetrics().density * 6);
+        super.setLayoutParams(params);
     }
 }

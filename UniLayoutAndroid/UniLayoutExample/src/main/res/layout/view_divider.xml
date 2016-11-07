@@ -7,5 +7,6 @@
     <com.crescentflare.unilayout.views.UniView
         android:id="@+id/view_divider_line"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="#d8d8d8"/>
 </merge>

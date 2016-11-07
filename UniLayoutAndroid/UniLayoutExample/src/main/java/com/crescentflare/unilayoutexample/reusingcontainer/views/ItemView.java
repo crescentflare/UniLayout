@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.crescentflare.unilayout.containers.UniFrameContainer;
@@ -42,6 +43,13 @@ public class ItemView extends UniLinearContainer
         titleView = (TextView)findViewById(R.id.view_item_title);
         additionalView = (TextView)findViewById(R.id.view_item_additional);
         valueView = (TextView)findViewById(R.id.view_item_value);
+    }
+
+    @Override
+    public void setLayoutParams(LayoutParams params)
+    {
+        params.width = LayoutParams.MATCH_PARENT;
+        super.setLayoutParams(params);
     }
 
 
