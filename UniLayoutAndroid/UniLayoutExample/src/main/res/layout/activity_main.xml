@@ -16,13 +16,13 @@
         <com.crescentflare.unilayout.containers.UniLinearContainer
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <com.crescentflare.unilayout.views.UniButton
+            <com.crescentflare.unilayout.views.UniButtonView
                 android:id="@+id/activity_main_nestedlayouts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/main_button_nestedlayouts"/>
-            <com.crescentflare.unilayout.views.UniButton
+            <com.crescentflare.unilayout.views.UniButtonView
                 android:id="@+id/activity_main_reusingcontainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

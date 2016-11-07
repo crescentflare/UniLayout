@@ -40,7 +40,6 @@ public class UniView extends View
 
     private void init(AttributeSet attrs)
     {
-        setLayoutParams(new UniLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
 

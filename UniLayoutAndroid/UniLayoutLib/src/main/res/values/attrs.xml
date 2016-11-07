@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <declare-styleable name="UniLayoutParams">
+        <attr name="uni_weight" format="integer"/>
+        <attr name="uni_min_width" format="dimension"/>
+        <attr name="uni_max_width" format="dimension"/>
+        <attr name="uni_min_height" format="dimension"/>
+        <attr name="uni_max_height" format="dimension"/>
+        <attr name="uni_gravity">
+            <flag name="left" value="0x0"/>
+            <flag name="center_horizontal" value="0x1"/>
+            <flag name="right" value="0x2"/>
+            <flag name="top" value="0x0"/>
+            <flag name="center_vertical" value="0x4"/>
+            <flag name="bottom" value="0x8"/>
+            <flag name="center" value="0x5"/>
+        </attr>
+        <attr name="uni_horizontal_gravity" format="float"/>
+        <attr name="uni_vertical_gravity" format="float"/>
+    </declare-styleable>
+    <declare-styleable name="UniLinearContainer">
+        <attr name="uni_orientation" format="enum">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

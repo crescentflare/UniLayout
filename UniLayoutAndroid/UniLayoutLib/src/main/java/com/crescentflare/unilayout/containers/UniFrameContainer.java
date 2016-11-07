@@ -44,6 +44,18 @@ public class UniFrameContainer extends ViewGroup
     {
     }
 
+    @Override
+    protected LayoutParams generateDefaultLayoutParams()
+    {
+        return new UniLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+    }
+
+    @Override
+    public LayoutParams generateLayoutParams(AttributeSet attrs)
+    {
+        return new UniLayoutParams(getContext(), attrs);
+    }
+
 
     // ---
     // Custom layout

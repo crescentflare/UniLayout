@@ -1,12 +1,14 @@
 package com.crescentflare.unilayout.containers;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.crescentflare.unilayout.R;
 import com.crescentflare.unilayout.helpers.UniLayoutParams;
 
 import java.util.ArrayList;
@@ -60,6 +62,24 @@ public class UniLinearContainer extends ViewGroup
 
     private void init(AttributeSet attrs)
     {
+        if (attrs != null)
+        {
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.UniLinearContainer);
+            orientation = a.getInt(R.styleable.UniLinearContainer_uni_orientation, VERTICAL);
+            a.recycle();
+        }
+    }
+
+    @Override
+    protected LayoutParams generateDefaultLayoutParams()
+    {
+        return new UniLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+    }
+
+    @Override
+    public LayoutParams generateLayoutParams(AttributeSet attrs)
+    {
+        return new UniLayoutParams(getContext(), attrs);
     }
 
 
