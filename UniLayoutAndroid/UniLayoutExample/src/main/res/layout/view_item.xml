@@ -1,0 +1,35 @@
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="com.crescentflare.unilayout.containers.UniLinearContainer">
+    <com.crescentflare.unilayout.containers.UniLinearContainer
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:uni_orientation="vertical"
+        app:uni_weight="1">
+        <com.crescentflare.unilayout.views.UniTextView
+            android:id="@+id/view_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nested_layouts_frame_container_title"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+        <com.crescentflare.unilayout.views.UniTextView
+            android:id="@+id/view_item_additional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/nested_layouts_frame_container_description"
+            android:textSize="15sp"/>
+    </com.crescentflare.unilayout.containers.UniLinearContainer>
+    <com.crescentflare.unilayout.views.UniTextView
+        android:id="@+id/view_item_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
+</merge>

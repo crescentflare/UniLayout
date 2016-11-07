@@ -10,7 +10,7 @@ import com.crescentflare.unilayout.helpers.UniLayoutParams;
 
 /**
  * UniLayout view: a simple image
- * Extends ImageView to use UniLayoutParams and provide some minor layout improvements
+ * Extends ImageView, currently it's just an alias to have the same name as the iOS class
  */
 public class UniImageView extends ImageView
 {

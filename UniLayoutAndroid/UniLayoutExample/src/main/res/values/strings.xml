@@ -3,8 +3,10 @@
     <string name="main_message">Press on the buttons below to view several examples of layouts built with UniLayout</string>
     <string name="main_button_nestedlayouts">Nested layouts</string>
     <string name="main_button_reusablecontainers">Reusing container</string>
+    <string name="example_nested_layouts">Nested layouts</string>
     <string name="nested_layouts_linear_container_title">Linear container</string>
     <string name="nested_layouts_linear_container_description">These containers are made to arrange views horizontally or vertically depending on their orientation. The size depends on its content. Nest them to create structured layouts.</string>
     <string name="nested_layouts_frame_container_title">Frame container</string>
     <string name="nested_layouts_frame_container_description">These containers are used as the most simple container but can also be used to stack views on top of each other for complex layouts.</string>
+    <string name="example_reusing_container">Reusing container</string>
 </resources>

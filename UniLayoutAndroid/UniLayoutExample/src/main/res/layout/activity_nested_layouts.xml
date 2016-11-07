@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context="com.crescentflare.unilayoutexample.NestedLayoutsActivity">
+    tools:context="com.crescentflare.unilayoutexample.nestedlayouts.NestedLayoutsActivity">
     <com.crescentflare.unilayout.containers.UniLinearContainer
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

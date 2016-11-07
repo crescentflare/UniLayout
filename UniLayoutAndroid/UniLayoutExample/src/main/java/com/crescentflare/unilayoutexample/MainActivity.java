@@ -1,14 +1,12 @@
 package com.crescentflare.unilayoutexample;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import java.util.List;
+import com.crescentflare.unilayoutexample.nestedlayouts.NestedLayoutsActivity;
+import com.crescentflare.unilayoutexample.reusingcontainer.ReusingContainerActivity;
 
 /**
  * The main activity shows a small layout example, explanation and buttons to show other layout examples
@@ -60,6 +58,7 @@ public class MainActivity extends AppCompatActivity
 
     private void showReusingContainer()
     {
-        // TODO: implement
+        Intent intent = new Intent(this, ReusingContainerActivity.class);
+        startActivity(intent);
     }
 }

@@ -9,7 +9,7 @@ import com.crescentflare.unilayout.helpers.UniLayoutParams;
 
 /**
  * UniLayout view: a view with simple text
- * Extends TextView to use UniLayoutParams and provide some minor layout improvements
+ * Extends TextView, currently it's just an alias to have the same name as the iOS class
  */
 public class UniTextView extends TextView
 {
