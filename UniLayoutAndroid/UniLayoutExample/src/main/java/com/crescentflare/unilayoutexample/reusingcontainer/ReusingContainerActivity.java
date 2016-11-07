@@ -12,16 +12,16 @@ import com.crescentflare.unilayoutexample.R;
  */
 public class ReusingContainerActivity extends AppCompatActivity
 {
-    /**
-     * Members
-     */
+    // ---
+    // Members
+    // ---
 
     private ReusingContainerAdapter adapter = new ReusingContainerAdapter();
 
 
-    /**
-     * Initialization
-     */
+    // ---
+    // Initialization
+    // ---
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,9 +57,9 @@ public class ReusingContainerActivity extends AppCompatActivity
     }
 
 
-    /**
-     * Menu handling
-     */
+    // ---
+    // Menu handling
+    // ---
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)

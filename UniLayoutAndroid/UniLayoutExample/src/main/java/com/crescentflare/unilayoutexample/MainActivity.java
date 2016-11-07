@@ -13,9 +13,9 @@ import com.crescentflare.unilayoutexample.reusingcontainer.ReusingContainerActiv
  */
 public class MainActivity extends AppCompatActivity
 {
-    /**
-     * Initialization
-     */
+    // ---
+    // Initialization
+    // ---
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    /**
-     * Interaction
-     */
+    // ---
+    // Interaction
+    // ---
 
     private void showNestedLayouts()
     {

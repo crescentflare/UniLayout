@@ -2,7 +2,6 @@ package com.crescentflare.unilayoutexample.reusingcontainer.views;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.widget.TextView;
 
 import com.crescentflare.unilayout.containers.UniFrameContainer;
 import com.crescentflare.unilayout.helpers.UniLayoutParams;

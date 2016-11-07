@@ -5,7 +5,6 @@ import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 
 import com.crescentflare.unilayout.helpers.UniLayoutParams;

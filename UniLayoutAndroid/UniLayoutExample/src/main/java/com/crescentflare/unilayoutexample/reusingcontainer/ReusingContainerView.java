@@ -1,16 +1,10 @@
 package com.crescentflare.unilayoutexample.reusingcontainer;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.MenuItem;
-
-import com.crescentflare.unilayoutexample.R;
 
 /**
  * Reusing container example: view

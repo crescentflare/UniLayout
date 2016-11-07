@@ -4,10 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.crescentflare.unilayout.containers.UniFrameContainer;
 import com.crescentflare.unilayout.containers.UniLinearContainer;
 import com.crescentflare.unilayoutexample.R;
 

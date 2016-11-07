@@ -2,11 +2,8 @@ package com.crescentflare.unilayout.helpers;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Point;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.crescentflare.unilayout.R;
 

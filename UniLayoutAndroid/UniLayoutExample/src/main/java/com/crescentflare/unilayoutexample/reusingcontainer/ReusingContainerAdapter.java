@@ -1,14 +1,9 @@
 package com.crescentflare.unilayoutexample.reusingcontainer;
 
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.crescentflare.unilayoutexample.R;
 import com.crescentflare.unilayoutexample.reusingcontainer.views.DividerView;
 import com.crescentflare.unilayoutexample.reusingcontainer.views.ItemView;
 import com.crescentflare.unilayoutexample.reusingcontainer.views.SectionView;
@@ -23,16 +18,16 @@ import java.util.List;
  */
 public class ReusingContainerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    /**
-     * Members
-     */
+    // ---
+    // Members
+    // ---
 
     private List<ReusableItem> items = new ArrayList<>();
 
 
-    /**
-     * Clear/add items
-     */
+    // ---
+    // Clear/add items
+    // ---
 
     public void removeItems()
     {
@@ -47,9 +42,9 @@ public class ReusingContainerAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
 
-    /**
-     * Internal item access
-     */
+    // ---
+    // Internal item access
+    // ---
 
     @Override
     public int getItemCount()
@@ -69,9 +64,9 @@ public class ReusingContainerAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
 
-    /**
-     * View holder
-     */
+    // ---
+    // View holder
+    // ---
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)

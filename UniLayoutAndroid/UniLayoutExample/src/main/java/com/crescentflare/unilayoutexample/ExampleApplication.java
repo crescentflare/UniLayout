@@ -8,15 +8,17 @@ import android.content.Context;
  */
 public class ExampleApplication extends Application
 {
-    /**
-     * Global context member
-     */
+    // ---
+    // Global context member
+    // ---
+
     public static Context context = null;
 
 
-    /**
-     * Initialization
-     */
+    // ---
+    // Initialization
+    // ---
+
     @Override
     public void onCreate()
     {

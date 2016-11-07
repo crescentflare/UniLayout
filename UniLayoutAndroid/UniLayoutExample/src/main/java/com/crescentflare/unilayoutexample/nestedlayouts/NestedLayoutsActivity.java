@@ -12,9 +12,9 @@ import com.crescentflare.unilayoutexample.R;
  */
 public class NestedLayoutsActivity extends AppCompatActivity
 {
-    /**
-     * Initialization
-     */
+    // ---
+    // Initialization
+    // ---
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,9 +32,9 @@ public class NestedLayoutsActivity extends AppCompatActivity
     }
 
 
-    /**
-     * Menu handling
-     */
+    // ---
+    // Menu handling
+    // ---
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)

@@ -1,21 +1,14 @@
 package com.crescentflare.unilayoutexample.reusingcontainer;
 
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
-
-import com.crescentflare.unilayoutexample.R;
-
 /**
  * Reusing container example: reusable item
  * An item to show in the recycler view
  */
 public class ReusableItem
 {
-    /**
-     * Item type enum
-     */
+    // ---
+    // Item type enum
+    // ---
 
     public enum Type
     {
@@ -27,9 +20,9 @@ public class ReusableItem
     }
 
 
-    /**
-     * Members
-     */
+    // ---
+    // Members
+    // ---
 
     private Type type = Type.Unknown;
     private String title = "";
@@ -37,9 +30,9 @@ public class ReusableItem
     private String value = "";
 
 
-    /**
-     * Initialization
-     */
+    // ---
+    // Initialization
+    // ---
 
     public ReusableItem(Type type)
     {
@@ -60,9 +53,9 @@ public class ReusableItem
     }
 
 
-    /**
-     * Generated code
-     */
+    // ---
+    // Generated code
+    // ---
 
     public Type getType()
     {
