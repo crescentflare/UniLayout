@@ -1,0 +1,16 @@
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="4dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    tools:parentTag="com.crescentflare.unilayout.containers.UniFrameContainer">
+    <com.crescentflare.unilayout.views.UniTextView
+        android:id="@+id/view_section_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
+</merge>

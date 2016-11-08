@@ -1,0 +1,14 @@
+<com.crescentflare.unilayout.containers.UniLinearContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f0f0"
+    tools:context="com.crescentflare.unilayoutexample.MainActivity">
+    <com.crescentflare.unilayoutexample.reusingcontainer.ReusingContainerView
+        android:id="@+id/activity_reusing_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:uni_weight="1"/>
+</com.crescentflare.unilayout.containers.UniLinearContainer>

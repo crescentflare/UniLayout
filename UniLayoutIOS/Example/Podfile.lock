@@ -1,0 +1,16 @@
+PODS:
+  - UniLayout (0.1.0)
+
+DEPENDENCIES:
+  - UniLayout (from `../../`)
+
+EXTERNAL SOURCES:
+  UniLayout:
+    :path: ../../
+
+SPEC CHECKSUMS:
+  UniLayout: 89449a3174e0d42acea1907cc336c3295e1fc683
+
+PODFILE CHECKSUM: c5be050806aea14e5154eac8062c6c6830d64e24
+
+COCOAPODS: 1.1.1
