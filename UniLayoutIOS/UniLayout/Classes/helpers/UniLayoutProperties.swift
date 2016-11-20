@@ -64,4 +64,13 @@ public class UniLayoutProperties {
     public var weight: CGFloat = 0
     public var hiddenTakesSpace = false
 
+
+    // ---
+    // MARK: Public initializer
+    // ---
+    
+    public init() {
+        // Required to be able to create UniLayoutView implementations outside of the library
+    }
+
 }
