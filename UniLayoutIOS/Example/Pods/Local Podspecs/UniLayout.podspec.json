@@ -18,5 +18,10 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "UniLayoutIOS/UniLayout/Classes/**/*"
+  "source_files": "UniLayoutIOS/UniLayout/Classes/**/*",
+  "resource_bundles": {
+    "UniLayout": [
+      "UniLayoutIOS/UniLayout/Assets/**/*"
+    ]
+  }
 }

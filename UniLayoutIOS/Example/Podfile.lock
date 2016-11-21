@@ -6,10 +6,10 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   UniLayout:
-    :path: ../../
+    :path: "../../"
 
 SPEC CHECKSUMS:
-  UniLayout: 89449a3174e0d42acea1907cc336c3295e1fc683
+  UniLayout: 517adf6a5a9be350aac18022405ed987bd1f615d
 
 PODFILE CHECKSUM: c5be050806aea14e5154eac8062c6c6830d64e24
 

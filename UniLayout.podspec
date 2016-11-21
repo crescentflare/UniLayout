@@ -32,9 +32,9 @@ A uniform layout system for both iOS and Android. Based on the layout container 
 
   s.source_files = 'UniLayoutIOS/UniLayout/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'UniLayout' => ['UniLayout/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'UniLayout' => ['UniLayoutIOS/UniLayout/Assets/**/*']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
