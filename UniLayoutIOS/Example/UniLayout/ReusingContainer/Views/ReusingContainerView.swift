@@ -109,6 +109,7 @@ class ReusingContainerView: UniFrameContainer, UITableViewDataSource, UITableVie
         let item = items[(indexPath as NSIndexPath).row]
         let nextType = (indexPath as NSIndexPath).row + 1 < items.count ? items[(indexPath as NSIndexPath).row + 1].type : ReusableItemType.unknown
         let cell = tableView.dequeueReusableCell(withIdentifier: item.type.rawValue) as? UniReusableView ?? UniReusableView()
+        cell.isSimulatingSpacing = false
         
         // Set up an item cell
         if item.type == .item {
@@ -120,7 +121,7 @@ class ReusingContainerView: UniFrameContainer, UITableViewDataSource, UITableVie
             
             // Supply data
             cell.selectionStyle = .none
-            cell.dividerIsHidden = nextType != .item
+            cell.dividerLine.isHidden = nextType != .item
             cell.contentView.backgroundColor = UIColor.white
             cellView?.title = item.title
             cellView?.additional = item.additional
@@ -137,7 +138,7 @@ class ReusingContainerView: UniFrameContainer, UITableViewDataSource, UITableVie
             
             // Supply data
             cell.selectionStyle = .none
-            cell.dividerIsHidden = true
+            cell.dividerLine.isHidden = true
             cell.contentView.backgroundColor = tableView.backgroundColor
             cellView?.text = item.title
         }
@@ -151,7 +152,7 @@ class ReusingContainerView: UniFrameContainer, UITableViewDataSource, UITableVie
             
             // Supply data
             cell.selectionStyle = .none
-            cell.dividerIsHidden = true
+            cell.dividerLine.isHidden = true
             cell.contentView.backgroundColor = tableView.backgroundColor
         }
         
