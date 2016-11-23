@@ -44,27 +44,13 @@ public class UniTextView extends TextView
 
 
     // ---
-    // Override measure to work with minimum width and alignment
+    // Override layout to force re-measure (to get text alignment to work properly)
     // ---
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    public void layout(int left, int top, int right, int bottom)
     {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        ViewGroup.LayoutParams layoutParams = getLayoutParams();
-        if (layoutParams instanceof UniLayoutParams)
-        {
-            UniLayoutParams uniLayoutParams = (UniLayoutParams)layoutParams;
-            int specMode = MeasureSpec.getMode(widthMeasureSpec);
-            if (specMode != MeasureSpec.EXACTLY && getMeasuredWidth() < uniLayoutParams.minWidth)
-            {
-                int limitWidth = uniLayoutParams.minWidth;
-                if (specMode == MeasureSpec.AT_MOST)
-                {
-                    limitWidth = Math.min(limitWidth, MeasureSpec.getSize(widthMeasureSpec));
-                }
-                super.onMeasure(MeasureSpec.makeMeasureSpec(limitWidth, MeasureSpec.EXACTLY), heightMeasureSpec);
-            }
-        }
+        measure(MeasureSpec.makeMeasureSpec(right - left, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(bottom - top, MeasureSpec.EXACTLY));
+        super.layout(left, top, right, bottom);
     }
 }
