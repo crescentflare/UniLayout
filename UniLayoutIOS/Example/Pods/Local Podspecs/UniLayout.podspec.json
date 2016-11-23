@@ -1,6 +1,6 @@
 {
   "name": "UniLayout",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "summary": "A uniform layout system for iOS and Android.",
   "description": "A uniform layout system for both iOS and Android. Based on the layout container system from Android (like LinearLayout and FrameLayout).",
   "homepage": "https://github.com/crescentflare/UniLayout",
@@ -13,10 +13,15 @@
   },
   "source": {
     "git": "https://github.com/crescentflare/UniLayout.git",
-    "tag": "0.1.0"
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "UniLayoutIOS/UniLayout/Classes/**/*"
+  "source_files": "UniLayoutIOS/UniLayout/Classes/**/*",
+  "resource_bundles": {
+    "UniLayout": [
+      "UniLayoutIOS/UniLayout/Assets/**/*"
+    ]
+  }
 }

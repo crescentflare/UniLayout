@@ -14,12 +14,19 @@ open class UniReusableView : UITableViewCell {
     // MARK: Members
     // --
     
-    private var dividerLine = UniView()
+    let mainContainer = UniLinearContainer()
+    let contentContainer = UniFrameContainer()
+    let accessoryContainer = UniFrameContainer()
+    public let dividerLine = UniView()
+    private let coreContainer = UniLinearContainer()
     private var _view: UIView? = nil
+    private var _accessoryView: UIView? = nil
+    private var _simulatedAccessoryType = UITableViewCellAccessoryType.none
+    private var _simulatingSpacing = true
     
     
     // --
-    // MARK: Setting values
+    // MARK: Set custom view
     // --
     
     public var view: UniLayoutView? {
@@ -27,20 +34,66 @@ open class UniReusableView : UITableViewCell {
             _view?.removeFromSuperview()
             _view = newValue as? UIView
             if _view != nil {
-                contentView.addSubview(_view!)
+                view?.layoutProperties.width = UniLayoutProperties.stretchToParent
+                contentContainer.addSubview(_view!)
             }
         }
         get { return _view as? UniLayoutView }
     }
     
-    public var dividerIsHidden: Bool? {
+    
+    // --
+    // MARK: Remove simulation of padding and height
+    // --
+    
+    open var isSimulatingSpacing: Bool {
         set {
-            dividerLine.isHidden = newValue ?? false
+            _simulatingSpacing = newValue
+            if _simulatingSpacing {
+                mainContainer.padding = UIEdgeInsetsMake(4, 8, 4, 8)
+                mainContainer.layoutProperties.minHeight = 44
+            } else {
+                mainContainer.padding = UIEdgeInsetsMake(0, 0, 0, 0)
+                mainContainer.layoutProperties.minHeight = 0
+            }
         }
-        get { return dividerLine.isHidden }
+        get { return _simulatingSpacing }
     }
     
+
+    // --
+    // MARK: Set custom accessory view
+    // --
     
+    open override var accessoryView: UIView? {
+        set {
+            _accessoryView?.removeFromSuperview()
+            _accessoryView = newValue
+            if _accessoryView != nil {
+                accessoryContainer.addSubview(_accessoryView!)
+            }
+            accessoryContainer.isHidden = _accessoryView == nil
+        }
+        get { return _accessoryView }
+    }
+
+    // --
+    // MARK: Override and simulate disclosure indicator
+    // --
+    
+    open override var accessoryType: UITableViewCellAccessoryType {
+        set {
+            _simulatedAccessoryType = newValue
+            if _simulatedAccessoryType == .disclosureIndicator {
+                let imageView = UniImageView()
+                imageView.image = UniAssets.chevron
+                accessoryView = imageView
+            }
+        }
+        get { return _simulatedAccessoryType }
+    }
+    
+
     // --
     // MARK: Initialize
     // --
@@ -56,19 +109,38 @@ open class UniReusableView : UITableViewCell {
     }
     
     func setupView() {
-        // Add a default empty view which will be overwritten later
-        let emptyView = UniView()
-        emptyView.layoutProperties.width = UniLayoutProperties.stretchToParent
-        emptyView.layoutProperties.height = 40
-        view = emptyView
+        // Set up core container
+        coreContainer.orientation = .vertical
+        contentView.addSubview(coreContainer)
         
-        // Add the divider line to the container
-        dividerLine = UniView()
+        // Set up and add the main container view
+        mainContainer.layoutProperties.width = UniLayoutProperties.stretchToParent
+        mainContainer.orientation = .horizontal
+        mainContainer.padding = UIEdgeInsetsMake(4, 8, 4, 8)
+        mainContainer.layoutProperties.minHeight = 44
+        coreContainer.addSubview(mainContainer)
+        
+        // Set up and add the divider line view
         dividerLine.layoutProperties.width = UniLayoutProperties.stretchToParent
         dividerLine.layoutProperties.height = 1 / UIScreen.main.scale
         dividerLine.layoutProperties.margin.left = 16
         dividerLine.backgroundColor = UIColor(white: 0.8, alpha: 1)
-        addSubview(dividerLine)
+        coreContainer.addSubview(dividerLine)
+        
+        // Set up and add the content container view
+        contentContainer.layoutProperties.width = 0
+        contentContainer.layoutProperties.weight = 1
+        contentContainer.layoutProperties.verticalGravity = 0.5
+        mainContainer.addSubview(contentContainer)
+        
+        // Set up and add the accessory container view
+        accessoryContainer.layoutProperties.margin.left = 6
+        accessoryContainer.layoutProperties.margin.right = 8
+        accessoryContainer.layoutProperties.minWidth = 12
+        accessoryContainer.layoutProperties.horizontalGravity = 1
+        accessoryContainer.layoutProperties.verticalGravity = 0.5
+        accessoryContainer.isHidden = true
+        mainContainer.addSubview(accessoryContainer)
     }
     
     
@@ -77,25 +149,14 @@ open class UniReusableView : UITableViewCell {
     // --
     
     open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
-        var result = CGSize.zero
-        if let uniCellView = _view as? UniLayoutView {
-            result = uniCellView.measuredSize(sizeSpec: targetSize, widthSpec: .exactSize, heightSpec: .unspecified)
-            result.height = max(result.height, uniCellView.layoutProperties.minHeight)
-        }
-        if !dividerLine.isHidden {
-            result.height += dividerLine.layoutProperties.height
-        }
+        var result = coreContainer.measuredSize(sizeSpec: targetSize, widthSpec: .exactSize, heightSpec: .unspecified)
+        result.height = max(coreContainer.layoutProperties.minHeight, min(result.height, coreContainer.layoutProperties.maxHeight))
         return result
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        if !dividerLine.isHidden {
-            _view?.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height - dividerLine.layoutProperties.height)
-            dividerLine.frame = CGRect(x: dividerLine.layoutProperties.margin.left, y: frame.height - dividerLine.layoutProperties.height, width: frame.width * 2 - dividerLine.layoutProperties.margin.left, height: dividerLine.layoutProperties.height)
-        } else {
-            _view?.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
-        }
+        coreContainer.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: contentView.frame.height)
     }
     
 }

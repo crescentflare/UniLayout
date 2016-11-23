@@ -7,29 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13ED7FABF6ECD24CE7A09F0342A434EC /* UniFrameContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C2C2DEFBC1283F343D9305B0A1CC9 /* UniFrameContainer.swift */; };
+		07D6396037542C58D121D205D71D64B2 /* UniFrameContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964AEF7D2B2CA1CFDACBB6886F2CFDE5 /* UniFrameContainer.swift */; };
+		158909C67BBC6E6B2E0C699D668E0ADD /* UniButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D617655FC541D9D165645F00B398B581 /* UniButtonView.swift */; };
+		1FE1E4BA87C0509B371ED8D76FABE6C5 /* UniTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DF40073859128CDFB084B25727E082 /* UniTextView.swift */; };
 		259E583035846272A0E21892F17669E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		2704539DB30826A2676A48429B428634 /* UniHorizontalScrollContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735016BCF0B71196DA3B0951FF41CA50 /* UniHorizontalScrollContainer.swift */; };
+		344A3B3D413888C9BDC58607327A2B25 /* UniImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1CB32411A2F066A7A3B1450207808 /* UniImageView.swift */; };
 		3785332679A1AB0A9816904C024AE811 /* Pods-UniLayout_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB15B1CB5A7E35A17279240B2FBCA4A /* Pods-UniLayout_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		39F459CAD45FD04FC5476A5BEAC3BDF0 /* UniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439FECA2FB20F320D16AF621DE9B2108 /* UniView.swift */; };
-		4F9D5DDCD912F0B616FF4D54D4C0C2EA /* UniVerticalScrollContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F141FA79F547C13EBC27410B67A291 /* UniVerticalScrollContainer.swift */; };
+		423EAE827D804A22F202EEA1245BECB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B6BE221067DF32D4C3BA3BF3EE3657E /* Images.xcassets */; };
+		5468B1A73F9B5634F12CD4F4AB2BFE84 /* UniLinearContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB513C44FD63C49B45141B3E7920F4 /* UniLinearContainer.swift */; };
 		56C92346191D933CA3D815510BA7449D /* Pods-UniLayout_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 93762A67D954A4D29F5D95DAB0E8F876 /* Pods-UniLayout_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		57927B58DCE9F27337CBAFA9E08C65DF /* UniLayoutProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E0C902A60138B97EC1D564DE039BCC /* UniLayoutProperties.swift */; };
-		664ED64CD8750E9D91D5896E0616D1B0 /* UniLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF9BA1667E0CD307FBA4A845CB5E642 /* UniLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		734D8773ECE8509817D78F905B42818A /* UniReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B131426C9383DCB7B4BEA9A6CEEDCF /* UniReusableView.swift */; };
-		793874313C2344C16CC3E2D4E5F13106 /* UniReusingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F146DD8256B31B313FF1E5E9C0E3E44A /* UniReusingContainer.swift */; };
+		5CE521D753C5F0BF3AA17F7BD906E641 /* UniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421E35577C078D81F5287867DB8572C5 /* UniView.swift */; };
+		664ED64CD8750E9D91D5896E0616D1B0 /* UniLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 280FC561093C2309CF9F19E9F31AA8BB /* UniLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		68E37E748915CA87E55B31951BB47096 /* UniReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965BB45923B70682C0A118B905884AAA /* UniReusableView.swift */; };
 		7F2036EAB41AC92A1979C59230D99336 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		911460F83A3F653F50419C4F0E83EE4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		940F3054290B48D80EA0E290214EB548 /* UniLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68067F340683CC7D3A4D6DB7442EA76E /* UniLayout-dummy.m */; };
-		9A38F25A44336E3A8FDDEAE9DBE21B04 /* UniLinearContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C282D90CA475D42E5A66378CE7A2BDE /* UniLinearContainer.swift */; };
-		C1A8F8A6E87B594B788B093852C6F635 /* UniHorizontalScrollContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC620672052967812B23659FBE59CFAD /* UniHorizontalScrollContainer.swift */; };
+		BA673071B7F700DE2FA56B226AABC9CE /* UniReusingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008163D36C91CBCB9133C7350619C9BC /* UniReusingContainer.swift */; };
+		BB3119E7F1037A7615BA9ED877DDFF14 /* UniLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E45B0753E4FA0D389E4833294CA5 /* UniLayout-dummy.m */; };
+		BD31B3F28096BF59AC932876B6B9F612 /* UniVerticalScrollContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC8C6A759DC3C8AE42D5F12B01FF950 /* UniVerticalScrollContainer.swift */; };
 		C5C3174A232D4E986D5E289358BA6641 /* Pods-UniLayout_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD50CA0B4531123F16A13E283D6F792 /* Pods-UniLayout_Tests-dummy.m */; };
+		CF078F39E1134A3EC3E3D7D98A934CE5 /* UniLayoutProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7CEA676B683B84D84437ACCB5A28B5 /* UniLayoutProperties.swift */; };
 		D7AFF8CBAEFA8B887119BC88374B2D1E /* Pods-UniLayout_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E6EEEF5CAA0502AB9DBDC9F7D4B21A /* Pods-UniLayout_Example-dummy.m */; };
-		E5AA78C07320296327137CD0C25CF46C /* UniImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5300712836D8ECBDBBF4135E3E753A /* UniImageView.swift */; };
-		E8F892658A0A26CD987EEAB8F6DF5E87 /* UniTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C7EB1865456DD312E028292DE4D13F /* UniTextView.swift */; };
-		F5C0F08DB7200AFDC2466ED6B2D66FAC /* UniButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133065641C52B77AC188006B7AC22820 /* UniButtonView.swift */; };
+		EAE0E15B0B3539E3DF8D5A6050793CE3 /* UniLayout.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 43152669D9C7E33718DF7EC287829EB8 /* UniLayout.bundle */; };
+		F2DF2F4A7BCB8D1EC2937FE6B8F6D36A /* UniAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ED70E4CBE26C91C8773C975B018D71 /* UniAssets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		376112ED5E5B9C730B0DF68D5AD32697 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDCC72601C49915136167A7F35C35A2A;
+			remoteInfo = "UniLayout-UniLayout";
+		};
 		9BC6732E0A24915180D1118B2704A5A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -40,51 +50,62 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		008163D36C91CBCB9133C7350619C9BC /* UniReusingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniReusingContainer.swift; sourceTree = "<group>"; };
 		05FA6EECAAE60F6D42CB2026286FB2D4 /* Pods-UniLayout_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-UniLayout_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		06C7EB1865456DD312E028292DE4D13F /* UniTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniTextView.swift; sourceTree = "<group>"; };
-		09F141FA79F547C13EBC27410B67A291 /* UniVerticalScrollContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniVerticalScrollContainer.swift; sourceTree = "<group>"; };
+		087537200BB55873EC568634AD7478BF /* UniLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = UniLayout.modulemap; sourceTree = "<group>"; };
 		12948A88F8C48F337688B14C7D50A957 /* Pods-UniLayout_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-UniLayout_Tests-resources.sh"; sourceTree = "<group>"; };
-		133065641C52B77AC188006B7AC22820 /* UniButtonView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniButtonView.swift; sourceTree = "<group>"; };
-		2107446A715D68283557CD35771F0C00 /* UniLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = UniLayout.modulemap; sourceTree = "<group>"; };
-		21E0C902A60138B97EC1D564DE039BCC /* UniLayoutProperties.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniLayoutProperties.swift; sourceTree = "<group>"; };
-		2B30CCEED8964CC990997969E84B195E /* UniLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UniLayout.xcconfig; sourceTree = "<group>"; };
+		1365CD6B35D1860278EBF18B84A0A7A7 /* UniLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UniLayout.xcconfig; sourceTree = "<group>"; };
+		1FD7E45B0753E4FA0D389E4833294CA5 /* UniLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UniLayout-dummy.m"; sourceTree = "<group>"; };
+		207CE2A50877C408817B7354BC158575 /* UniLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UniLayout.framework; path = UniLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		280FC561093C2309CF9F19E9F31AA8BB /* UniLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UniLayout-umbrella.h"; sourceTree = "<group>"; };
+		2F7CEA676B683B84D84437ACCB5A28B5 /* UniLayoutProperties.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniLayoutProperties.swift; sourceTree = "<group>"; };
+		35636105EC4F2790A85E5297CA239449 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C8CC03DCFB3E794116C5B30BD2044DB /* Pods-UniLayout_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UniLayout_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		3DDAEC65450F9ADBCE3CAA7F82D82110 /* Pods-UniLayout_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UniLayout_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		3FD50CA0B4531123F16A13E283D6F792 /* Pods-UniLayout_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-UniLayout_Tests-dummy.m"; sourceTree = "<group>"; };
-		439FECA2FB20F320D16AF621DE9B2108 /* UniView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniView.swift; sourceTree = "<group>"; };
+		421E35577C078D81F5287867DB8572C5 /* UniView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniView.swift; sourceTree = "<group>"; };
+		43152669D9C7E33718DF7EC287829EB8 /* UniLayout.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = UniLayout.bundle; path = UniLayout.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F6CF48340D9CEB925C6030BFCF3A4F /* Pods-UniLayout_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UniLayout_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5B25B8765486C19C98D03FED67B6FBAA /* Pods-UniLayout_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-UniLayout_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		5CAB513C44FD63C49B45141B3E7920F4 /* UniLinearContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniLinearContainer.swift; sourceTree = "<group>"; };
 		62A336CA47933759B050614F5F1FA501 /* Pods-UniLayout_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-UniLayout_Tests.modulemap"; sourceTree = "<group>"; };
-		68067F340683CC7D3A4D6DB7442EA76E /* UniLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UniLayout-dummy.m"; sourceTree = "<group>"; };
-		6CF9BA1667E0CD307FBA4A845CB5E642 /* UniLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UniLayout-umbrella.h"; sourceTree = "<group>"; };
+		6B6BE221067DF32D4C3BA3BF3EE3657E /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		70E6EEEF5CAA0502AB9DBDC9F7D4B21A /* Pods-UniLayout_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-UniLayout_Example-dummy.m"; sourceTree = "<group>"; };
-		7C282D90CA475D42E5A66378CE7A2BDE /* UniLinearContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniLinearContainer.swift; sourceTree = "<group>"; };
+		735016BCF0B71196DA3B0951FF41CA50 /* UniHorizontalScrollContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniHorizontalScrollContainer.swift; sourceTree = "<group>"; };
+		766362057B969AC6AC1AEB604584FC4E /* UniLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UniLayout-prefix.pch"; sourceTree = "<group>"; };
 		7F36921A186ADB9846F5D9D4EA5DE96B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8034F61E0BF26607EF90F07E7DE14C85 /* Pods_UniLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_UniLayout_Example.framework; path = "Pods-UniLayout_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C901538A874F486609787DAD43FF761 /* Pods-UniLayout_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-UniLayout_Example.modulemap"; sourceTree = "<group>"; };
 		93762A67D954A4D29F5D95DAB0E8F876 /* Pods-UniLayout_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-UniLayout_Example-umbrella.h"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9B3C2C2DEFBC1283F343D9305B0A1CC9 /* UniFrameContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniFrameContainer.swift; sourceTree = "<group>"; };
+		964AEF7D2B2CA1CFDACBB6886F2CFDE5 /* UniFrameContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniFrameContainer.swift; sourceTree = "<group>"; };
+		965BB45923B70682C0A118B905884AAA /* UniReusableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniReusableView.swift; sourceTree = "<group>"; };
 		AD660B68A837B50EEA80E4E2664E1B8A /* Pods-UniLayout_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-UniLayout_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		B0E44034A9AC5A209EA7313E19B9CE8A /* ResourceBundle-UniLayout-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-UniLayout-Info.plist"; sourceTree = "<group>"; };
+		B317D3E74C7361EFDFBB4737D997C69F /* Pods_UniLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_UniLayout_Tests.framework; path = "Pods-UniLayout_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31EBCA89804E46FC3AF9FB7BD6D2C9C /* Pods-UniLayout_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-UniLayout_Example-resources.sh"; sourceTree = "<group>"; };
-		B6F8DF92E3417C19F70646A5015D8B86 /* Pods_UniLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_UniLayout_Tests.framework; path = "Pods-UniLayout_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9D404FDDD0E60623A8C0F5FAA0F74B0 /* UniLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UniLayout.framework; path = UniLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE314943C6A3D17F10D52F6123B1FB69 /* Pods-UniLayout_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UniLayout_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		CFC1CB32411A2F066A7A3B1450207808 /* UniImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniImageView.swift; sourceTree = "<group>"; };
+		D0ED70E4CBE26C91C8773C975B018D71 /* UniAssets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniAssets.swift; sourceTree = "<group>"; };
 		D11872932E5D12135630A29C8B756A36 /* Pods-UniLayout_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-UniLayout_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		D287E6C3147754E8A2D0C5F84CE9291A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DB5300712836D8ECBDBBF4135E3E753A /* UniImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniImageView.swift; sourceTree = "<group>"; };
+		D617655FC541D9D165645F00B398B581 /* UniButtonView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniButtonView.swift; sourceTree = "<group>"; };
+		DDE75BA20748F38396D6042A954BE63F /* Pods_UniLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_UniLayout_Example.framework; path = "Pods-UniLayout_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEC8C6A759DC3C8AE42D5F12B01FF950 /* UniVerticalScrollContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniVerticalScrollContainer.swift; sourceTree = "<group>"; };
 		E0189D4EE6E504A0AAFB727B6C2F156B /* Pods-UniLayout_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-UniLayout_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		E3B131426C9383DCB7B4BEA9A6CEEDCF /* UniReusableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniReusableView.swift; sourceTree = "<group>"; };
 		EAB15B1CB5A7E35A17279240B2FBCA4A /* Pods-UniLayout_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-UniLayout_Tests-umbrella.h"; sourceTree = "<group>"; };
-		EC620672052967812B23659FBE59CFAD /* UniHorizontalScrollContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniHorizontalScrollContainer.swift; sourceTree = "<group>"; };
-		F146DD8256B31B313FF1E5E9C0E3E44A /* UniReusingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniReusingContainer.swift; sourceTree = "<group>"; };
 		F57C20104541F0D12FD4BD0C21648933 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5A2BBF5C5AAA91BE18AE53AFFC713F1 /* Pods-UniLayout_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-UniLayout_Example-frameworks.sh"; sourceTree = "<group>"; };
-		F7C2C4DBB60075A7ABBCE975120476EC /* UniLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UniLayout-prefix.pch"; sourceTree = "<group>"; };
+		F6DF40073859128CDFB084B25727E082 /* UniTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UniTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		107033C7A18C28D3F39E1497C71FA269 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C26C6D72D26C83DF7175FE68E8213299 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -112,26 +133,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0AB30BB9035801A03FA48AB79D9E9FC7 /* views */ = {
+		05CB322DC2AFE81ADC39F736E1BD9292 /* UniLayoutIOS */ = {
 			isa = PBXGroup;
 			children = (
-				133065641C52B77AC188006B7AC22820 /* UniButtonView.swift */,
-				DB5300712836D8ECBDBBF4135E3E753A /* UniImageView.swift */,
-				E3B131426C9383DCB7B4BEA9A6CEEDCF /* UniReusableView.swift */,
-				06C7EB1865456DD312E028292DE4D13F /* UniTextView.swift */,
-				439FECA2FB20F320D16AF621DE9B2108 /* UniView.swift */,
+				FF95212C5E34703C273E0D12D6B0E598 /* UniLayout */,
 			);
-			name = views;
-			path = views;
+			name = UniLayoutIOS;
+			path = UniLayoutIOS;
 			sourceTree = "<group>";
 		};
-		21286E2BE27F64B64C519613F462FE34 /* helpers */ = {
+		0C1D892B46DA6B6B26E2D33C486400D9 /* utility */ = {
 			isa = PBXGroup;
 			children = (
-				21E0C902A60138B97EC1D564DE039BCC /* UniLayoutProperties.swift */,
+				D0ED70E4CBE26C91C8773C975B018D71 /* UniAssets.swift */,
 			);
-			name = helpers;
-			path = helpers;
+			name = utility;
+			path = utility;
+			sourceTree = "<group>";
+		};
+		0E01CDAE4AFF41277B7A28B43B0BE5F7 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				35636105EC4F2790A85E5297CA239449 /* Info.plist */,
+				B0E44034A9AC5A209EA7313E19B9CE8A /* ResourceBundle-UniLayout-Info.plist */,
+				087537200BB55873EC568634AD7478BF /* UniLayout.modulemap */,
+				1365CD6B35D1860278EBF18B84A0A7A7 /* UniLayout.xcconfig */,
+				1FD7E45B0753E4FA0D389E4833294CA5 /* UniLayout-dummy.m */,
+				766362057B969AC6AC1AEB604584FC4E /* UniLayout-prefix.pch */,
+				280FC561093C2309CF9F19E9F31AA8BB /* UniLayout-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "UniLayoutIOS/Example/Pods/Target Support Files/UniLayout";
 			sourceTree = "<group>";
 		};
 		493C45D74B763B85D3831F5F3BF920C9 /* Pods-UniLayout_Example */ = {
@@ -152,56 +184,56 @@
 			path = "Target Support Files/Pods-UniLayout_Example";
 			sourceTree = "<group>";
 		};
-		56E1FC2DAABD334A46F0335F3E6344A7 /* UniLayout */ = {
+		5182DFE1BDAD88937ABA3180B12C174D /* helpers */ = {
 			isa = PBXGroup;
 			children = (
-				749A0FC0723018263AB604B3C7393588 /* Support Files */,
-				65845BE75695E3D5135304EA6A8573A2 /* UniLayoutIOS */,
+				2F7CEA676B683B84D84437ACCB5A28B5 /* UniLayoutProperties.swift */,
 			);
-			name = UniLayout;
-			path = ../../..;
+			name = helpers;
+			path = helpers;
 			sourceTree = "<group>";
 		};
-		57AFD352678CD93BE87DB4E12136AF7D /* Products */ = {
+		5345403B7DCB0F14ABE4EBC1522CC164 /* UniLayoutIOS */ = {
 			isa = PBXGroup;
 			children = (
-				8034F61E0BF26607EF90F07E7DE14C85 /* Pods_UniLayout_Example.framework */,
-				B6F8DF92E3417C19F70646A5015D8B86 /* Pods_UniLayout_Tests.framework */,
-				B9D404FDDD0E60623A8C0F5FAA0F74B0 /* UniLayout.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		597F6E3584F561939BA0C2F725E7D940 /* UniLayout */ = {
-			isa = PBXGroup;
-			children = (
-				7F692EF3C668545D505550694BCCD0E5 /* Classes */,
-			);
-			name = UniLayout;
-			path = UniLayout;
-			sourceTree = "<group>";
-		};
-		65845BE75695E3D5135304EA6A8573A2 /* UniLayoutIOS */ = {
-			isa = PBXGroup;
-			children = (
-				597F6E3584F561939BA0C2F725E7D940 /* UniLayout */,
+				5C5D62DCC16F4C4F04914F2BAB201BE1 /* UniLayout */,
 			);
 			name = UniLayoutIOS;
 			path = UniLayoutIOS;
 			sourceTree = "<group>";
 		};
-		749A0FC0723018263AB604B3C7393588 /* Support Files */ = {
+		59D2D1E881E5106CC0EB40D6B6AE7329 /* containers */ = {
 			isa = PBXGroup;
 			children = (
-				D287E6C3147754E8A2D0C5F84CE9291A /* Info.plist */,
-				2107446A715D68283557CD35771F0C00 /* UniLayout.modulemap */,
-				2B30CCEED8964CC990997969E84B195E /* UniLayout.xcconfig */,
-				68067F340683CC7D3A4D6DB7442EA76E /* UniLayout-dummy.m */,
-				F7C2C4DBB60075A7ABBCE975120476EC /* UniLayout-prefix.pch */,
-				6CF9BA1667E0CD307FBA4A845CB5E642 /* UniLayout-umbrella.h */,
+				964AEF7D2B2CA1CFDACBB6886F2CFDE5 /* UniFrameContainer.swift */,
+				735016BCF0B71196DA3B0951FF41CA50 /* UniHorizontalScrollContainer.swift */,
+				5CAB513C44FD63C49B45141B3E7920F4 /* UniLinearContainer.swift */,
+				008163D36C91CBCB9133C7350619C9BC /* UniReusingContainer.swift */,
+				DEC8C6A759DC3C8AE42D5F12B01FF950 /* UniVerticalScrollContainer.swift */,
 			);
-			name = "Support Files";
-			path = "UniLayoutIOS/Example/Pods/Target Support Files/UniLayout";
+			name = containers;
+			path = containers;
+			sourceTree = "<group>";
+		};
+		5C5D62DCC16F4C4F04914F2BAB201BE1 /* UniLayout */ = {
+			isa = PBXGroup;
+			children = (
+				8B9D660005E7AB7A6BB91ADEF5FFC0FB /* Assets */,
+			);
+			name = UniLayout;
+			path = UniLayout;
+			sourceTree = "<group>";
+		};
+		6C9D2FA3D02CB989B327140ACC87F602 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				59D2D1E881E5106CC0EB40D6B6AE7329 /* containers */,
+				5182DFE1BDAD88937ABA3180B12C174D /* helpers */,
+				0C1D892B46DA6B6B26E2D33C486400D9 /* utility */,
+				E272ED15A8D1C61836692D9DD3C86C40 /* views */,
+			);
+			name = Classes;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
@@ -212,26 +244,35 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		762EF23745FEA91626D8DBD43035D36F /* UniLayout */ = {
+			isa = PBXGroup;
+			children = (
+				AE17CEC0095B53AA12FE5C7524667A81 /* Resources */,
+				0E01CDAE4AFF41277B7A28B43B0BE5F7 /* Support Files */,
+				05CB322DC2AFE81ADC39F736E1BD9292 /* UniLayoutIOS */,
+			);
+			name = UniLayout;
+			path = ../../..;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				C5ABA04648320E341E534A51CA3AB154 /* Development Pods */,
+				A83ACD946AD4BF516284C4CE9515A7F4 /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				57AFD352678CD93BE87DB4E12136AF7D /* Products */,
+				F11DE95DB86C7701C3122DAA200CD11B /* Products */,
 				A260B83A9589FE3E9CEAC2059C578816 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		7F692EF3C668545D505550694BCCD0E5 /* Classes */ = {
+		8B9D660005E7AB7A6BB91ADEF5FFC0FB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				BB3EB79440BFE09C3542C7D0E656EA59 /* containers */,
-				21286E2BE27F64B64C519613F462FE34 /* helpers */,
-				0AB30BB9035801A03FA48AB79D9E9FC7 /* views */,
+				6B6BE221067DF32D4C3BA3BF3EE3657E /* Images.xcassets */,
 			);
-			name = Classes;
-			path = Classes;
+			name = Assets;
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		A260B83A9589FE3E9CEAC2059C578816 /* Targets Support Files */ = {
@@ -243,17 +284,20 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		BB3EB79440BFE09C3542C7D0E656EA59 /* containers */ = {
+		A83ACD946AD4BF516284C4CE9515A7F4 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9B3C2C2DEFBC1283F343D9305B0A1CC9 /* UniFrameContainer.swift */,
-				EC620672052967812B23659FBE59CFAD /* UniHorizontalScrollContainer.swift */,
-				7C282D90CA475D42E5A66378CE7A2BDE /* UniLinearContainer.swift */,
-				F146DD8256B31B313FF1E5E9C0E3E44A /* UniReusingContainer.swift */,
-				09F141FA79F547C13EBC27410B67A291 /* UniVerticalScrollContainer.swift */,
+				762EF23745FEA91626D8DBD43035D36F /* UniLayout */,
 			);
-			name = containers;
-			path = containers;
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		AE17CEC0095B53AA12FE5C7524667A81 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5345403B7DCB0F14ABE4EBC1522CC164 /* UniLayoutIOS */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -264,12 +308,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C5ABA04648320E341E534A51CA3AB154 /* Development Pods */ = {
+		E272ED15A8D1C61836692D9DD3C86C40 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				56E1FC2DAABD334A46F0335F3E6344A7 /* UniLayout */,
+				D617655FC541D9D165645F00B398B581 /* UniButtonView.swift */,
+				CFC1CB32411A2F066A7A3B1450207808 /* UniImageView.swift */,
+				965BB45923B70682C0A118B905884AAA /* UniReusableView.swift */,
+				F6DF40073859128CDFB084B25727E082 /* UniTextView.swift */,
+				421E35577C078D81F5287867DB8572C5 /* UniView.swift */,
 			);
-			name = "Development Pods";
+			name = views;
+			path = views;
 			sourceTree = "<group>";
 		};
 		E2E7194B3F7CC91CD42850668AA5344C /* Pods-UniLayout_Tests */ = {
@@ -288,6 +337,26 @@
 			);
 			name = "Pods-UniLayout_Tests";
 			path = "Target Support Files/Pods-UniLayout_Tests";
+			sourceTree = "<group>";
+		};
+		F11DE95DB86C7701C3122DAA200CD11B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DDE75BA20748F38396D6042A954BE63F /* Pods_UniLayout_Example.framework */,
+				B317D3E74C7361EFDFBB4737D997C69F /* Pods_UniLayout_Tests.framework */,
+				43152669D9C7E33718DF7EC287829EB8 /* UniLayout.bundle */,
+				207CE2A50877C408817B7354BC158575 /* UniLayout.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FF95212C5E34703C273E0D12D6B0E598 /* UniLayout */ = {
+			isa = PBXGroup;
+			children = (
+				6C9D2FA3D02CB989B327140ACC87F602 /* Classes */,
+			);
+			name = UniLayout;
+			path = UniLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,17 +393,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E16EFF061B4D9457FF2F7F1553507F6C /* Build configuration list for PBXNativeTarget "UniLayout" */;
 			buildPhases = (
-				A95754CD89B7116548AF874DE35D7BAA /* Sources */,
+				53270E69B3372B32ECE3B09BD6CEF378 /* Sources */,
 				F6AE7F83A6A9603C3A2B8E4FE86FAFF9 /* Frameworks */,
+				654B48F7164FAB09E419C5ACD8589C88 /* Resources */,
 				065F845F93F190EA489BBB39ABFC1132 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F4463B3541931669BA47CFA8B989168E /* PBXTargetDependency */,
 			);
 			name = UniLayout;
 			productName = UniLayout;
-			productReference = B9D404FDDD0E60623A8C0F5FAA0F74B0 /* UniLayout.framework */;
+			productReference = 207CE2A50877C408817B7354BC158575 /* UniLayout.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		93F1716F6B76789D372198D0994522F3 /* Pods-UniLayout_Tests */ = {
@@ -351,8 +422,25 @@
 			);
 			name = "Pods-UniLayout_Tests";
 			productName = "Pods-UniLayout_Tests";
-			productReference = B6F8DF92E3417C19F70646A5015D8B86 /* Pods_UniLayout_Tests.framework */;
+			productReference = B317D3E74C7361EFDFBB4737D997C69F /* Pods_UniLayout_Tests.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		CDCC72601C49915136167A7F35C35A2A /* UniLayout-UniLayout */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F48B8765363D67CFE32FAC71E5E44E46 /* Build configuration list for PBXNativeTarget "UniLayout-UniLayout" */;
+			buildPhases = (
+				43AAD169BBE920FA3DCD23B9FA001F5E /* Sources */,
+				107033C7A18C28D3F39E1497C71FA269 /* Frameworks */,
+				5563DA23854A4BED2AC74F8D7782EC7B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UniLayout-UniLayout";
+			productName = "UniLayout-UniLayout";
+			productReference = 43152669D9C7E33718DF7EC287829EB8 /* UniLayout.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 		F9D3DA1E9CE9BD878708AB5A1DC397A4 /* Pods-UniLayout_Example */ = {
 			isa = PBXNativeTarget;
@@ -369,7 +457,7 @@
 			);
 			name = "Pods-UniLayout_Example";
 			productName = "Pods-UniLayout_Example";
-			productReference = 8034F61E0BF26607EF90F07E7DE14C85 /* Pods_UniLayout_Example.framework */;
+			productReference = DDE75BA20748F38396D6042A954BE63F /* Pods_UniLayout_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -389,16 +477,36 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 57AFD352678CD93BE87DB4E12136AF7D /* Products */;
+			productRefGroup = F11DE95DB86C7701C3122DAA200CD11B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				F9D3DA1E9CE9BD878708AB5A1DC397A4 /* Pods-UniLayout_Example */,
 				93F1716F6B76789D372198D0994522F3 /* Pods-UniLayout_Tests */,
 				2961402EFE9B1E6BABAC8EFD4F6731C4 /* UniLayout */,
+				CDCC72601C49915136167A7F35C35A2A /* UniLayout-UniLayout */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5563DA23854A4BED2AC74F8D7782EC7B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				423EAE827D804A22F202EEA1245BECB0 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		654B48F7164FAB09E419C5ACD8589C88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAE0E15B0B3539E3DF8D5A6050793CE3 /* UniLayout.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		05A74FF8BF5D9DFAE0F9D575D9D64345 /* Sources */ = {
@@ -409,22 +517,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A95754CD89B7116548AF874DE35D7BAA /* Sources */ = {
+		43AAD169BBE920FA3DCD23B9FA001F5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5C0F08DB7200AFDC2466ED6B2D66FAC /* UniButtonView.swift in Sources */,
-				13ED7FABF6ECD24CE7A09F0342A434EC /* UniFrameContainer.swift in Sources */,
-				C1A8F8A6E87B594B788B093852C6F635 /* UniHorizontalScrollContainer.swift in Sources */,
-				E5AA78C07320296327137CD0C25CF46C /* UniImageView.swift in Sources */,
-				940F3054290B48D80EA0E290214EB548 /* UniLayout-dummy.m in Sources */,
-				57927B58DCE9F27337CBAFA9E08C65DF /* UniLayoutProperties.swift in Sources */,
-				9A38F25A44336E3A8FDDEAE9DBE21B04 /* UniLinearContainer.swift in Sources */,
-				734D8773ECE8509817D78F905B42818A /* UniReusableView.swift in Sources */,
-				793874313C2344C16CC3E2D4E5F13106 /* UniReusingContainer.swift in Sources */,
-				E8F892658A0A26CD987EEAB8F6DF5E87 /* UniTextView.swift in Sources */,
-				4F9D5DDCD912F0B616FF4D54D4C0C2EA /* UniVerticalScrollContainer.swift in Sources */,
-				39F459CAD45FD04FC5476A5BEAC3BDF0 /* UniView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53270E69B3372B32ECE3B09BD6CEF378 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2DF2F4A7BCB8D1EC2937FE6B8F6D36A /* UniAssets.swift in Sources */,
+				158909C67BBC6E6B2E0C699D668E0ADD /* UniButtonView.swift in Sources */,
+				07D6396037542C58D121D205D71D64B2 /* UniFrameContainer.swift in Sources */,
+				2704539DB30826A2676A48429B428634 /* UniHorizontalScrollContainer.swift in Sources */,
+				344A3B3D413888C9BDC58607327A2B25 /* UniImageView.swift in Sources */,
+				BB3119E7F1037A7615BA9ED877DDFF14 /* UniLayout-dummy.m in Sources */,
+				CF078F39E1134A3EC3E3D7D98A934CE5 /* UniLayoutProperties.swift in Sources */,
+				5468B1A73F9B5634F12CD4F4AB2BFE84 /* UniLinearContainer.swift in Sources */,
+				68E37E748915CA87E55B31951BB47096 /* UniReusableView.swift in Sources */,
+				BA673071B7F700DE2FA56B226AABC9CE /* UniReusingContainer.swift in Sources */,
+				1FE1E4BA87C0509B371ED8D76FABE6C5 /* UniTextView.swift in Sources */,
+				BD31B3F28096BF59AC932876B6B9F612 /* UniVerticalScrollContainer.swift in Sources */,
+				5CE521D753C5F0BF3AA17F7BD906E641 /* UniView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +560,12 @@
 			name = UniLayout;
 			target = 2961402EFE9B1E6BABAC8EFD4F6731C4 /* UniLayout */;
 			targetProxy = 9BC6732E0A24915180D1118B2704A5A0 /* PBXContainerItemProxy */;
+		};
+		F4463B3541931669BA47CFA8B989168E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "UniLayout-UniLayout";
+			target = CDCC72601C49915136167A7F35C35A2A /* UniLayout-UniLayout */;
+			targetProxy = 376112ED5E5B9C730B0DF68D5AD32697 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -485,7 +607,7 @@
 		};
 		48BCC1065C5E82633DDDD341E91C046F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B30CCEED8964CC990997969E84B195E /* UniLayout.xcconfig */;
+			baseConfigurationReference = 1365CD6B35D1860278EBF18B84A0A7A7 /* UniLayout.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -515,6 +637,23 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		8CC974E6C0F1E25727F811C3CA134173 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1365CD6B35D1860278EBF18B84A0A7A7 /* UniLayout.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/UniLayout";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/UniLayout/ResourceBundle-UniLayout-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = UniLayout;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
 		};
 		8DED8AD26D381A6ACFF202E5217EC498 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -558,7 +697,7 @@
 		};
 		9A244AFF051047FCD17FE42A6724EDF1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B30CCEED8964CC990997969E84B195E /* UniLayout.xcconfig */;
+			baseConfigurationReference = 1365CD6B35D1860278EBF18B84A0A7A7 /* UniLayout.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -703,6 +842,23 @@
 			};
 			name = Release;
 		};
+		B90FB8AA92F5EF2F1984FBA439E5A751 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1365CD6B35D1860278EBF18B84A0A7A7 /* UniLayout.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/UniLayout";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/UniLayout/ResourceBundle-UniLayout-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = UniLayout;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
 		FC0175B3242CD39FAD323245FC59EA33 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3C8CC03DCFB3E794116C5B30BD2044DB /* Pods-UniLayout_Tests.debug.xcconfig */;
@@ -773,6 +929,15 @@
 			buildConfigurations = (
 				48BCC1065C5E82633DDDD341E91C046F /* Debug */,
 				9A244AFF051047FCD17FE42A6724EDF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F48B8765363D67CFE32FAC71E5E44E46 /* Build configuration list for PBXNativeTarget "UniLayout-UniLayout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B90FB8AA92F5EF2F1984FBA439E5A751 /* Debug */,
+				8CC974E6C0F1E25727F811C3CA134173 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UniLayout'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A uniform layout system for iOS and Android.'
 
 # This description is used to generate tags and improve search results.
@@ -32,9 +32,9 @@ A uniform layout system for both iOS and Android. Based on the layout container 
 
   s.source_files = 'UniLayoutIOS/UniLayout/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'UniLayout' => ['UniLayout/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'UniLayout' => ['UniLayoutIOS/UniLayout/Assets/**/*']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
