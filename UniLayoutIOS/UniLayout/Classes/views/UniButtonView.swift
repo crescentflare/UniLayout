@@ -15,6 +15,12 @@ public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     // ---
 
     public var layoutProperties = UniLayoutProperties()
+    private var backgroundColorNormalState: UIColor?
+    private var backgroundColorHighlightedState: UIColor?
+    private var backgroundColorDisabledState: UIColor?
+    private var borderColorNormalState: UIColor?
+    private var borderColorHighlightedState: UIColor?
+    private var borderColorDisabledState: UIColor?
 
     
     // ---
@@ -53,6 +59,88 @@ public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
         padding = UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
+    
+    // ---
+    // MARK: Add more state support
+    // ---
+    
+    public override var isHighlighted: Bool {
+        didSet {
+            refreshStateBackground()
+            refreshStateBorder()
+        }
+    }
+    
+    public override var isEnabled: Bool {
+        didSet {
+            refreshStateBackground()
+            refreshStateBorder()
+        }
+    }
+    
+    public override var backgroundColor: UIColor? {
+        get { return backgroundColorNormalState }
+        set { setBackgroundColor(newValue, for: .normal) }
+    }
+
+    public func setBackgroundColor(_ color: UIColor?, for state: UIControlState) {
+        let currentState = !isEnabled ? UIControlState.disabled : (isHighlighted ? UIControlState.highlighted : UIControlState.normal)
+        if state == .normal {
+            backgroundColorNormalState = color
+        } else if state == .highlighted {
+            backgroundColorHighlightedState = color
+        } else if state == .disabled {
+            backgroundColorDisabledState = color
+        }
+        if state == .normal || state == currentState {
+            refreshStateBackground()
+        }
+    }
+    
+    public func setBorderColor(_ color: UIColor?, for state: UIControlState) {
+        let currentState = !isEnabled ? UIControlState.disabled : (isHighlighted ? UIControlState.highlighted : UIControlState.normal)
+        if state == .normal {
+            borderColorNormalState = color
+        } else if state == .highlighted {
+            borderColorHighlightedState = color
+        } else if state == .disabled {
+            borderColorDisabledState = color
+        }
+        if state == .normal || state == currentState {
+            refreshStateBorder()
+        }
+    }
+
+    private func refreshStateBackground() {
+        var backgroundWasSet = false
+        if !isEnabled && backgroundColorDisabledState != nil {
+            super.backgroundColor = backgroundColorDisabledState
+            backgroundWasSet = true
+        }
+        if isEnabled && isHighlighted && backgroundColorHighlightedState != nil {
+            super.backgroundColor = backgroundColorHighlightedState
+            backgroundWasSet = true
+        }
+        if !backgroundWasSet {
+            super.backgroundColor = backgroundColorNormalState
+        }
+    }
+
+    private func refreshStateBorder() {
+        var borderWasSet = false
+        if !isEnabled && borderColorDisabledState != nil {
+            layer.borderColor = borderColorDisabledState?.cgColor
+            borderWasSet = true
+        }
+        if isEnabled && isHighlighted && borderColorHighlightedState != nil {
+            layer.borderColor = borderColorHighlightedState?.cgColor
+            borderWasSet = true
+        }
+        if !borderWasSet {
+            layer.borderColor = borderColorNormalState?.cgColor
+        }
+    }
+
     
     // ---
     // MARK: Custom layout
