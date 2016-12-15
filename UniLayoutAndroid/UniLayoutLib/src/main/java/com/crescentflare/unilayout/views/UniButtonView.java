@@ -38,4 +38,16 @@ public class UniButtonView extends Button
     private void init(AttributeSet attrs)
     {
     }
+
+
+    // ---
+    // Override layout to force re-measure (to get text alignment to work properly)
+    // ---
+
+    @Override
+    public void layout(int left, int top, int right, int bottom)
+    {
+        measure(MeasureSpec.makeMeasureSpec(right - left, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(bottom - top, MeasureSpec.EXACTLY));
+        super.layout(left, top, right, bottom);
+    }
 }
