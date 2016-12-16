@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
+open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
 
     // ---
     // MARK: Members
@@ -64,21 +64,21 @@ public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     // MARK: Add more state support
     // ---
     
-    public override var isHighlighted: Bool {
+    open override var isHighlighted: Bool {
         didSet {
             refreshStateBackground()
             refreshStateBorder()
         }
     }
     
-    public override var isEnabled: Bool {
+    open override var isEnabled: Bool {
         didSet {
             refreshStateBackground()
             refreshStateBorder()
         }
     }
     
-    public override var backgroundColor: UIColor? {
+    open override var backgroundColor: UIColor? {
         get { return backgroundColorNormalState }
         set { setBackgroundColor(newValue, for: .normal) }
     }
@@ -146,7 +146,7 @@ public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     // MARK: Custom layout
     // ---
 
-    public func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
+    open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         let limitedSize = CGSize(width: max(0, sizeSpec.width), height: max(0, sizeSpec.height))
         var result = super.systemLayoutSizeFitting(limitedSize, withHorizontalFittingPriority: widthSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired, verticalFittingPriority: heightSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired)
         if widthSpec == .exactSize {
@@ -162,11 +162,11 @@ public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
         return result
     }
 
-    public override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
     
-    public override func setNeedsLayout() {
+    open override func setNeedsLayout() {
         super.setNeedsLayout()
         if superview is UniLayoutView {
             superview?.setNeedsLayout()
