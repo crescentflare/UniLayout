@@ -291,7 +291,7 @@ public class UniLinearContainer extends ViewGroup
                 }
             }
 
-            // Perform measure and update remaining height
+            // Perform measure and update remaining width
             int limitHeight = paddedHeightSize;
             if (viewLayoutParams instanceof MarginLayoutParams)
             {
