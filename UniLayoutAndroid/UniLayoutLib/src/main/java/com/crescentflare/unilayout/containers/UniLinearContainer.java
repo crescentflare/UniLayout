@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.crescentflare.unilayout.R;
 import com.crescentflare.unilayout.helpers.UniLayoutParams;
+import com.crescentflare.unilayout.views.UniView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +104,6 @@ public class UniLinearContainer extends ViewGroup
     // ---
 
     private Point measuredSize = new Point();
-    private List<Point> measuredChildSizes = new ArrayList<>();
 
     private void performVerticalLayout(Point measuredSize, int widthSize, int heightSize, int widthSpec, int heightSpec, boolean adjustLayout)
     {
@@ -126,7 +126,6 @@ public class UniLinearContainer extends ViewGroup
         int remainingHeight = paddedHeightSize;
         float totalMinHeightForWeight = 0;
         int childCount = getChildCount();
-        prepareChildSizes(childCount);
         for (int i = 0; i < childCount; i++)
         {
             // Skip hidden views if they are not part of the layout
@@ -146,68 +145,19 @@ public class UniLinearContainer extends ViewGroup
                     totalWeight += uniLayoutParams.weight;
                     remainingHeight -= uniLayoutParams.topMargin + uniLayoutParams.bottomMargin + uniLayoutParams.minHeight;
                     totalMinHeightForWeight += uniLayoutParams.minHeight;
-                    measuredChildSizes.get(i).set(0, 0);
                     continue;
                 }
             }
 
-            // Adjust size limitations based on layout property restrictions
-            int viewWidthSpec = widthSpec == MeasureSpec.UNSPECIFIED ? MeasureSpec.UNSPECIFIED : MeasureSpec.AT_MOST;
-            int viewHeightSpec = heightSpec == MeasureSpec.UNSPECIFIED ? MeasureSpec.UNSPECIFIED : MeasureSpec.AT_MOST;
-            int viewWidthSize = paddedWidthSize;
-            int viewHeightSize = paddedHeightSize;
-            int viewMinWidth = 0;
-            int viewMaxWidth = 0xFFFFFF;
-            int viewMinHeight = 0;
-            int viewMaxHeight = 0xFFFFFF;
-            if (viewLayoutParams instanceof UniLayoutParams)
-            {
-                viewMinWidth = ((UniLayoutParams)viewLayoutParams).minWidth;
-                viewMaxWidth = ((UniLayoutParams)viewLayoutParams).maxWidth;
-                viewMinHeight = ((UniLayoutParams)viewLayoutParams).minHeight;
-                viewMaxHeight = ((UniLayoutParams)viewLayoutParams).maxHeight;
-            }
+            // Perform measure and update remaining height
+            int limitWidth = paddedWidthSize;
             if (viewLayoutParams instanceof MarginLayoutParams)
             {
-                viewWidthSize = Math.max(0, viewWidthSize - ((MarginLayoutParams)viewLayoutParams).leftMargin - ((MarginLayoutParams)viewLayoutParams).rightMargin);
-                viewHeightSize = Math.max(0, viewHeightSize - ((MarginLayoutParams)viewLayoutParams).topMargin - ((MarginLayoutParams)viewLayoutParams).bottomMargin);
-            }
-            if (widthSpec == MeasureSpec.EXACTLY && viewLayoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT)
-            {
-                viewWidthSize = Math.min(viewWidthSize, Math.max(viewMinWidth, viewMaxWidth));
-                viewWidthSpec = MeasureSpec.EXACTLY;
-            }
-            else if (viewLayoutParams.width >= 0)
-            {
-                viewWidthSize = Math.min(viewWidthSize, Math.max(viewMinWidth, Math.min(viewLayoutParams.width, viewMaxWidth)));
-                viewWidthSpec = MeasureSpec.EXACTLY;
-            }
-            else
-            {
-                viewWidthSize = Math.min(viewWidthSize, Math.max(viewMinWidth, viewMaxWidth));
-            }
-            if (viewLayoutParams.height >= 0)
-            {
-                viewHeightSize = Math.min(viewHeightSize, Math.max(viewMinHeight, Math.min(viewLayoutParams.height, viewMaxHeight)));
-                viewHeightSpec = MeasureSpec.EXACTLY;
-            }
-            else
-            {
-                viewHeightSize = Math.min(viewHeightSize, Math.max(viewMinHeight, viewMaxHeight));
-            }
-
-            // Obtain final size and make final adjustments per view
-            view.measure(MeasureSpec.makeMeasureSpec(viewWidthSize, viewWidthSpec), MeasureSpec.makeMeasureSpec(viewHeightSize, viewHeightSpec));
-            int resultWidth = view.getMeasuredWidth();
-            int resultHeight = view.getMeasuredHeight();
-            resultWidth = Math.min(viewWidthSize, Math.max(viewMinWidth, resultWidth));
-            resultHeight = Math.min(viewHeightSize, Math.max(viewMinHeight, resultHeight));
-            if (viewLayoutParams instanceof MarginLayoutParams)
-            {
+                limitWidth -= ((MarginLayoutParams)viewLayoutParams).leftMargin + ((MarginLayoutParams)viewLayoutParams).rightMargin;
                 remainingHeight -= ((MarginLayoutParams)viewLayoutParams).topMargin + ((MarginLayoutParams)viewLayoutParams).bottomMargin;
             }
-            measuredChildSizes.get(i).set(resultWidth, resultHeight);
-            remainingHeight -= resultHeight;
+            UniView.uniMeasure(view, limitWidth, remainingHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+            remainingHeight = Math.max(0, remainingHeight - view.getMeasuredHeight());
         }
 
         // Measure the remaining views with weight
@@ -221,45 +171,15 @@ public class UniLinearContainer extends ViewGroup
                 continue;
             }
 
-            // Continue with views with weight
+            // Continue measuring views with weight
             if (view.getLayoutParams() instanceof UniLayoutParams)
             {
                 UniLayoutParams uniLayoutParams = (UniLayoutParams)view.getLayoutParams();
                 if (uniLayoutParams.weight > 0)
                 {
-                    // Adjust size limitations based on layout property restrictions
-                    int wantHeight = (int)(remainingHeight * uniLayoutParams.weight / totalWeight);
-                    int viewWidthSpec = widthSpec == MeasureSpec.UNSPECIFIED ? MeasureSpec.UNSPECIFIED : MeasureSpec.AT_MOST;
-                    int viewHeightSpec = heightSpec == MeasureSpec.UNSPECIFIED ? MeasureSpec.UNSPECIFIED : MeasureSpec.AT_MOST;
-                    int viewWidthSize = paddedWidthSize;
-                    int viewHeightSize = remainingHeight;
-                    viewWidthSize = Math.max(0, viewWidthSize - uniLayoutParams.leftMargin - uniLayoutParams.rightMargin);
-                    viewHeightSize = Math.max(0, viewHeightSize);
-                    if (widthSpec == MeasureSpec.EXACTLY && uniLayoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT)
-                    {
-                        viewWidthSize = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, uniLayoutParams.maxWidth));
-                        viewWidthSpec = MeasureSpec.EXACTLY;
-                    }
-                    else if (uniLayoutParams.width >= 0)
-                    {
-                        viewWidthSize = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, Math.min(uniLayoutParams.width, uniLayoutParams.maxWidth)));
-                        viewWidthSpec = MeasureSpec.EXACTLY;
-                    }
-                    else
-                    {
-                        viewWidthSize = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, uniLayoutParams.maxWidth));
-                    }
-                    viewHeightSize = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, Math.min(wantHeight, uniLayoutParams.maxHeight)));
-                    viewHeightSpec = MeasureSpec.EXACTLY;
-
-                    // Obtain final size and make final adjustments per view
-                    view.measure(MeasureSpec.makeMeasureSpec(viewWidthSize, viewWidthSpec), MeasureSpec.makeMeasureSpec(viewHeightSize, viewHeightSpec));
-                    int resultWidth = view.getMeasuredWidth();
-                    int resultHeight = view.getMeasuredHeight();
-                    resultWidth = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, resultWidth));
-                    resultHeight = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, resultHeight));
-                    measuredChildSizes.get(i).set(resultWidth, adjustLayout ? resultHeight : Math.min(viewHeightSize, uniLayoutParams.minHeight));
-                    remainingHeight -= resultHeight;
+                    int forceViewHeightSpec = heightSpec == MeasureSpec.EXACTLY ? MeasureSpec.EXACTLY : MeasureSpec.UNSPECIFIED;
+                    UniView.uniMeasure(view, paddedWidthSize - uniLayoutParams.leftMargin - uniLayoutParams.rightMargin, (int)(remainingHeight * uniLayoutParams.weight / totalWeight), widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, forceViewHeightSpec);
+                    remainingHeight = Math.max(0, remainingHeight - view.getMeasuredHeight());
                     totalWeight -= uniLayoutParams.weight;
                 }
             }
@@ -277,7 +197,8 @@ public class UniLinearContainer extends ViewGroup
             }
 
             // Continue with the others
-            Point size = measuredChildSizes.get(i);
+            int width = view.getMeasuredWidth();
+            int height = view.getMeasuredHeight();
             int x = getPaddingLeft();
             int nextY = y;
             if (view.getLayoutParams() instanceof UniLayoutParams)
@@ -287,19 +208,19 @@ public class UniLinearContainer extends ViewGroup
                 y += uniLayoutParams.topMargin;
                 if (adjustLayout)
                 {
-                    x += (paddedWidthSize - uniLayoutParams.leftMargin - uniLayoutParams.rightMargin - size.x) * uniLayoutParams.horizontalGravity;
+                    x += (paddedWidthSize - uniLayoutParams.leftMargin - uniLayoutParams.rightMargin - width) * uniLayoutParams.horizontalGravity;
                 }
-                measuredSize.x = Math.max(measuredSize.x, x + size.x + uniLayoutParams.rightMargin);
-                nextY = y + size.y + uniLayoutParams.bottomMargin;
+                measuredSize.x = Math.max(measuredSize.x, x + width + uniLayoutParams.rightMargin);
+                nextY = y + height + uniLayoutParams.bottomMargin;
             }
             else
             {
-                measuredSize.x = Math.max(measuredSize.x, x + size.x);
-                nextY = y + size.y;
+                measuredSize.x = Math.max(measuredSize.x, x + width);
+                nextY = y + height;
             }
             if (adjustLayout)
             {
-                view.layout(x, y, x + size.x, y + size.y);
+                view.layout(x, y, x + width, y + height);
             }
             measuredSize.y = Math.max(measuredSize.y, nextY);
             y = nextY;
@@ -347,7 +268,6 @@ public class UniLinearContainer extends ViewGroup
         int remainingWidth = paddedWidthSize;
         float totalMinWidthForWeight = 0;
         int childCount = getChildCount();
-        prepareChildSizes(childCount);
         for (int i = 0; i < childCount; i++)
         {
             // Skip hidden views if they are not part of the layout
@@ -367,68 +287,19 @@ public class UniLinearContainer extends ViewGroup
                     totalWeight += uniLayoutParams.weight;
                     remainingWidth -= uniLayoutParams.leftMargin + uniLayoutParams.rightMargin + uniLayoutParams.minWidth;
                     totalMinWidthForWeight += uniLayoutParams.minWidth;
-                    measuredChildSizes.get(i).set(0, 0);
                     continue;
                 }
             }
 
-            // Adjust size limitations based on layout property restrictions
-            int viewWidthSpec = widthSpec == MeasureSpec.UNSPECIFIED ? MeasureSpec.UNSPECIFIED : MeasureSpec.AT_MOST;
-            int viewHeightSpec = heightSpec == MeasureSpec.UNSPECIFIED ? MeasureSpec.UNSPECIFIED : MeasureSpec.AT_MOST;
-            int viewWidthSize = paddedWidthSize;
-            int viewHeightSize = paddedHeightSize;
-            int viewMinWidth = 0;
-            int viewMaxWidth = 0xFFFFFF;
-            int viewMinHeight = 0;
-            int viewMaxHeight = 0xFFFFFF;
-            if (viewLayoutParams instanceof UniLayoutParams)
-            {
-                viewMinWidth = ((UniLayoutParams)viewLayoutParams).minWidth;
-                viewMaxWidth = ((UniLayoutParams)viewLayoutParams).maxWidth;
-                viewMinHeight = ((UniLayoutParams)viewLayoutParams).minHeight;
-                viewMaxHeight = ((UniLayoutParams)viewLayoutParams).maxHeight;
-            }
-            if (viewLayoutParams instanceof MarginLayoutParams)
-            {
-                viewWidthSize = Math.max(0, viewWidthSize - ((MarginLayoutParams)viewLayoutParams).leftMargin - ((MarginLayoutParams)viewLayoutParams).rightMargin);
-                viewHeightSize = Math.max(0, viewHeightSize - ((MarginLayoutParams)viewLayoutParams).topMargin - ((MarginLayoutParams)viewLayoutParams).bottomMargin);
-            }
-            if (viewLayoutParams.width >= 0)
-            {
-                viewWidthSize = Math.min(viewWidthSize, Math.max(viewMinWidth, Math.min(viewLayoutParams.width, viewMaxWidth)));
-                viewWidthSpec = MeasureSpec.EXACTLY;
-            }
-            else
-            {
-                viewWidthSize = Math.min(viewWidthSize, Math.max(viewMinWidth, viewMaxWidth));
-            }
-            if (heightSpec == MeasureSpec.EXACTLY && viewLayoutParams.height == ViewGroup.LayoutParams.MATCH_PARENT)
-            {
-                viewHeightSize = Math.min(viewHeightSize, Math.max(viewMinHeight, viewMaxHeight));
-                viewHeightSpec = MeasureSpec.EXACTLY;
-            }
-            else if (viewLayoutParams.height >= 0)
-            {
-                viewHeightSize = Math.min(viewHeightSize, Math.max(viewMinHeight, Math.min(viewLayoutParams.height, viewMaxHeight)));
-                viewHeightSpec = MeasureSpec.EXACTLY;
-            }
-            else
-            {
-                viewHeightSize = Math.min(viewHeightSize, Math.max(viewMinHeight, viewMaxHeight));
-            }
-
-            // Obtain final size and make final adjustments per view
-            view.measure(MeasureSpec.makeMeasureSpec(viewWidthSize, viewWidthSpec), MeasureSpec.makeMeasureSpec(viewHeightSize, viewHeightSpec));
-            int resultWidth = view.getMeasuredWidth();
-            int resultHeight = view.getMeasuredHeight();
-            resultWidth = Math.min(viewWidthSize, Math.max(viewMinWidth, resultWidth));
-            resultHeight = Math.min(viewHeightSize, Math.max(viewMinHeight, resultHeight));
+            // Perform measure and update remaining height
+            int limitHeight = paddedHeightSize;
             if (viewLayoutParams instanceof MarginLayoutParams)
             {
                 remainingWidth -= ((MarginLayoutParams)viewLayoutParams).leftMargin + ((MarginLayoutParams)viewLayoutParams).rightMargin;
+                limitHeight -= ((MarginLayoutParams)viewLayoutParams).topMargin + ((MarginLayoutParams)viewLayoutParams).bottomMargin;
             }
-            measuredChildSizes.get(i).set(resultWidth, resultHeight);
-            remainingWidth -= resultWidth;
+            UniView.uniMeasure(view, remainingWidth, limitHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+            remainingWidth = Math.max(0, remainingWidth - view.getMeasuredWidth());
         }
 
         // Measure the remaining views with weight
@@ -448,39 +319,9 @@ public class UniLinearContainer extends ViewGroup
                 UniLayoutParams uniLayoutParams = (UniLayoutParams)view.getLayoutParams();
                 if (uniLayoutParams.weight > 0)
                 {
-                    // Adjust size limitations based on layout property restrictions
-                    int wantWidth = (int)(remainingWidth * uniLayoutParams.weight / totalWeight);
-                    int viewWidthSpec = widthSpec == MeasureSpec.UNSPECIFIED ? MeasureSpec.UNSPECIFIED : MeasureSpec.AT_MOST;
-                    int viewHeightSpec = heightSpec == MeasureSpec.UNSPECIFIED ? MeasureSpec.UNSPECIFIED : MeasureSpec.AT_MOST;
-                    int viewWidthSize = remainingWidth;
-                    int viewHeightSize = paddedHeightSize;
-                    viewWidthSize = Math.max(0, viewWidthSize);
-                    viewHeightSize = Math.max(0, viewHeightSize - uniLayoutParams.topMargin - uniLayoutParams.bottomMargin);
-                    viewWidthSize = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, Math.min(wantWidth, uniLayoutParams.maxWidth)));
-                    viewWidthSpec = MeasureSpec.EXACTLY;
-                    if (heightSpec == MeasureSpec.EXACTLY && uniLayoutParams.height == ViewGroup.LayoutParams.MATCH_PARENT)
-                    {
-                        viewHeightSize = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, uniLayoutParams.maxHeight));
-                        viewHeightSpec = MeasureSpec.EXACTLY;
-                    }
-                    else if (uniLayoutParams.height >= 0)
-                    {
-                        viewHeightSize = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, Math.min(uniLayoutParams.height, uniLayoutParams.maxHeight)));
-                        viewHeightSpec = MeasureSpec.EXACTLY;
-                    }
-                    else
-                    {
-                        viewHeightSize = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, uniLayoutParams.maxHeight));
-                    }
-
-                    // Obtain final size and make final adjustments per view
-                    view.measure(MeasureSpec.makeMeasureSpec(viewWidthSize, viewWidthSpec), MeasureSpec.makeMeasureSpec(viewHeightSize, viewHeightSpec));
-                    int resultWidth = view.getMeasuredWidth();
-                    int resultHeight = view.getMeasuredHeight();
-                    resultWidth = Math.min(viewWidthSize, Math.max(uniLayoutParams.minWidth, resultWidth));
-                    resultHeight = Math.min(viewHeightSize, Math.max(uniLayoutParams.minHeight, resultHeight));
-                    measuredChildSizes.get(i).set(adjustLayout ? resultWidth : Math.min(viewWidthSize, uniLayoutParams.minWidth), resultHeight);
-                    remainingWidth -= resultWidth;
+                    int forceViewWidthSpec = widthSpec == MeasureSpec.EXACTLY ? MeasureSpec.EXACTLY : MeasureSpec.UNSPECIFIED;
+                    UniView.uniMeasure(view, (int)(remainingWidth * uniLayoutParams.weight / totalWeight), paddedHeightSize - uniLayoutParams.topMargin - uniLayoutParams.bottomMargin, widthSpec, heightSpec, forceViewWidthSpec, MeasureSpec.UNSPECIFIED);
+                    remainingWidth = Math.max(0, remainingWidth - view.getMeasuredWidth());
                     totalWeight -= uniLayoutParams.weight;
                 }
             }
@@ -498,7 +339,8 @@ public class UniLinearContainer extends ViewGroup
             }
 
             // Continue with the others
-            Point size = measuredChildSizes.get(i);
+            int width = view.getMeasuredWidth();
+            int height = view.getMeasuredHeight();
             int y = getPaddingTop();
             int nextX = x;
             if (view.getLayoutParams() instanceof UniLayoutParams)
@@ -508,19 +350,19 @@ public class UniLinearContainer extends ViewGroup
                 y += uniLayoutParams.topMargin;
                 if (adjustLayout)
                 {
-                    y += (paddedHeightSize - uniLayoutParams.topMargin - uniLayoutParams.bottomMargin - size.y) * uniLayoutParams.verticalGravity;
+                    y += (paddedHeightSize - uniLayoutParams.topMargin - uniLayoutParams.bottomMargin - height) * uniLayoutParams.verticalGravity;
                 }
-                measuredSize.y = Math.max(measuredSize.y, y + size.y + uniLayoutParams.bottomMargin);
-                nextX = x + size.x + uniLayoutParams.rightMargin;
+                measuredSize.y = Math.max(measuredSize.y, y + height + uniLayoutParams.bottomMargin);
+                nextX = x + width + uniLayoutParams.rightMargin;
             }
             else
             {
-                measuredSize.y = Math.max(measuredSize.y, y + size.y);
-                nextX = x + size.x;
+                measuredSize.y = Math.max(measuredSize.y, y + height);
+                nextX = x + width;
             }
             if (adjustLayout)
             {
-                view.layout(x, y, x + size.x, y + size.y);
+                view.layout(x, y, x + width, y + height);
             }
             measuredSize.x = Math.max(measuredSize.x, nextX);
             x = nextX;
@@ -572,19 +414,6 @@ public class UniLinearContainer extends ViewGroup
         else
         {
             performHorizontalLayout(measuredSize, right - left, bottom - top, MeasureSpec.EXACTLY, MeasureSpec.EXACTLY, true);
-        }
-    }
-
-
-    // ---
-    // Helper
-    // ---
-
-    void prepareChildSizes(int count)
-    {
-        while (measuredChildSizes.size() < count)
-        {
-            measuredChildSizes.add(new Point());
         }
     }
 }
