@@ -8,13 +8,19 @@
 
 import UIKit
 
-public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
+open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
 
     // ---
     // MARK: Members
     // ---
 
     public var layoutProperties = UniLayoutProperties()
+    private var backgroundColorNormalState: UIColor?
+    private var backgroundColorHighlightedState: UIColor?
+    private var backgroundColorDisabledState: UIColor?
+    private var borderColorNormalState: UIColor?
+    private var borderColorHighlightedState: UIColor?
+    private var borderColorDisabledState: UIColor?
 
     
     // ---
@@ -55,10 +61,96 @@ public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     
     
     // ---
+    // MARK: Add more state support
+    // ---
+    
+    open override var isHighlighted: Bool {
+        didSet {
+            refreshStateBackground()
+            if borderColorNormalState != nil || borderColorHighlightedState != nil || borderColorDisabledState != nil {
+                refreshStateBorder()
+            }
+        }
+    }
+    
+    open override var isEnabled: Bool {
+        didSet {
+            refreshStateBackground()
+            if borderColorNormalState != nil || borderColorHighlightedState != nil || borderColorDisabledState != nil {
+                refreshStateBorder()
+            }
+        }
+    }
+    
+    open override var backgroundColor: UIColor? {
+        get { return backgroundColorNormalState }
+        set { setBackgroundColor(newValue, for: .normal) }
+    }
+
+    public func setBackgroundColor(_ color: UIColor?, for state: UIControlState) {
+        let currentState = !isEnabled ? UIControlState.disabled : (isHighlighted ? UIControlState.highlighted : UIControlState.normal)
+        if state == .normal {
+            backgroundColorNormalState = color
+        } else if state == .highlighted {
+            backgroundColorHighlightedState = color
+        } else if state == .disabled {
+            backgroundColorDisabledState = color
+        }
+        if state == .normal || state == currentState {
+            refreshStateBackground()
+        }
+    }
+    
+    public func setBorderColor(_ color: UIColor?, for state: UIControlState) {
+        let currentState = !isEnabled ? UIControlState.disabled : (isHighlighted ? UIControlState.highlighted : UIControlState.normal)
+        if state == .normal {
+            borderColorNormalState = color
+        } else if state == .highlighted {
+            borderColorHighlightedState = color
+        } else if state == .disabled {
+            borderColorDisabledState = color
+        }
+        if state == .normal || state == currentState {
+            refreshStateBorder()
+        }
+    }
+
+    private func refreshStateBackground() {
+        var backgroundWasSet = false
+        if !isEnabled && backgroundColorDisabledState != nil {
+            super.backgroundColor = backgroundColorDisabledState
+            backgroundWasSet = true
+        }
+        if isEnabled && isHighlighted && backgroundColorHighlightedState != nil {
+            super.backgroundColor = backgroundColorHighlightedState
+            backgroundWasSet = true
+        }
+        if !backgroundWasSet {
+            super.backgroundColor = backgroundColorNormalState
+        }
+    }
+
+    private func refreshStateBorder() {
+        var borderWasSet = false
+        if !isEnabled && borderColorDisabledState != nil {
+            layer.borderColor = borderColorDisabledState?.cgColor
+            borderWasSet = true
+        }
+        if isEnabled && isHighlighted && borderColorHighlightedState != nil {
+            layer.borderColor = borderColorHighlightedState?.cgColor
+            borderWasSet = true
+        }
+        if !borderWasSet {
+            layer.borderColor = borderColorNormalState?.cgColor
+        }
+    }
+
+    
+    // ---
     // MARK: Custom layout
     // ---
 
-    public func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
+    open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         let limitedSize = CGSize(width: max(0, sizeSpec.width), height: max(0, sizeSpec.height))
         var result = super.systemLayoutSizeFitting(limitedSize, withHorizontalFittingPriority: widthSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired, verticalFittingPriority: heightSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired)
         if widthSpec == .exactSize {
@@ -74,11 +166,11 @@ public class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
         return result
     }
 
-    public override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
     
-    public override func setNeedsLayout() {
+    open override func setNeedsLayout() {
         super.setNeedsLayout()
         if superview is UniLayoutView {
             superview?.setNeedsLayout()
