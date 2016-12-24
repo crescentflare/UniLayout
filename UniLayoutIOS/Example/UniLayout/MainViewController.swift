@@ -56,9 +56,11 @@ class MainViewController: UIViewController {
         nestedLayoutButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
         nestedLayoutButton.setTitle("Nested layouts", for: .normal)
         nestedLayoutButton.setTitleColor(self.view.tintColor, for: .normal)
+        nestedLayoutButton.setTitleColor(self.view.tintColor.withAlphaComponent(0.35), for: .highlighted)
         nestedLayoutButton.layer.cornerRadius = 8
         nestedLayoutButton.layer.borderWidth = 1
-        nestedLayoutButton.layer.borderColor = self.view.tintColor.cgColor
+        nestedLayoutButton.setBorderColor(self.view.tintColor, for: .normal)
+        nestedLayoutButton.setBorderColor(self.view.tintColor.withAlphaComponent(0.35), for: .highlighted)
         buttonContainer.addSubview(nestedLayoutButton)
         nestedLayoutButton.addTarget(self, action: #selector(showNestedLayouts), for: .touchUpInside)
 
@@ -69,9 +71,11 @@ class MainViewController: UIViewController {
         reusingContainerButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
         reusingContainerButton.setTitle("Reusing container", for: .normal)
         reusingContainerButton.setTitleColor(self.view.tintColor, for: .normal)
+        reusingContainerButton.setTitleColor(self.view.tintColor.withAlphaComponent(0.35), for: .highlighted)
         reusingContainerButton.layer.cornerRadius = 8
         reusingContainerButton.layer.borderWidth = 1
-        reusingContainerButton.layer.borderColor = self.view.tintColor.cgColor
+        reusingContainerButton.setBorderColor(self.view.tintColor, for: .normal)
+        reusingContainerButton.setBorderColor(self.view.tintColor.withAlphaComponent(0.35), for: .highlighted)
         buttonContainer.addSubview(reusingContainerButton)
         reusingContainerButton.addTarget(self, action: #selector(showReusingContainer), for: .touchUpInside)
     }
