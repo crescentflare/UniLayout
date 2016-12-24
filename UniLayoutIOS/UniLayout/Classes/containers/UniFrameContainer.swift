@@ -33,63 +33,52 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             paddedSize.height = 0xFFFFFF
         }
         
-        // Iterate over subviews and layout each one
+        // Iterate over subviews and measure each one
+        var subviewSizes: [CGSize] = []
         for view in subviews {
             // Skip hidden views if they are not part of the layout
             if view.isHidden && !((view as? UniLayoutView)?.layoutProperties.hiddenTakesSpace ?? false) {
                 continue
             }
             
-            // Adjust size limitations based on layout property restrictions
-            var viewWidthSpec = widthSpec == .unspecified ? UniMeasureSpec.unspecified : UniMeasureSpec.limitSize
-            var viewHeightSpec = heightSpec == .unspecified ? UniMeasureSpec.unspecified : UniMeasureSpec.limitSize
-            var viewSizeSpec = paddedSize
+            // Perform measure and update remaining width
+            var limitWidth = paddedSize.width
+            var limitHeight = paddedSize.height
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
-                viewSizeSpec.width = max(0, viewSizeSpec.width - viewLayoutProperties.margin.left - viewLayoutProperties.margin.right)
-                viewSizeSpec.height = max(0, viewSizeSpec.height - viewLayoutProperties.margin.top - viewLayoutProperties.margin.bottom)
-                if widthSpec == .exactSize && viewLayoutProperties.width == UniLayoutProperties.stretchToParent {
-                    viewSizeSpec.width = min(viewSizeSpec.width, max(viewLayoutProperties.minWidth, viewLayoutProperties.maxWidth))
-                    viewWidthSpec = .exactSize
-                } else if viewLayoutProperties.width >= 0 {
-                    viewSizeSpec.width = min(viewSizeSpec.width, max(viewLayoutProperties.minWidth, min(viewLayoutProperties.width, viewLayoutProperties.maxWidth)))
-                    viewWidthSpec = .exactSize
-                } else {
-                    viewSizeSpec.width = min(viewSizeSpec.width, max(viewLayoutProperties.minWidth, viewLayoutProperties.maxWidth))
-                }
-                if heightSpec == .exactSize && viewLayoutProperties.height == UniLayoutProperties.stretchToParent {
-                    viewSizeSpec.height = min(viewSizeSpec.height, max(viewLayoutProperties.minHeight, viewLayoutProperties.maxHeight))
-                    viewHeightSpec = .exactSize
-                } else if viewLayoutProperties.height >= 0 {
-                    viewSizeSpec.height = min(viewSizeSpec.height, max(viewLayoutProperties.minHeight, min(viewLayoutProperties.height, viewLayoutProperties.maxHeight)))
-                    viewHeightSpec = .exactSize
-                } else {
-                    viewSizeSpec.height = min(viewSizeSpec.height, max(viewLayoutProperties.minHeight, viewLayoutProperties.maxHeight))
-                }
+                limitWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
+                limitHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
+            }
+            let result = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: limitWidth, height: limitHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
+            subviewSizes.append(result)
+        }
+        
+        // Start doing layout
+        for i in 0..<min(subviews.count, subviewSizes.count) {
+            // Skip hidden views if they are not part of the layout
+            let view = subviews[i]
+            if view.isHidden && !((view as? UniLayoutView)?.layoutProperties.hiddenTakesSpace ?? false) {
+                continue
             }
             
-            // Obtain final size and make final adjustments per view
-            var result = UniView.obtainMeasuredSize(ofView: view, sizeSpec: viewSizeSpec, widthSpec: viewWidthSpec, heightSpec: viewHeightSpec)
+            // Continue with the others
+            let size = subviewSizes[i]
             var x = padding.left
             var y = padding.top
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
-                result.width = min(viewSizeSpec.width, max(viewLayoutProperties.minWidth, result.width))
-                result.height = min(viewSizeSpec.height, max(viewLayoutProperties.minHeight, result.height))
                 x += viewLayoutProperties.margin.left
                 y += viewLayoutProperties.margin.top
                 if adjustFrames {
-                    x += (paddedSize.width - viewLayoutProperties.margin.left - viewLayoutProperties.margin.right - result.width) * viewLayoutProperties.horizontalGravity
-                    y += (paddedSize.height - viewLayoutProperties.margin.top - viewLayoutProperties.margin.bottom - result.height) * viewLayoutProperties.verticalGravity
+                    x += (paddedSize.width - viewLayoutProperties.margin.left - viewLayoutProperties.margin.right - size.width) * viewLayoutProperties.horizontalGravity
+                    y += (paddedSize.height - viewLayoutProperties.margin.top - viewLayoutProperties.margin.bottom - size.height) * viewLayoutProperties.verticalGravity
                 }
-                measuredSize.width = max(measuredSize.width, x + result.width + viewLayoutProperties.margin.right)
-                measuredSize.height = max(measuredSize.height, y + result.height + viewLayoutProperties.margin.bottom)
+                measuredSize.width = max(measuredSize.width, x + size.width + viewLayoutProperties.margin.right)
+                measuredSize.height = max(measuredSize.height, y + size.height + viewLayoutProperties.margin.bottom)
             } else {
-                result.width = min(viewSizeSpec.width, result.width)
-                result.height = min(viewSizeSpec.height, result.height)
-                measuredSize.width = max(measuredSize.width, x + result.width)
-                measuredSize.height = max(measuredSize.height, y + result.height)
+                measuredSize.width = max(measuredSize.width, x + size.width)
+                measuredSize.height = max(measuredSize.height, y + size.height)
             }
             if adjustFrames {
-                view.frame = CGRect(x: x, y: y, width: result.width, height: result.height)
+                view.frame = CGRect(x: x, y: y, width: size.width, height: size.height)
             }
         }
         
