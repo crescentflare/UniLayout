@@ -67,14 +67,18 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     open override var isHighlighted: Bool {
         didSet {
             refreshStateBackground()
-            refreshStateBorder()
+            if borderColorNormalState != nil || borderColorHighlightedState != nil || borderColorDisabledState != nil {
+                refreshStateBorder()
+            }
         }
     }
     
     open override var isEnabled: Bool {
         didSet {
             refreshStateBackground()
-            refreshStateBorder()
+            if borderColorNormalState != nil || borderColorHighlightedState != nil || borderColorDisabledState != nil {
+                refreshStateBorder()
+            }
         }
     }
     
