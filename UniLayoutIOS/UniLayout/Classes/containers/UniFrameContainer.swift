@@ -38,6 +38,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
         for view in subviews {
             // Skip hidden views if they are not part of the layout
             if view.isHidden && !((view as? UniLayoutView)?.layoutProperties.hiddenTakesSpace ?? false) {
+                subviewSizes.append(CGSize.zero)
                 continue
             }
             
