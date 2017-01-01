@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
+open class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
 
     // ---
     // MARK: Members
@@ -22,7 +22,7 @@ public class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
     // MARK: Hook layout into text changes
     // ---
     
-    public override var text: String? {
+    open override var text: String? {
         set {
             super.text = newValue
             setNeedsLayout()
@@ -54,7 +54,7 @@ public class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
     // MARK: Custom layout
     // ---
 
-    public func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
+    open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         let paddedSize = CGSize(width: max(0, sizeSpec.width - padding.left - padding.right), height: max(0, sizeSpec.height - padding.top - padding.bottom))
         var result = super.systemLayoutSizeFitting(paddedSize, withHorizontalFittingPriority: widthSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired, verticalFittingPriority: heightSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired)
         result.width += padding.left + padding.right
@@ -72,15 +72,15 @@ public class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
         return result
     }
 
-    public override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
     
-    public override func drawText(in rect: CGRect) {
+    open override func drawText(in rect: CGRect) {
         super.drawText(in: UIEdgeInsetsInsetRect(rect, padding))
     }
     
-    public override func setNeedsLayout() {
+    open override func setNeedsLayout() {
         super.setNeedsLayout()
         if superview is UniLayoutView {
             superview?.setNeedsLayout()

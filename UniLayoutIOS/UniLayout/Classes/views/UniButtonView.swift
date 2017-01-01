@@ -21,6 +21,7 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     private var borderColorNormalState: UIColor?
     private var borderColorHighlightedState: UIColor?
     private var borderColorDisabledState: UIColor?
+    private var _settingFrame = false
 
     
     // ---
@@ -60,6 +61,20 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     }
     
     
+    // ---
+    // MARK: Override set frame to prevent parent layout request
+    // ---
+    
+    open override var frame: CGRect {
+        get { return super.frame }
+        set {
+            _settingFrame = true
+            super.frame = newValue
+            _settingFrame = false
+        }
+    }
+    
+
     // ---
     // MARK: Add more state support
     // ---
@@ -172,8 +187,10 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     
     open override func setNeedsLayout() {
         super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
+        if !_settingFrame {
+            if superview is UniLayoutView {
+                superview?.setNeedsLayout()
+            }
         }
     }
 

@@ -52,6 +52,8 @@ public class ReusingContainerActivity extends AppCompatActivity
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Button view", "Extends Button, currently only used to match the naming convention with iOS", "Button"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Image view", "Extends ImageView, currently only used to match the naming convention with iOS", "Image"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Text view", "Extends TextView, currently only used to match the naming convention with iOS", "Text"));
+        adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Spinner view", "Extends ProgressBar, currently only used to match the naming convention with iOS", "Indicator"));
+        adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Web view", "Extends WebView, currently only used to match the naming convention with iOS", "Web content"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "View", "Extends View to support padding for size calculation", "Container"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.BottomDivider));
     }
