@@ -17,6 +17,7 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPad
     public var layoutProperties = UniLayoutProperties()
     public var padding = UIEdgeInsets.zero
     public var fillContent: Bool = false
+    private var _backgroundView: UIView?
     private var _contentView: UIView?
 
 
@@ -35,6 +36,21 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPad
             _contentView = newValue
             if _contentView != nil {
                 addSubview(_contentView!)
+            }
+        }
+    }
+
+    public var backgroundView: UIView? {
+        get {
+            return _backgroundView
+        }
+        set {
+            if _backgroundView != nil {
+                _backgroundView!.removeFromSuperview()
+            }
+            _backgroundView = newValue
+            if _backgroundView != nil {
+                insertSubview(_backgroundView!, at: 0)
             }
         }
     }
