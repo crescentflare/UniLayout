@@ -42,7 +42,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 continue
             }
             
-            // Perform measure and update remaining width
+            // Perform measure
             var limitWidth = paddedSize.width
             var limitHeight = paddedSize.height
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {

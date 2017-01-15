@@ -53,7 +53,7 @@ open class UniView: UIView, UniLayoutView, UniLayoutPaddedView {
     // MARK: Utilities
     // ---
     
-    static func uniMeasure(view: UIView, sizeSpec: CGSize, parentWidthSpec: UniMeasureSpec, parentHeightSpec: UniMeasureSpec, forceViewWidthSpec: UniMeasureSpec, forceViewHeightSpec: UniMeasureSpec) -> CGSize {
+    public static func uniMeasure(view: UIView, sizeSpec: CGSize, parentWidthSpec: UniMeasureSpec, parentHeightSpec: UniMeasureSpec, forceViewWidthSpec: UniMeasureSpec, forceViewHeightSpec: UniMeasureSpec) -> CGSize {
         // Derive view spec from parent
         var viewWidthSpec = forceViewWidthSpec
         var viewHeightSpec = forceViewHeightSpec
