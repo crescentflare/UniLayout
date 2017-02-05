@@ -71,47 +71,72 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPad
             paddedSize.height = 0xFFFFFF
         }
         
-        // Measure the content view
-        var measuredContentSize = CGSize.zero
-        if let view = _contentView {
-            if !view.isHidden || ((view as? UniLayoutView)?.layoutProperties.hiddenTakesSpace ?? false) {
-                var limitWidth = paddedSize.width
-                var filledHeight = paddedSize.height
-                if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
-                    limitWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
-                    filledHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
-                }
-                measuredContentSize = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: limitWidth, height: 0xFFFFFF), parentWidthSpec: widthSpec, parentHeightSpec: .unspecified, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
-                if fillContent && heightSpec == .exactSize && measuredContentSize.height < filledHeight {
-                    measuredContentSize.height = filledHeight
-                }
+        // Iterate over subviews and measure each one
+        var subviewSizes: [CGSize] = []
+        var checkViews: [UIView] = []
+        if _backgroundView != nil {
+            checkViews.append(_backgroundView!)
+        }
+        if _contentView != nil {
+            checkViews.append(_contentView!)
+        }
+        for view in checkViews {
+            // Skip hidden views if they are not part of the layout
+            if view.isHidden && !((view as? UniLayoutView)?.layoutProperties.hiddenTakesSpace ?? false) && !(view is UIRefreshControl) {
+                subviewSizes.append(CGSize.zero)
+                continue
             }
+            
+            // Perform measure
+            var limitWidth = paddedSize.width
+            var filledHeight = paddedSize.height
+            if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
+                limitWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
+                filledHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
+            }
+            var result = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: limitWidth, height: 0xFFFFFF), parentWidthSpec: widthSpec, parentHeightSpec: .unspecified, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
+            if view is UIRefreshControl && widthSpec == .exactSize {
+                result.width = limitWidth
+            }
+            if fillContent && view == _contentView && heightSpec == .exactSize && result.height < filledHeight {
+                result.height = filledHeight
+            }
+            subviewSizes.append(result)
         }
         
         // Start doing layout
-        if let view = _contentView {
-            if !view.isHidden || ((view as? UniLayoutView)?.layoutProperties.hiddenTakesSpace ?? false) {
-                var x = padding.left
-                var y = padding.top
-                if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
-                    x += viewLayoutProperties.margin.left
-                    y += viewLayoutProperties.margin.top
-                    if adjustFrames {
-                        x += (paddedSize.width - viewLayoutProperties.margin.left - viewLayoutProperties.margin.right - measuredContentSize.width) * viewLayoutProperties.horizontalGravity
-                        y += (paddedSize.height - viewLayoutProperties.margin.top - viewLayoutProperties.margin.bottom - measuredContentSize.height) * viewLayoutProperties.verticalGravity
-                    }
-                    measuredSize.width = max(measuredSize.width, x + measuredContentSize.width + viewLayoutProperties.margin.right)
-                    measuredSize.height = max(measuredSize.height, y + measuredContentSize.height + viewLayoutProperties.margin.bottom)
-                } else {
-                    measuredSize.width = max(measuredSize.width, x + measuredContentSize.width)
-                    measuredSize.height = max(measuredSize.height, y + measuredContentSize.height)
-                }
+        for i in 0..<min(checkViews.count, subviewSizes.count) {
+            // Skip hidden views if they are not part of the layout
+            let view = checkViews[i]
+            if view.isHidden && !((view as? UniLayoutView)?.layoutProperties.hiddenTakesSpace ?? false) && !(view is UIRefreshControl) {
+                continue
+            }
+            
+            // Continue with the others
+            let size = subviewSizes[i]
+            var x = padding.left
+            var y = padding.top
+            if view is UIRefreshControl {
+                y += contentOffset.y
+            }
+            if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
+                x += viewLayoutProperties.margin.left
+                y += viewLayoutProperties.margin.top
                 if adjustFrames {
-                    UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: measuredContentSize.width, height: measuredContentSize.height))
+                    x += (paddedSize.width - viewLayoutProperties.margin.left - viewLayoutProperties.margin.right - size.width) * viewLayoutProperties.horizontalGravity
+                    y += (paddedSize.height - viewLayoutProperties.margin.top - viewLayoutProperties.margin.bottom - size.height) * viewLayoutProperties.verticalGravity
                 }
+                measuredSize.width = max(measuredSize.width, x + size.width + viewLayoutProperties.margin.right)
+                measuredSize.height = max(measuredSize.height, y + size.height + viewLayoutProperties.margin.bottom)
+            } else {
+                measuredSize.width = max(measuredSize.width, x + size.width)
+                measuredSize.height = max(measuredSize.height, y + size.height)
+            }
+            if adjustFrames {
+                UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
             }
         }
-        
+
         // Adjust final measure with padding and limitations
         measuredSize.width += padding.right
         measuredSize.height += padding.bottom
