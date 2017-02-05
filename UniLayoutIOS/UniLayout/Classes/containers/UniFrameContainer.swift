@@ -79,7 +79,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 measuredSize.height = max(measuredSize.height, y + size.height)
             }
             if adjustFrames {
-                view.frame = CGRect(x: x, y: y, width: size.width, height: size.height)
+                UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
             }
         }
         
@@ -104,7 +104,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
     }
     
     open override func layoutSubviews() {
-        performLayout(sizeSpec: frame.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
+        performLayout(sizeSpec: bounds.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
     }
     
     open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {

@@ -122,7 +122,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 nextY = y + size.height
             }
             if adjustFrames {
-                view.frame = CGRect(x: x, y: y, width: size.width, height: size.height)
+                UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
             }
             measuredSize.height = max(measuredSize.height, nextY)
             y = nextY
@@ -236,7 +236,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 nextX = x + size.width
             }
             if adjustFrames {
-                view.frame = CGRect(x: x, y: y, width: size.width, height: size.height)
+                UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
             }
             measuredSize.width = max(measuredSize.width, nextX)
             x = nextX
@@ -267,9 +267,9 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
     
     open override func layoutSubviews() {
         if orientation == .vertical {
-            performVerticalLayout(sizeSpec: frame.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
+            performVerticalLayout(sizeSpec: bounds.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
         } else {
-            performHorizontalLayout(sizeSpec: frame.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
+            performHorizontalLayout(sizeSpec: bounds.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
         }
     }
     
