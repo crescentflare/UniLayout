@@ -103,6 +103,20 @@ open class UniView: UIView, UniLayoutView, UniLayoutPaddedView {
         result.height = min(viewSize.height, max(viewMinHeight, result.height))
         return result
     }
+    
+    public static func uniSetFrame(view: UIView, frame: CGRect) {
+        if view.bounds.width == frame.width && view.bounds.height == frame.height {
+            if view.center.x == frame.origin.x + frame.width / 2 && view.center.y == frame.origin.y + frame.height / 2 {
+                return // No change
+            }
+            view.center = CGPoint(x: frame.origin.x + frame.width / 2, y: frame.origin.y + frame.height / 2)
+        } else if view.center.x == frame.origin.x + frame.width / 2 && view.center.y == frame.origin.y + frame.height / 2 {
+            view.bounds.size = frame.size
+        } else {
+            view.bounds.size = frame.size
+            view.center = CGPoint(x: frame.origin.x + frame.width / 2, y: frame.origin.y + frame.height / 2)
+        }
+    }
 
     static func obtainMeasuredSize(ofView: UIView, sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         if let layoutView = ofView as? UniLayoutView {

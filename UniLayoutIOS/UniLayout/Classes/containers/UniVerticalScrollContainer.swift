@@ -107,7 +107,7 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPad
                     measuredSize.height = max(measuredSize.height, y + measuredContentSize.height)
                 }
                 if adjustFrames {
-                    view.frame = CGRect(x: x, y: y, width: measuredContentSize.width, height: measuredContentSize.height)
+                    UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: measuredContentSize.width, height: measuredContentSize.height))
                 }
             }
         }
@@ -136,7 +136,7 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPad
     }
     
     open override func layoutSubviews() {
-        performLayout(sizeSpec: frame.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
+        performLayout(sizeSpec: bounds.size, widthSpec: .exactSize, heightSpec: .exactSize, adjustFrames: true)
     }
     
     open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
