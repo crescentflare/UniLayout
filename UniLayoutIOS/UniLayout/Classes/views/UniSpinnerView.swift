@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UIActivityIndicatorView, adding padding and layout properties
 open class UniSpinnerView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---

@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// An enum used to indicate how measure a view, sent by a layout container
 public enum UniMeasureSpec {
     
     case unspecified
@@ -16,12 +17,15 @@ public enum UniMeasureSpec {
     
 }
 
+/// A protocol to add padding support to a view
 public protocol UniLayoutPaddedView {
     
     var padding: UIEdgeInsets { get set }
     
 }
 
+/// A protocol to change a view into a UniLayout enabled view
+/// Adds layout properties and more control over measuring its size
 public protocol UniLayoutView {
     
     var layoutProperties: UniLayoutProperties { get set }
@@ -29,6 +33,8 @@ public protocol UniLayoutView {
     
 }
 
+/// The properties available to every UniLayout enabled view
+/// Allows more control on how a subview is placed within a container
 public class UniLayoutProperties {
     
     // ---

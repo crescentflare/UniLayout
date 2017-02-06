@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A layout container view used for vertically scrolling the content view
 open class UniVerticalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPaddedView {
     
     // ---

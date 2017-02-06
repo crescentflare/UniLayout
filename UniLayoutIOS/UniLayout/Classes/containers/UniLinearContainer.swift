@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Specifies the layout direction of the subviews of the linear container
 public enum UniLinearContainerOrientation: String {
     
     case vertical = "vertical"
@@ -15,6 +16,7 @@ public enum UniLinearContainerOrientation: String {
     
 }
 
+/// A layout container view used to align subviews horizontally or vertically
 open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---

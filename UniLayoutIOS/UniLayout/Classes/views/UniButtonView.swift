@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UIButton, adding padding and layout properties
 open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
 
     // ---

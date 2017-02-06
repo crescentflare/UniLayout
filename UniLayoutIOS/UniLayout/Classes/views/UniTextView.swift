@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UILabel, adding padding, layout properties and defaults to multiple lines
 open class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
 
     // ---

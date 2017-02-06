@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UIImageView, adding padding and layout properties
 open class UniImageView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---

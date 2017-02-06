@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A layout container view used for overlapping subviews with optional alignment properties
 open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---

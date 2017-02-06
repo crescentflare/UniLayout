@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UIWebView, adding padding and layout properties
 open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---

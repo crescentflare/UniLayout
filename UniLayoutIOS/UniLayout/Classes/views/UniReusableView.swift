@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UITableViewCell, used in combination with a UniLayout container as the custom view
 open class UniReusableView : UITableViewCell {
     
     // --

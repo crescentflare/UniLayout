@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Provides a way to obtain one of the predefined assets from the library bundle
 public class UniAssets {
 
     // ---
