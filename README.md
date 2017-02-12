@@ -40,6 +40,11 @@ Make sure that jcenter is added as a repository.
 The provided example shows how to build several layout styles. The layout is written in code on iOS, or xml files on Android.
 
 
+### More information
+
+Refer to the [wiki](https://github.com/crescentflare/UniLayout/wiki) for more detailed information about the library.
+
+
 ### Status
 
 The library is in its initial state but has basic functionality which can already be useful. However, code isn't optimized yet and may contain bugs. Code optimizations and more features will be added in the future.
