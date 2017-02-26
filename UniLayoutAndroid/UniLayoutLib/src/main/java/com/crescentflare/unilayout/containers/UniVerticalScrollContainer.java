@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 
 import com.crescentflare.unilayout.helpers.UniLayoutParams;
+import com.crescentflare.unilayout.helpers.UniScrollListener;
 import com.crescentflare.unilayout.views.UniView;
 
 /**
@@ -16,6 +17,13 @@ import com.crescentflare.unilayout.views.UniView;
  */
 public class UniVerticalScrollContainer extends ScrollView
 {
+    // ---
+    // Members
+    // ---
+
+    private UniScrollListener scrollListener;
+
+
     // ---
     // Initialization
     // ---
@@ -43,6 +51,26 @@ public class UniVerticalScrollContainer extends ScrollView
 
     private void init(AttributeSet attrs)
     {
+    }
+
+
+    // ---
+    // Hook into scroll events
+    // ---
+
+    public void setScrollListener(UniScrollListener scrollListener)
+    {
+        this.scrollListener = scrollListener;
+    }
+
+    @Override
+    protected void onScrollChanged(int x, int y, int oldX, int oldY)
+    {
+        super.onScrollChanged(x, y, oldX, oldY);
+        if (scrollListener != null)
+        {
+            scrollListener.onScrollChanged(x, y, oldX, oldY);
+        }
     }
 
 
