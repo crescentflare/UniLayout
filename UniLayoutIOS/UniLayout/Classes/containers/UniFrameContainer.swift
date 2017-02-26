@@ -118,18 +118,11 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
     // ---
 
     open override func willRemoveSubview(_ subview: UIView) {
-        setNeedsLayout()
+        UniLayout.setNeedsLayout(view: self)
     }
     
     open override func didAddSubview(_ subview: UIView) {
-        setNeedsLayout()
-    }
- 
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
-        }
+        UniLayout.setNeedsLayout(view: self)
     }
 
 }

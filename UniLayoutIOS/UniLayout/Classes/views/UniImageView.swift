@@ -145,13 +145,6 @@ open class UniImageView: UIView, UniLayoutView, UniLayoutPaddedView {
         return imageView.intrinsicContentSize
     }
 
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
-        }
-    }
-
 }
 
 class UniNotifyingImageView: UIImageView {
@@ -161,17 +154,26 @@ class UniNotifyingImageView: UIImageView {
     // ---
     
     override var image: UIImage? {
-        set {
-            super.image = newValue
-            setNeedsLayout()
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
         }
-        get { return super.image }
     }
 
-    override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
+    override var highlightedImage: UIImage? {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var animationImages: [UIImage]? {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var highlightedAnimationImages: [UIImage]? {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
         }
     }
 

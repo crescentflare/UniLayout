@@ -88,6 +88,15 @@ public class UniLayout {
         }
     }
     
+    public static func setNeedsLayout(view: UIView) {
+        if let superview = view.superview {
+            if superview is UniLayoutView {
+                setNeedsLayout(view: superview)
+            }
+        }
+        view.setNeedsLayout()
+    }
+    
     
     // ---
     // MARK: Internal helpers

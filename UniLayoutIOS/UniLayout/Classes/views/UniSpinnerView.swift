@@ -129,13 +129,6 @@ open class UniSpinnerView: UIView, UniLayoutView, UniLayoutPaddedView {
         return indicatorView.intrinsicContentSize
     }
 
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
-        }
-    }
-
 }
 
 class UniNotifyingActivityIndicatorView: UIActivityIndicatorView {
@@ -145,17 +138,8 @@ class UniNotifyingActivityIndicatorView: UIActivityIndicatorView {
     // ---
     
     override var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
-        set {
-            super.activityIndicatorViewStyle = newValue
-            setNeedsLayout()
-        }
-        get { return super.activityIndicatorViewStyle }
-    }
-    
-    override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
         }
     }
     

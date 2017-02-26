@@ -173,20 +173,13 @@ open class UniHorizontalScrollContainer: UIScrollView, UniLayoutView, UniLayoutP
     // ---
     // MARK: Improve layout needed behavior
     // ---
-
+    
     open override func willRemoveSubview(_ subview: UIView) {
-        setNeedsLayout()
+        UniLayout.setNeedsLayout(view: self)
     }
     
     open override func didAddSubview(_ subview: UIView) {
-        setNeedsLayout()
-    }
-
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
-        }
+        UniLayout.setNeedsLayout(view: self)
     }
    
 }

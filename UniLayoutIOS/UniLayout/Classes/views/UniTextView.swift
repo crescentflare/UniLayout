@@ -24,13 +24,35 @@ open class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
     // ---
     
     open override var text: String? {
-        set {
-            super.text = newValue
-            setNeedsLayout()
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
         }
-        get { return super.text }
     }
-    
+
+    open override var font: UIFont! {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    open override var lineBreakMode: NSLineBreakMode {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    open override var attributedText: NSAttributedString? {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    open override var numberOfLines: Int {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
 
     // ---
     // MARK: Initialization
@@ -81,11 +103,4 @@ open class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
         super.drawText(in: UIEdgeInsetsInsetRect(rect, padding))
     }
     
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
-        }
-    }
-
 }
