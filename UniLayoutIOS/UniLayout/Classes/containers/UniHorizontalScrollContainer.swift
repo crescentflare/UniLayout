@@ -95,7 +95,7 @@ open class UniHorizontalScrollContainer: UIScrollView, UniLayoutView, UniLayoutP
                 filledWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
                 limitHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
             }
-            var result = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: 0xFFFFFF, height: limitHeight), parentWidthSpec: .unspecified, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
+            var result = UniLayout.measure(view: view, sizeSpec: CGSize(width: 0xFFFFFF, height: limitHeight), parentWidthSpec: .unspecified, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
             if view is UIRefreshControl && heightSpec == .exactSize {
                 result.height = limitHeight
             }
@@ -134,7 +134,7 @@ open class UniHorizontalScrollContainer: UIScrollView, UniLayoutView, UniLayoutP
                 measuredSize.height = max(measuredSize.height, y + size.height)
             }
             if adjustFrames {
-                UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
+                UniLayout.setFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
             }
         }
 

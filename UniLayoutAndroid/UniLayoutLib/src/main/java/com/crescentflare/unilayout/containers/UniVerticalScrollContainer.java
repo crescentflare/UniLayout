@@ -9,6 +9,7 @@ import android.widget.ScrollView;
 
 import com.crescentflare.unilayout.helpers.UniLayoutParams;
 import com.crescentflare.unilayout.helpers.UniScrollListener;
+import com.crescentflare.unilayout.helpers.UniLayout;
 import com.crescentflare.unilayout.views.UniView;
 
 /**
@@ -116,7 +117,7 @@ public class UniVerticalScrollContainer extends ScrollView
                 limitWidth -= ((MarginLayoutParams)viewLayoutParams).leftMargin + ((MarginLayoutParams)viewLayoutParams).rightMargin;
                 filledHeight -= ((MarginLayoutParams)viewLayoutParams).topMargin + ((MarginLayoutParams)viewLayoutParams).bottomMargin;
             }
-            UniView.uniMeasure(view, limitWidth, 0xFFFFFF, widthSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+            UniLayout.measure(view, limitWidth, 0xFFFFFF, widthSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
             if (isFillViewport() && heightSpec == MeasureSpec.EXACTLY && view.getMeasuredHeight() < filledHeight)
             {
                 view.measure(MeasureSpec.makeMeasureSpec(view.getMeasuredWidth(), MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(filledHeight, MeasureSpec.EXACTLY));

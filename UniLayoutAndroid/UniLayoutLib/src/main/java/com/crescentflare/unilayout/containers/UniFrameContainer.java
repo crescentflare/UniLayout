@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.crescentflare.unilayout.helpers.UniLayoutParams;
+import com.crescentflare.unilayout.helpers.UniLayout;
 import com.crescentflare.unilayout.views.UniView;
 
 /**
@@ -99,7 +100,7 @@ public class UniFrameContainer extends ViewGroup
                 limitWidth -= ((MarginLayoutParams)viewLayoutParams).leftMargin + ((MarginLayoutParams)viewLayoutParams).rightMargin;
                 limitHeight -= ((MarginLayoutParams)viewLayoutParams).topMargin + ((MarginLayoutParams)viewLayoutParams).bottomMargin;
             }
-            UniView.uniMeasure(view, limitWidth, limitHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+            UniLayout.measure(view, limitWidth, limitHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
         }
 
         // Start doing layout

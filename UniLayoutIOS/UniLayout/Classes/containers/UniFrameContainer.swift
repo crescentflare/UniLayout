@@ -50,7 +50,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 limitWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
                 limitHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
             }
-            let result = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: limitWidth, height: limitHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
+            let result = UniLayout.measure(view: view, sizeSpec: CGSize(width: limitWidth, height: limitHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
             subviewSizes.append(result)
         }
         
@@ -80,7 +80,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 measuredSize.height = max(measuredSize.height, y + size.height)
             }
             if adjustFrames {
-                UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
+                UniLayout.setFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
             }
         }
         

@@ -72,7 +72,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 limitWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
                 remainingHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
             }
-            let result = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: limitWidth, height: remainingHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
+            let result = UniLayout.measure(view: view, sizeSpec: CGSize(width: limitWidth, height: remainingHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
             remainingHeight = max(0, remainingHeight - result.height)
             subviewSizes.append(result)
         }
@@ -90,7 +90,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
                 if viewLayoutProperties.weight > 0 {
                     let forceViewHeightSpec: UniMeasureSpec = heightSpec == .exactSize ? .exactSize : .unspecified
-                    let result = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: paddedSize.width - viewLayoutProperties.margin.left - viewLayoutProperties.margin.right, height: remainingHeight * viewLayoutProperties.weight / totalWeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: forceViewHeightSpec)
+                    let result = UniLayout.measure(view: view, sizeSpec: CGSize(width: paddedSize.width - viewLayoutProperties.margin.left - viewLayoutProperties.margin.right, height: remainingHeight * viewLayoutProperties.weight / totalWeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: forceViewHeightSpec)
                     remainingHeight = max(0, remainingHeight - result.height)
                     totalWeight -= viewLayoutProperties.weight
                     subviewSizes[i] = result
@@ -124,7 +124,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 nextY = y + size.height
             }
             if adjustFrames {
-                UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
+                UniLayout.setFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
             }
             measuredSize.height = max(measuredSize.height, nextY)
             y = nextY
@@ -186,7 +186,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 remainingWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
                 limitHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
             }
-            let result = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: remainingWidth, height: limitHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
+            let result = UniLayout.measure(view: view, sizeSpec: CGSize(width: remainingWidth, height: limitHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
             remainingWidth = max(0, remainingWidth - result.width)
             subviewSizes.append(result)
         }
@@ -204,7 +204,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
                 if viewLayoutProperties.weight > 0 {
                     let forceViewWidthSpec: UniMeasureSpec = widthSpec == .exactSize ? .exactSize : .unspecified
-                    let result = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: remainingWidth * viewLayoutProperties.weight / totalWeight, height: paddedSize.height - viewLayoutProperties.margin.top - viewLayoutProperties.margin.bottom), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: forceViewWidthSpec, forceViewHeightSpec: .unspecified)
+                    let result = UniLayout.measure(view: view, sizeSpec: CGSize(width: remainingWidth * viewLayoutProperties.weight / totalWeight, height: paddedSize.height - viewLayoutProperties.margin.top - viewLayoutProperties.margin.bottom), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: forceViewWidthSpec, forceViewHeightSpec: .unspecified)
                     remainingWidth = max(0, remainingWidth - result.width)
                     totalWeight -= viewLayoutProperties.weight
                     subviewSizes[i] = result
@@ -238,7 +238,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 nextX = x + size.width
             }
             if adjustFrames {
-                UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
+                UniLayout.setFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
             }
             measuredSize.width = max(measuredSize.width, nextX)
             x = nextX
