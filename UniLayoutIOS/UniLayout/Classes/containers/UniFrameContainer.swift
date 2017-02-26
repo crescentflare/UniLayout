@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A layout container view used for overlapping subviews with optional alignment properties
 open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---
@@ -49,7 +50,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 limitWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
                 limitHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
             }
-            let result = UniView.uniMeasure(view: view, sizeSpec: CGSize(width: limitWidth, height: limitHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
+            let result = UniLayout.measure(view: view, sizeSpec: CGSize(width: limitWidth, height: limitHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
             subviewSizes.append(result)
         }
         
@@ -79,7 +80,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 measuredSize.height = max(measuredSize.height, y + size.height)
             }
             if adjustFrames {
-                UniView.uniSetFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
+                UniLayout.setFrame(view: view, frame: CGRect(x: x, y: y, width: size.width, height: size.height))
             }
         }
         
@@ -117,18 +118,11 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
     // ---
 
     open override func willRemoveSubview(_ subview: UIView) {
-        setNeedsLayout()
+        UniLayout.setNeedsLayout(view: self)
     }
     
     open override func didAddSubview(_ subview: UIView) {
-        setNeedsLayout()
-    }
- 
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
-        }
+        UniLayout.setNeedsLayout(view: self)
     }
 
 }

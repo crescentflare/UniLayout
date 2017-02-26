@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UITableViewCell, used in combination with a UniLayout container as the custom view
 open class UniReusableView : UITableViewCell {
     
     // --
@@ -156,7 +157,7 @@ open class UniReusableView : UITableViewCell {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        UniView.uniSetFrame(view: coreContainer, frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height))
+        UniLayout.setFrame(view: coreContainer, frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height))
     }
     
 }

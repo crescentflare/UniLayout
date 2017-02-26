@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.crescentflare.unilayout.R;
 import com.crescentflare.unilayout.helpers.UniLayoutParams;
+import com.crescentflare.unilayout.helpers.UniLayout;
 import com.crescentflare.unilayout.views.UniView;
 
 import java.util.ArrayList;
@@ -156,7 +157,7 @@ public class UniLinearContainer extends ViewGroup
                 limitWidth -= ((MarginLayoutParams)viewLayoutParams).leftMargin + ((MarginLayoutParams)viewLayoutParams).rightMargin;
                 remainingHeight -= ((MarginLayoutParams)viewLayoutParams).topMargin + ((MarginLayoutParams)viewLayoutParams).bottomMargin;
             }
-            UniView.uniMeasure(view, limitWidth, remainingHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+            UniLayout.measure(view, limitWidth, remainingHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
             remainingHeight = Math.max(0, remainingHeight - view.getMeasuredHeight());
         }
 
@@ -178,7 +179,7 @@ public class UniLinearContainer extends ViewGroup
                 if (uniLayoutParams.weight > 0)
                 {
                     int forceViewHeightSpec = heightSpec == MeasureSpec.EXACTLY ? MeasureSpec.EXACTLY : MeasureSpec.UNSPECIFIED;
-                    UniView.uniMeasure(view, paddedWidthSize - uniLayoutParams.leftMargin - uniLayoutParams.rightMargin, (int)(remainingHeight * uniLayoutParams.weight / totalWeight), widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, forceViewHeightSpec);
+                    UniLayout.measure(view, paddedWidthSize - uniLayoutParams.leftMargin - uniLayoutParams.rightMargin, (int)(remainingHeight * uniLayoutParams.weight / totalWeight), widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, forceViewHeightSpec);
                     remainingHeight = Math.max(0, remainingHeight - view.getMeasuredHeight());
                     totalWeight -= uniLayoutParams.weight;
                 }
@@ -298,7 +299,7 @@ public class UniLinearContainer extends ViewGroup
                 remainingWidth -= ((MarginLayoutParams)viewLayoutParams).leftMargin + ((MarginLayoutParams)viewLayoutParams).rightMargin;
                 limitHeight -= ((MarginLayoutParams)viewLayoutParams).topMargin + ((MarginLayoutParams)viewLayoutParams).bottomMargin;
             }
-            UniView.uniMeasure(view, remainingWidth, limitHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+            UniLayout.measure(view, remainingWidth, limitHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
             remainingWidth = Math.max(0, remainingWidth - view.getMeasuredWidth());
         }
 
@@ -320,7 +321,7 @@ public class UniLinearContainer extends ViewGroup
                 if (uniLayoutParams.weight > 0)
                 {
                     int forceViewWidthSpec = widthSpec == MeasureSpec.EXACTLY ? MeasureSpec.EXACTLY : MeasureSpec.UNSPECIFIED;
-                    UniView.uniMeasure(view, (int)(remainingWidth * uniLayoutParams.weight / totalWeight), paddedHeightSize - uniLayoutParams.topMargin - uniLayoutParams.bottomMargin, widthSpec, heightSpec, forceViewWidthSpec, MeasureSpec.UNSPECIFIED);
+                    UniLayout.measure(view, (int)(remainingWidth * uniLayoutParams.weight / totalWeight), paddedHeightSize - uniLayoutParams.topMargin - uniLayoutParams.bottomMargin, widthSpec, heightSpec, forceViewWidthSpec, MeasureSpec.UNSPECIFIED);
                     remainingWidth = Math.max(0, remainingWidth - view.getMeasuredWidth());
                     totalWeight -= uniLayoutParams.weight;
                 }

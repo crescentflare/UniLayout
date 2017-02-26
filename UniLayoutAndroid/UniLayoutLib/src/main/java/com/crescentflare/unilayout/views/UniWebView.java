@@ -5,12 +5,21 @@ import android.util.AttributeSet;
 import android.webkit.WebView;
 import android.widget.Button;
 
+import com.crescentflare.unilayout.helpers.UniScrollListener;
+
 /**
  * UniLayout view: a web view
- * Extends WebView, currently it's just an alias to have the same name as the iOS class
+ * Extends WebView to enable listening for scroll events
  */
 public class UniWebView extends WebView
 {
+    // ---
+    // Members
+    // ---
+
+    private UniScrollListener scrollListener;
+
+
     // ---
     // Initialization
     // ---
@@ -38,5 +47,25 @@ public class UniWebView extends WebView
 
     private void init(AttributeSet attrs)
     {
+    }
+
+
+    // ---
+    // Hook into scroll events
+    // ---
+
+    public void setScrollListener(UniScrollListener scrollListener)
+    {
+        this.scrollListener = scrollListener;
+    }
+
+    @Override
+    protected void onScrollChanged(int x, int y, int oldX, int oldY)
+    {
+        super.onScrollChanged(x, y, oldX, oldY);
+        if (scrollListener != null)
+        {
+            scrollListener.onScrollChanged(x, y, oldX, oldY);
+        }
     }
 }

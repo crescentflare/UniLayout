@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UIActivityIndicatorView, adding padding and layout properties
 open class UniSpinnerView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---
@@ -117,7 +118,7 @@ open class UniSpinnerView: UIView, UniLayoutView, UniLayoutPaddedView {
     }
 
     open override func layoutSubviews() {
-        UniView.uniSetFrame(view: indicatorView, frame: CGRect(x: padding.left, y: padding.top, width: max(0, bounds.width - padding.left - padding.right), height: max(0, bounds.height - padding.top - padding.bottom)))
+        UniLayout.setFrame(view: indicatorView, frame: CGRect(x: padding.left, y: padding.top, width: max(0, bounds.width - padding.left - padding.right), height: max(0, bounds.height - padding.top - padding.bottom)))
     }
     
     open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
@@ -126,13 +127,6 @@ open class UniSpinnerView: UIView, UniLayoutView, UniLayoutPaddedView {
     
     open override var intrinsicContentSize : CGSize {
         return indicatorView.intrinsicContentSize
-    }
-
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
-        }
     }
 
 }
@@ -144,17 +138,8 @@ class UniNotifyingActivityIndicatorView: UIActivityIndicatorView {
     // ---
     
     override var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
-        set {
-            super.activityIndicatorViewStyle = newValue
-            setNeedsLayout()
-        }
-        get { return super.activityIndicatorViewStyle }
-    }
-    
-    override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
         }
     }
     

@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/crescentflare/UniLayout'
     gitUrl = 'https://github.com/crescentflare/UniLayout.git'
 
-    libraryVersion = '0.2.1'
+    libraryVersion = '0.3.0'
 
     developerId = 'crescentflare'
     developerName = 'Johan Bos'
@@ -32,7 +32,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 22
         versionCode 1
-        versionName "0.2.1"
+        versionName "0.3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 

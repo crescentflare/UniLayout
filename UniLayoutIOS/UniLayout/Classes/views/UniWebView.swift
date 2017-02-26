@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UIWebView, adding padding and layout properties
 open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---
@@ -139,32 +140,25 @@ open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
     }
 
     open override func layoutSubviews() {
-        UniView.uniSetFrame(view: webView, frame: CGRect(x: padding.left, y: padding.top, width: max(0, bounds.width - padding.left - padding.right), height: max(0, bounds.height - padding.top - padding.bottom)))
+        UniLayout.setFrame(view: webView, frame: CGRect(x: padding.left, y: padding.top, width: max(0, bounds.width - padding.left - padding.right), height: max(0, bounds.height - padding.top - padding.bottom)))
     }
     
     open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
     }
     
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
-        }
-    }
-
 }
 
 class UniNotifyingWebView: UIWebView {
     
     // ---
-    // MARK: Hook layout into style changes
+    // MARK: Hook layout into content changes
     // ---
     
     override func setNeedsLayout() {
         super.setNeedsLayout()
         if superview is UniLayoutView {
-            superview?.setNeedsLayout()
+            UniLayout.setNeedsLayout(view: superview!)
         }
     }
     

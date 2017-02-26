@@ -8,6 +8,8 @@
 
 import UIKit
 
+/// A layout container view used to recycle its subviews, based on a table view
+/// Adds support for layout properties
 open class UniReusingContainer: UITableView, UniLayoutView {
 
     // ---

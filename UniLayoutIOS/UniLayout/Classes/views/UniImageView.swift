@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UIImageView, adding padding and layout properties
 open class UniImageView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---
@@ -133,7 +134,7 @@ open class UniImageView: UIView, UniLayoutView, UniLayoutPaddedView {
     }
     
     open override func layoutSubviews() {
-        UniView.uniSetFrame(view: imageView, frame: CGRect(x: padding.left, y: padding.top, width: max(0, bounds.width - padding.left - padding.right), height: max(0, bounds.height - padding.top - padding.bottom)))
+        UniLayout.setFrame(view: imageView, frame: CGRect(x: padding.left, y: padding.top, width: max(0, bounds.width - padding.left - padding.right), height: max(0, bounds.height - padding.top - padding.bottom)))
     }
     
     open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
@@ -142,13 +143,6 @@ open class UniImageView: UIView, UniLayoutView, UniLayoutPaddedView {
     
     open override var intrinsicContentSize : CGSize {
         return imageView.intrinsicContentSize
-    }
-
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
-        }
     }
 
 }
@@ -160,17 +154,26 @@ class UniNotifyingImageView: UIImageView {
     // ---
     
     override var image: UIImage? {
-        set {
-            super.image = newValue
-            setNeedsLayout()
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
         }
-        get { return super.image }
     }
 
-    override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if superview is UniLayoutView {
-            superview?.setNeedsLayout()
+    override var highlightedImage: UIImage? {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var animationImages: [UIImage]? {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var highlightedAnimationImages: [UIImage]? {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
         }
     }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A UniLayout enabled UIButton, adding padding and layout properties
 open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
 
     // ---
@@ -21,7 +22,6 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     private var borderColorNormalState: UIColor?
     private var borderColorHighlightedState: UIColor?
     private var borderColorDisabledState: UIColor?
-    private var _settingFrame = false
 
     
     // ---
@@ -33,7 +33,7 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
         set {
             contentEdgeInsets = newValue
             if contentEdgeInsets.top == 0 {
-                contentEdgeInsets.top = 0.01
+                contentEdgeInsets.top = 0.01 // Prevents UIKIT to apply automatic sizing when using a zero value
             }
             if contentEdgeInsets.bottom == 0 {
                 contentEdgeInsets.bottom = 0.01
@@ -62,16 +62,50 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     
     
     // ---
-    // MARK: Override set frame to prevent parent layout request
+    // MARK: Override variables to update the layout
     // ---
     
-    open override var frame: CGRect {
-        get { return super.frame }
-        set {
-            _settingFrame = true
-            super.frame = newValue
-            _settingFrame = false
+    open override var contentEdgeInsets: UIEdgeInsets {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
         }
+    }
+
+    open override var titleEdgeInsets: UIEdgeInsets {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+    
+    open override var imageEdgeInsets: UIEdgeInsets {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+    
+    
+    // ---
+    // MARK: Override functions to update the layout
+    // ---
+
+    open override func setTitle(_ title: String?, for state: UIControlState) {
+        super.setTitle(title, for: state)
+        UniLayout.setNeedsLayout(view: self)
+    }
+
+    open override func setImage(_ image: UIImage?, for state: UIControlState) {
+        super.setImage(image, for: state)
+        UniLayout.setNeedsLayout(view: self)
+    }
+
+    open override func setBackgroundImage(_ image: UIImage?, for state: UIControlState) {
+        super.setBackgroundImage(image, for: state)
+        UniLayout.setNeedsLayout(view: self)
+    }
+
+    open override func setAttributedTitle(_ title: NSAttributedString?, for state: UIControlState) {
+        super.setAttributedTitle(title, for: state)
+        UniLayout.setNeedsLayout(view: self)
     }
     
 
@@ -183,15 +217,6 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
 
     open override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return measuredSize(sizeSpec: targetSize, widthSpec: horizontalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified, heightSpec: verticalFittingPriority == UILayoutPriorityRequired ? UniMeasureSpec.limitSize : UniMeasureSpec.unspecified)
-    }
-    
-    open override func setNeedsLayout() {
-        super.setNeedsLayout()
-        if !_settingFrame {
-            if superview is UniLayoutView {
-                superview?.setNeedsLayout()
-            }
-        }
     }
 
 }

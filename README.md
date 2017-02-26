@@ -20,7 +20,7 @@ UniLayout is a project to make multi-platform development easier for iOS and And
 The library is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile.
 
 ```ruby
-pod "UniLayout", '~> 0.2.4'
+pod "UniLayout", '~> 0.3.0'
 ```
 
 
@@ -29,7 +29,7 @@ pod "UniLayout", '~> 0.2.4'
 When using gradle, the library can easily be imported into the build.gradle file of your project. Add the following dependency:
 
 ```
-compile 'com.crescentflare.unilayout:UniLayoutLib:0.2.1'
+compile 'com.crescentflare.unilayout:UniLayoutLib:0.3.0'
 ```
 
 Make sure that jcenter is added as a repository.
@@ -38,6 +38,11 @@ Make sure that jcenter is added as a repository.
 ### Example
 
 The provided example shows how to build several layout styles. The layout is written in code on iOS, or xml files on Android.
+
+
+### More information
+
+Refer to the [wiki](https://github.com/crescentflare/UniLayout/wiki) for more detailed information about the library.
 
 
 ### Status
