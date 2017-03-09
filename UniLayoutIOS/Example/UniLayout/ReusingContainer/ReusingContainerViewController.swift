@@ -46,6 +46,7 @@ class ReusingContainerViewController: UIViewController {
         reusingContainer.addItem(ReusableItem(type: .item, title: "Button view", additional: "Extends UIButton to work with layout properties and provides more control over its padding", value: "Button"))
         reusingContainer.addItem(ReusableItem(type: .item, title: "Image view", additional: "Contains UIImageView to add padding and work with layout properties", value: "Image"))
         reusingContainer.addItem(ReusableItem(type: .item, title: "Text view", additional: "Extends UILabel to add padding and work with other layout properties", value: "Text"))
+        reusingContainer.addItem(ReusableItem(type: .item, title: "Switch view", additional: "Contains UISwitch to add text, padding and work with other layout properties", value: "Control"))
         reusingContainer.addItem(ReusableItem(type: .item, title: "Spinner view", additional: "Extends UIActivityIndicatorView to add padding and work with other layout properties", value: "Indicator"))
         reusingContainer.addItem(ReusableItem(type: .item, title: "Web view", additional: "Extends UIWebView to work with layout properties and provides more control over its padding", value: "Web content"))
         reusingContainer.addItem(ReusableItem(type: .item, title: "View", additional: "Extends UIView to add layout properties and padding, can be used as a base for custom layouts", value: "Container"))
