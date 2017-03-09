@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:22.1.0'
     testCompile 'junit:junit:4.12'
     testCompile 'org.json:org.json:2.0'
 }
