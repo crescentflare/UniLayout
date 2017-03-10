@@ -20,7 +20,7 @@ UniLayout is a project to make multi-platform development easier for iOS and And
 The library is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile.
 
 ```ruby
-pod "UniLayout", '~> 0.3.0'
+pod "UniLayout", '~> 0.3.1'
 ```
 
 
@@ -29,7 +29,7 @@ pod "UniLayout", '~> 0.3.0'
 When using gradle, the library can easily be imported into the build.gradle file of your project. Add the following dependency:
 
 ```
-compile 'com.crescentflare.unilayout:UniLayoutLib:0.3.0'
+compile 'com.crescentflare.unilayout:UniLayoutLib:0.3.1'
 ```
 
 Make sure that jcenter is added as a repository.
