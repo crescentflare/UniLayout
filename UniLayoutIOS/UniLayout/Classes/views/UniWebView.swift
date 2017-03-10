@@ -84,7 +84,7 @@ open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
     
     
     // ---
-    // MARK: UIActivityIndicatorView methods
+    // MARK: UIWebView methods
     // ---
 
     public func loadRequest(_ request: URLRequest) {

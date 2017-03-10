@@ -96,8 +96,12 @@ open class UniHorizontalScrollContainer: UIScrollView, UniLayoutView, UniLayoutP
                 limitHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
             }
             var result = UniLayout.measure(view: view, sizeSpec: CGSize(width: 0xFFFFFF, height: limitHeight), parentWidthSpec: .unspecified, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
-            if view is UIRefreshControl && heightSpec == .exactSize {
-                result.height = limitHeight
+            if view is UIRefreshControl {
+                if heightSpec == .exactSize {
+                    result.height = limitHeight
+                } else {
+                    result.height = 0
+                }
             }
             if fillContent && view == _contentView && widthSpec == .exactSize && result.width < filledWidth {
                 result.width = filledWidth

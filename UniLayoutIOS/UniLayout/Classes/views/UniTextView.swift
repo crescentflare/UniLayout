@@ -104,3 +104,65 @@ open class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
     }
     
 }
+
+class UniNotifyingLabelView: UILabel {
+    
+    // ---
+    // MARK: Hook layout into content changes
+    // ---
+    
+    override var text: String? {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var font: UIFont! {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var shadowOffset: CGSize {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var lineBreakMode: NSLineBreakMode {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+    
+    override var attributedText: NSAttributedString? {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var numberOfLines: Int {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+    
+    override var adjustsFontSizeToFitWidth: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var baselineAdjustment: UIBaselineAdjustment {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+    override var minimumScaleFactor: CGFloat {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
+}

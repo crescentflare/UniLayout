@@ -38,7 +38,7 @@
             android:id="@+id/view_item_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="6dp"
             app:uni_gravity="center"
             android:textSize="17sp"
             android:textStyle="bold"/>
