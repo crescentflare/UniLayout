@@ -158,6 +158,9 @@ open class UniReusableView : UITableViewCell {
     open override func layoutSubviews() {
         super.layoutSubviews()
         UniLayout.setFrame(view: coreContainer, frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height))
+        if selectedBackgroundView != nil {
+            UniLayout.setFrame(view: selectedBackgroundView!, frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height))
+        }
     }
     
 }
