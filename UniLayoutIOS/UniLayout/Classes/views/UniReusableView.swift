@@ -18,7 +18,7 @@ open class UniReusableView : UITableViewCell {
     let mainContainer = UniLinearContainer()
     let contentContainer = UniFrameContainer()
     let accessoryContainer = UniFrameContainer()
-    public let dividerLine: UniView = UniReusableDividerView()
+    public let dividerLine = UniReusableDividerView()
     private let coreContainer = UniLinearContainer()
     private var _view: UIView? = nil
     private var _accessoryView: UIView? = nil
@@ -125,7 +125,7 @@ open class UniReusableView : UITableViewCell {
         dividerLine.layoutProperties.width = UniLayoutProperties.stretchToParent
         dividerLine.layoutProperties.height = 1 / UIScreen.main.scale
         dividerLine.layoutProperties.margin.left = 16
-        dividerLine.backgroundColor = UIColor(white: 0.8, alpha: 1)
+        dividerLine.color = UIColor(white: 0.8, alpha: 1)
         coreContainer.addSubview(dividerLine)
         
         // Set up and add the content container view
@@ -166,21 +166,21 @@ open class UniReusableView : UITableViewCell {
 }
 
 /// A helper view for the UniReusableView to show as a divider which keeps its background color, even when selected
-fileprivate class UniReusableDividerView : UniView {
+public class UniReusableDividerView : UniView {
     
-    private var simulatedBackgroundColor: UIColor?
+    private var fillColor: UIColor?
     
-    override var backgroundColor: UIColor? {
+    var color: UIColor? {
         set {
-            simulatedBackgroundColor = newValue
+            fillColor = newValue
         }
         get {
-            return simulatedBackgroundColor
+            return fillColor
         }
     }
     
-    override func draw(_ rect: CGRect) {
-        if let fillColor = simulatedBackgroundColor {
+    public override func draw(_ rect: CGRect) {
+        if let fillColor = fillColor {
             if let context = UIGraphicsGetCurrentContext() {
                 context.setFillColor(fillColor.cgColor)
                 context.fill(self.bounds)
