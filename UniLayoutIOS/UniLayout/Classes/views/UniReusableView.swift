@@ -18,7 +18,7 @@ open class UniReusableView : UITableViewCell {
     let mainContainer = UniLinearContainer()
     let contentContainer = UniFrameContainer()
     let accessoryContainer = UniFrameContainer()
-    public let dividerLine = UniView()
+    public let dividerLine = UniReusableDividerView()
     private let coreContainer = UniLinearContainer()
     private var _view: UIView? = nil
     private var _accessoryView: UIView? = nil
@@ -125,7 +125,7 @@ open class UniReusableView : UITableViewCell {
         dividerLine.layoutProperties.width = UniLayoutProperties.stretchToParent
         dividerLine.layoutProperties.height = 1 / UIScreen.main.scale
         dividerLine.layoutProperties.margin.left = 16
-        dividerLine.backgroundColor = UIColor(white: 0.8, alpha: 1)
+        dividerLine.color = UIColor(white: 0.8, alpha: 1)
         coreContainer.addSubview(dividerLine)
         
         // Set up and add the content container view
@@ -160,6 +160,31 @@ open class UniReusableView : UITableViewCell {
         UniLayout.setFrame(view: coreContainer, frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height))
         if selectedBackgroundView != nil {
             UniLayout.setFrame(view: selectedBackgroundView!, frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height))
+        }
+    }
+    
+}
+
+/// A helper view for the UniReusableView to show as a divider which keeps its background color, even when selected
+public class UniReusableDividerView : UniView {
+    
+    private var fillColor: UIColor?
+    
+    var color: UIColor? {
+        set {
+            fillColor = newValue
+        }
+        get {
+            return fillColor
+        }
+    }
+    
+    public override func draw(_ rect: CGRect) {
+        if let fillColor = fillColor {
+            if let context = UIGraphicsGetCurrentContext() {
+                context.setFillColor(fillColor.cgColor)
+                context.fill(self.bounds)
+            }
         }
     }
     
