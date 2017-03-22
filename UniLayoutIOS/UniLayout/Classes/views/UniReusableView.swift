@@ -170,7 +170,7 @@ public class UniReusableDividerView : UniView {
     
     private var fillColor: UIColor?
     
-    var color: UIColor? {
+    public var color: UIColor? {
         set {
             fillColor = newValue
         }
