@@ -102,6 +102,12 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
         }
     }
     
+    open override var isHidden: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+    
     
     // ---
     // MARK: Override functions to update the layout

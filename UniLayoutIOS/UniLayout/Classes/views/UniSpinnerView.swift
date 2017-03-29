@@ -103,6 +103,17 @@ open class UniSpinnerView: UIView, UniLayoutView, UniLayoutPaddedView {
     
     
     // ---
+    // MARK: Override variables to update the layout
+    // ---
+    
+    open override var isHidden: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+    
+    
+    // ---
     // MARK: UIActivityIndicatorView methods
     // ---
     

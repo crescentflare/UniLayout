@@ -310,5 +310,11 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
     open override func didAddSubview(_ subview: UIView) {
         UniLayout.setNeedsLayout(view: self)
     }
+    
+    open override var isHidden: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
 
 }

@@ -205,4 +205,10 @@ open class UniVerticalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPad
         UniLayout.setNeedsLayout(view: self)
     }
 
+    open override var isHidden: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
 }

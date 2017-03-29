@@ -205,4 +205,10 @@ open class UniHorizontalScrollContainer: UIScrollView, UniLayoutView, UniLayoutP
         UniLayout.setNeedsLayout(view: self)
     }
    
+    open override var isHidden: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
 }

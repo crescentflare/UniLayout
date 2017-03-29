@@ -66,7 +66,13 @@ open class UniTextView: UILabel, UniLayoutView, UniLayoutPaddedView {
         }
     }
 
-
+    open override var isHidden: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+    
+    
     // ---
     // MARK: Initialization
     // ---

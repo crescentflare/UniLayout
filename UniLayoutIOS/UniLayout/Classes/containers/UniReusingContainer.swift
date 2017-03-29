@@ -50,5 +50,16 @@ open class UniReusingContainer: UITableView, UniLayoutView {
         }
         return result
     }
+    
+
+    // ---
+    // MARK: Improve layout needed behavior
+    // ---
+    
+    open override var isHidden: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
 
 }
