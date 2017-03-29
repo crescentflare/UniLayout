@@ -12,11 +12,30 @@ import UIKit
 open class UniVerticalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPaddedView {
     
     // ---
+    // MARK: Layout integration
+    // ---
+    
+    public var layoutProperties = UniLayoutProperties()
+    public var padding = UIEdgeInsets.zero
+    
+    public var visibility: UniVisibility {
+        set {
+            isHidden = newValue != .visible
+            layoutProperties.hiddenTakesSpace = newValue == .invisible
+        }
+        get {
+            if isHidden {
+                return layoutProperties.hiddenTakesSpace ? .invisible : .hidden
+            }
+            return .visible
+        }
+    }
+
+    
+    // ---
     // MARK: Members
     // ---
 
-    public var layoutProperties = UniLayoutProperties()
-    public var padding = UIEdgeInsets.zero
     public var fillContent: Bool = false
     private var _backgroundView: UIView?
     private var _contentView: UIView?

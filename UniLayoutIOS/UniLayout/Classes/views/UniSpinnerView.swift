@@ -12,11 +12,30 @@ import UIKit
 open class UniSpinnerView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---
-    // MARK: Members
+    // MARK: Layout integration
     // ---
     
     public var layoutProperties = UniLayoutProperties()
     public var padding = UIEdgeInsets.zero
+    
+    public var visibility: UniVisibility {
+        set {
+            isHidden = newValue != .visible
+            layoutProperties.hiddenTakesSpace = newValue == .invisible
+        }
+        get {
+            if isHidden {
+                return layoutProperties.hiddenTakesSpace ? .invisible : .hidden
+            }
+            return .visible
+        }
+    }
+
+    
+    // ---
+    // MARK: Members
+    // ---
+    
     private var indicatorView = UniNotifyingActivityIndicatorView()
 
     
