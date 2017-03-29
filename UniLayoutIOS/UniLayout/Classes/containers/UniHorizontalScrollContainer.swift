@@ -12,12 +12,31 @@ import UIKit
 open class UniHorizontalScrollContainer: UIScrollView, UniLayoutView, UniLayoutPaddedView {
     
     // ---
+    // MARK: Layout integration
+    // ---
+    
+    public var layoutProperties = UniLayoutProperties()
+    public var padding = UIEdgeInsets.zero
+    
+    public var visibility: UniVisibility {
+        set {
+            isHidden = newValue != .visible
+            layoutProperties.hiddenTakesSpace = newValue == .invisible
+        }
+        get {
+            if isHidden {
+                return layoutProperties.hiddenTakesSpace ? .invisible : .hidden
+            }
+            return .visible
+        }
+    }
+
+    
+    // ---
     // MARK: Members
     // ---
 
-    public var layoutProperties = UniLayoutProperties()
     public var fillContent: Bool = false
-    public var padding = UIEdgeInsets.zero
     private var _backgroundView: UIView?
     private var _contentView: UIView?
 
@@ -186,4 +205,10 @@ open class UniHorizontalScrollContainer: UIScrollView, UniLayoutView, UniLayoutP
         UniLayout.setNeedsLayout(view: self)
     }
    
+    open override var isHidden: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+
 }

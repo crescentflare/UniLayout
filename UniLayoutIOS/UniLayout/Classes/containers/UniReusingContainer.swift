@@ -13,12 +13,25 @@ import UIKit
 open class UniReusingContainer: UITableView, UniLayoutView {
 
     // ---
-    // MARK: Members
+    // MARK: Layout integration
     // ---
     
     public var layoutProperties = UniLayoutProperties()
+    
+    public var visibility: UniVisibility {
+        set {
+            isHidden = newValue != .visible
+            layoutProperties.hiddenTakesSpace = newValue == .invisible
+        }
+        get {
+            if isHidden {
+                return layoutProperties.hiddenTakesSpace ? .invisible : .hidden
+            }
+            return .visible
+        }
+    }
 
-
+    
     // ---
     // MARK: Custom layout
     // ---
@@ -36,6 +49,17 @@ open class UniReusingContainer: UITableView, UniLayoutView {
             result.height = min(result.height, sizeSpec.height)
         }
         return result
+    }
+    
+
+    // ---
+    // MARK: Improve layout needed behavior
+    // ---
+    
+    open override var isHidden: Bool {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
     }
 
 }

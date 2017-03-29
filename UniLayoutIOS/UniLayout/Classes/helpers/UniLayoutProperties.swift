@@ -17,6 +17,15 @@ public enum UniMeasureSpec {
     
 }
 
+/// An enum used to set the visibility type of a view, wraps the isHidden and hiddentakesSpace properties
+public enum UniVisibility {
+    
+    case visible
+    case invisible
+    case hidden
+    
+}
+
 /// A protocol to add padding support to a view
 public protocol UniLayoutPaddedView {
     
@@ -29,6 +38,7 @@ public protocol UniLayoutPaddedView {
 public protocol UniLayoutView {
     
     var layoutProperties: UniLayoutProperties { get set }
+    var visibility: UniVisibility { get set }
     func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize
     
 }

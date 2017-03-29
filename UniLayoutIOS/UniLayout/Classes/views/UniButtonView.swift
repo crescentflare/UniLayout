@@ -12,17 +12,36 @@ import UIKit
 open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
 
     // ---
+    // MARK: Layout integration
+    // ---
+    
+    public var layoutProperties = UniLayoutProperties()
+    
+    public var visibility: UniVisibility {
+        set {
+            isHidden = newValue != .visible
+            layoutProperties.hiddenTakesSpace = newValue == .invisible
+        }
+        get {
+            if isHidden {
+                return layoutProperties.hiddenTakesSpace ? .invisible : .hidden
+            }
+            return .visible
+        }
+    }
+
+    
+    // ---
     // MARK: Members
     // ---
-
-    public var layoutProperties = UniLayoutProperties()
+    
     private var backgroundColorNormalState: UIColor?
     private var backgroundColorHighlightedState: UIColor?
     private var backgroundColorDisabledState: UIColor?
     private var borderColorNormalState: UIColor?
     private var borderColorHighlightedState: UIColor?
     private var borderColorDisabledState: UIColor?
-
+    
     
     // ---
     // MARK: Change padding
@@ -78,6 +97,12 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     }
     
     open override var imageEdgeInsets: UIEdgeInsets {
+        didSet {
+            UniLayout.setNeedsLayout(view: self)
+        }
+    }
+    
+    open override var isHidden: Bool {
         didSet {
             UniLayout.setNeedsLayout(view: self)
         }
