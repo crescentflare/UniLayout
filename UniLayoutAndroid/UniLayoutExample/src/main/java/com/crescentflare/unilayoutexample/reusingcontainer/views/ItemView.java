@@ -39,7 +39,6 @@ public class ItemView extends UniLinearContainer
         titleView = (TextView)findViewById(R.id.view_item_title);
         additionalView = (TextView)findViewById(R.id.view_item_additional);
         valueView = (TextView)findViewById(R.id.view_item_value);
-        divider = findViewById(R.id.view_item_divider);
     }
 
     @Override
@@ -70,10 +69,5 @@ public class ItemView extends UniLinearContainer
     {
         valueView.setText(text);
         valueView.setVisibility(text.length() > 0 ? VISIBLE : GONE);
-    }
-
-    public void showDivider(boolean show)
-    {
-        divider.setVisibility(show ? VISIBLE : GONE);
     }
 }

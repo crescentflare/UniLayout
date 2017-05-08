@@ -117,7 +117,6 @@ public class ReusingContainerAdapter extends UniReusingContainer.Adapter
                 ((ItemView)view).setTitle(item.getTitle());
                 ((ItemView)view).setAdditional(item.getAdditional());
                 ((ItemView)view).setValue(item.getValue());
-                ((ItemView)view).showDivider(nextItem != null && nextItem.getType() == ReusableItem.Type.Item);
                 container.getDividerView().setVisibility(nextItem == null || nextItem.getType() != ReusableItem.Type.Item ? View.GONE : View.VISIBLE);
                 break;
         }

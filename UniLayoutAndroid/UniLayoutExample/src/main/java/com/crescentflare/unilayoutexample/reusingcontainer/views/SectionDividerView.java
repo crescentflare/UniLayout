@@ -35,6 +35,7 @@ public class SectionDividerView extends UniFrameContainer
         {
             ((UniLayoutParams)lineView.getLayoutParams()).verticalGravity = 1;
         }
+        setBackgroundColor(0xfff0f0f0);
     }
 
     @Override

@@ -32,6 +32,7 @@ public class SectionView extends UniFrameContainer
         int sidePadding = (int)(getResources().getDisplayMetrics().density * 8);
         LayoutInflater.from(getContext()).inflate(R.layout.view_section, this, true);
         setPadding(sidePadding, topPadding, sidePadding, 0);
+        setBackgroundColor(0xfff0f0f0);
         textView = (TextView)findViewById(R.id.view_section_text);
     }
 

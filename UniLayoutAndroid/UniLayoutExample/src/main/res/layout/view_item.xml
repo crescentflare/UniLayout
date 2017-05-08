@@ -25,6 +25,7 @@
                 android:id="@+id/view_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#202020"
                 android:textSize="17sp"
                 android:textStyle="bold"/>
             <com.crescentflare.unilayout.views.UniTextView
@@ -32,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:textColor="#202020"
                 android:textSize="15sp"/>
         </com.crescentflare.unilayout.containers.UniLinearContainer>
         <com.crescentflare.unilayout.views.UniTextView
@@ -40,13 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             app:uni_gravity="center"
+            android:textColor="#202020"
             android:textSize="17sp"
             android:textStyle="bold"/>
     </com.crescentflare.unilayout.containers.UniLinearContainer>
-    <com.crescentflare.unilayout.views.UniView
-        android:id="@+id/view_item_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="16dp"
-        android:background="#d8d8d8"/>
 </merge>
