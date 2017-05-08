@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.crescentflare.unilayout.containers.UniReusingContainer;
 import com.crescentflare.unilayoutexample.R;
 
 /**
@@ -37,7 +38,7 @@ public class ReusingContainerActivity extends AppCompatActivity
             actionBar.setHomeButtonEnabled(true);
         }
 
-        ReusingContainerView reusingView = (ReusingContainerView)findViewById(R.id.activity_reusing_container_view);
+        UniReusingContainer reusingView = (UniReusingContainer)findViewById(R.id.activity_reusing_container_view);
         reusingView.setAdapter(adapter);
 
         adapter.addItem(new ReusableItem(ReusableItem.Type.Section, "Supported containers"));
