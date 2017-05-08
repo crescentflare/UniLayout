@@ -28,6 +28,7 @@ public class UniReusingContainer extends ScrollView
 
     private LayoutContainer contentView;
     private UniScrollListener scrollListener;
+    private boolean multiSelect;
 
 
     // ---
@@ -90,6 +91,7 @@ public class UniReusingContainer extends ScrollView
             contentView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             addView(contentView);
             contentView.setAdapter(adapter);
+            contentView.setMultiSelect(multiSelect);
             newCreated = true;
         }
 
@@ -113,6 +115,20 @@ public class UniReusingContainer extends ScrollView
             index++;
         }
         return -1;
+    }
+
+    public void setMultiSelect(boolean enabled)
+    {
+        multiSelect = enabled;
+        if (contentView != null)
+        {
+            contentView.setMultiSelect(multiSelect);
+        }
+    }
+
+    public boolean isMultiSelect()
+    {
+        return multiSelect;
     }
 
 
@@ -314,6 +330,7 @@ public class UniReusingContainer extends ScrollView
         private int usingViewStartY;
         private Point measuredSize = new Point();
         private Point[] measuredViews = null;
+        private boolean multiSelect;
 
 
         // ---
@@ -344,6 +361,36 @@ public class UniReusingContainer extends ScrollView
         private void init(AttributeSet attrs)
         {
             extraMarginY = (int)(getResources().getDisplayMetrics().density * 64);
+        }
+
+
+        // ---
+        // Settings
+        // ---
+
+        public void setMultiSelect(boolean multiSelect)
+        {
+            this.multiSelect = multiSelect;
+            if (!multiSelect && adapter != null)
+            {
+                int foundSelections = 0;
+                int count = getReusableViewCount();
+                for (int i = 0; i < count; i++)
+                {
+                    if (isItemSelected(i))
+                    {
+                        foundSelections++;
+                        if (foundSelections > 1)
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (foundSelections > 1)
+                {
+                    adapter.clearSelections();
+                }
+            }
         }
 
 
@@ -388,6 +435,17 @@ public class UniReusingContainer extends ScrollView
                 {
                     usingView.view.setSelected(isItemSelected(itemPosition), true);
                     usingView.view.setEnabled(isItemEnabled(itemPosition), true);
+                }
+                if (!multiSelect && isItemSelected(itemPosition) && adapter != null)
+                {
+                    int count = getReusableViewCount();
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (i != itemPosition && isItemSelected(i))
+                        {
+                            adapter.setItemSelected(i, false);
+                        }
+                    }
                 }
             }
         }
@@ -991,6 +1049,21 @@ public class UniReusingContainer extends ScrollView
                 return itemsEnabled[itemPosition];
             }
             return true;
+        }
+
+        public void clearSelections()
+        {
+            if (itemsSelected != null)
+            {
+                for (int i = 0; i < itemsSelected.length; i++)
+                {
+                    if (itemsSelected[i])
+                    {
+                        itemsSelected[i] = false;
+                        notifyItemChanged(i);
+                    }
+                }
+            }
         }
 
         public void notifyDataSetChanged()
