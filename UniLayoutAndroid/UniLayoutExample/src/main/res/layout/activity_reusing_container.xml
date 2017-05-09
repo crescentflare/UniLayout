@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#f0f0f0"
     tools:context="com.crescentflare.unilayoutexample.MainActivity">
-    <com.crescentflare.unilayoutexample.reusingcontainer.ReusingContainerView
+    <com.crescentflare.unilayout.containers.UniReusingContainer
         android:id="@+id/activity_reusing_container_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"

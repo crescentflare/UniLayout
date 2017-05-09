@@ -12,7 +12,7 @@ import com.crescentflare.unilayoutexample.R;
  * Reusing container example: divider view
  * A view type in the reusing container showing a divider for styling purposes
  */
-public class DividerView extends UniFrameContainer
+public class SectionDividerView extends UniFrameContainer
 {
     // ---
     // Members
@@ -25,16 +25,17 @@ public class DividerView extends UniFrameContainer
     // Initialization
     // ---
 
-    public DividerView(Context context, boolean bottom)
+    public SectionDividerView(Context context, boolean bottom)
     {
         super(context);
 
-        LayoutInflater.from(getContext()).inflate(R.layout.view_divider, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.view_section_divider, this, true);
         lineView = (UniView)findViewById(R.id.view_divider_line);
         if (!bottom)
         {
             ((UniLayoutParams)lineView.getLayoutParams()).verticalGravity = 1;
         }
+        setBackgroundColor(0xfff0f0f0);
     }
 
     @Override

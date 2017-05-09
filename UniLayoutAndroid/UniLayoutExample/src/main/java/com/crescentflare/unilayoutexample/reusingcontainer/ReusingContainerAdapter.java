@@ -1,22 +1,21 @@
 package com.crescentflare.unilayoutexample.reusingcontainer;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 
-import com.crescentflare.unilayoutexample.reusingcontainer.views.DividerView;
+import com.crescentflare.unilayout.containers.UniReusingContainer;
+import com.crescentflare.unilayout.views.UniReusableView;
+import com.crescentflare.unilayoutexample.reusingcontainer.views.SectionDividerView;
 import com.crescentflare.unilayoutexample.reusingcontainer.views.ItemView;
 import com.crescentflare.unilayoutexample.reusingcontainer.views.SectionView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Reusing container example: adapter
  * Provides display of reusable items
  */
-public class ReusingContainerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class ReusingContainerAdapter extends UniReusingContainer.Adapter
 {
     // ---
     // Members
@@ -53,71 +52,73 @@ public class ReusingContainerAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public int getItemViewType(int position)
+    public String getItemViewType(int itemPosition)
     {
-        ReusableItem item = items.get(position);
+        ReusableItem item = items.get(itemPosition);
         if (item.getType() == null)
         {
-            return -1;
+            return super.getItemViewType(itemPosition);
         }
-        return Arrays.asList(ReusableItem.Type.values()).indexOf(item.getType());
+        return item.getType().toString();
     }
 
 
     // ---
-    // View holder
+    // Item creation and binding
     // ---
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public View onCreateView(UniReusableView container, String viewType)
     {
         ReusableItem.Type type = null;
-        if (viewType >= 0 && viewType < ReusableItem.Type.values().length)
+        for (ReusableItem.Type checkType : ReusableItem.Type.values())
         {
-            type = ReusableItem.Type.values()[viewType];
+            if (checkType.toString().equals(viewType))
+            {
+                type = checkType;
+                break;
+            }
         }
-        switch (type)
+        if (type != null)
         {
-            case Section:
-                return new ViewHolder(new SectionView(parent.getContext()));
-            case TopDivider:
-                return new ViewHolder(new DividerView(parent.getContext(), false));
-            case BottomDivider:
-                return new ViewHolder(new DividerView(parent.getContext(), true));
-            case Item:
-                return new ViewHolder(new ItemView(parent.getContext()));
+            switch (type)
+            {
+                case Section:
+                    container.getDividerView().setVisibility(View.GONE);
+                    return new SectionView(container.getContext());
+                case TopDivider:
+                    container.getDividerView().setVisibility(View.GONE);
+                    return new SectionDividerView(container.getContext(), false);
+                case BottomDivider:
+                    container.getDividerView().setVisibility(View.GONE);
+                    return new SectionDividerView(container.getContext(), true);
+                case Item:
+                    return new ItemView(container.getContext());
+            }
         }
-        return new ViewHolder(new View(parent.getContext()));
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
+    public void onUpdateView(UniReusableView container, View view, String viewType, int itemPosition)
     {
-        ReusableItem item = items.get(position);
+        ReusableItem item = items.get(itemPosition);
         ReusableItem nextItem = null;
-        if (position + 1 < items.size())
+        if (itemPosition + 1 < items.size())
         {
-            nextItem = items.get(position + 1);
+            nextItem = items.get(itemPosition + 1);
         }
         switch (item.getType())
         {
             case Section:
-                ((SectionView)holder.itemView).setText(item.getTitle());
+                ((SectionView)view).setText(item.getTitle());
                 break;
             case Item:
-                ((ItemView)holder.itemView).setTitle(item.getTitle());
-                ((ItemView)holder.itemView).setAdditional(item.getAdditional());
-                ((ItemView)holder.itemView).setValue(item.getValue());
-                ((ItemView)holder.itemView).showDivider(nextItem != null && nextItem.getType() == ReusableItem.Type.Item);
+                ((ItemView)view).setTitle(item.getTitle());
+                ((ItemView)view).setAdditional(item.getAdditional());
+                ((ItemView)view).setValue(item.getValue());
+                container.getDividerView().setVisibility(nextItem == null || nextItem.getType() != ReusableItem.Type.Item ? View.GONE : View.VISIBLE);
                 break;
-        }
-    }
-
-    private static class ViewHolder extends RecyclerView.ViewHolder
-    {
-        public ViewHolder(View view)
-        {
-            super(view);
         }
     }
 }
