@@ -51,6 +51,7 @@ public class ReusingContainerActivity extends AppCompatActivity
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Vertical scroll container", "Contains a single content view which can scroll vertically, use linear container as a content view for scrollable layouts", "Scroll"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Linear container", "Aligns items horizontally or vertically, depending on its orientation", "Layout"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Frame container", "A simple container to contain one view, or add multiple overlapping views", "Layout"));
+        adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Reusing container", "A vertical layout container with scrolling with reusable views, also supports selection", "Layout/Scroll"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.BottomDivider));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Section, "Supported views"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.TopDivider));
@@ -61,6 +62,7 @@ public class ReusingContainerActivity extends AppCompatActivity
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Spinner view", "Extends ProgressBar, currently only used to match the naming convention with iOS", "Indicator"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Web view", "Extends WebView, currently only used to match the naming convention with iOS", "Web content"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "View", "Extends View to support padding for size calculation", "Container"));
+        adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Reusable view", "A view to be used by the reusing container which can be reused while scrolling", "Container"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.BottomDivider));
 
         // Disable interaction
