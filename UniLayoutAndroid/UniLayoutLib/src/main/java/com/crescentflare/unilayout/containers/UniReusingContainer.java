@@ -464,6 +464,8 @@ public class UniReusingContainer extends ScrollView
             usingViews.clear();
             countedHeight = 0;
             countedViews = 0;
+            usingViewStartPosition = 0;
+            usingViewStartY = 0;
         }
 
         private int getReusableViewCount()
