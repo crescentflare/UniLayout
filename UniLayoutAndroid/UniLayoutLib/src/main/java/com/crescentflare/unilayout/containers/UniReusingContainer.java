@@ -452,6 +452,13 @@ public class UniReusingContainer extends ScrollView
 
         public void refreshCalculation()
         {
+            for (UsingView usingView : usingViews)
+            {
+                if (usingView != null && usingView.view != null)
+                {
+                    removeView(usingView.view);
+                }
+            }
             measuredViews = new Point[getReusableViewCount()];
             viewTypes.clear();
             usingViews.clear();
