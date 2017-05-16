@@ -35,7 +35,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
     // ---
     // MARK: Tap and highlight support
     // ---
-    
+
     private var _highlighted = false
     private var _highlightedBackgroundColor: UIColor?
     private var _normalBackgroundColor: UIColor?
@@ -97,7 +97,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 return
             }
         }
-        super.touchesEnded(touches, with: event)
+        super.touchesMoved(touches, with: event)
     }
 
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -124,7 +124,7 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
         super.touchesCancelled(touches ?? Set(), with: event)
     }
 
-    
+ 
     // ---
     // MARK: Custom layout
     // ---
