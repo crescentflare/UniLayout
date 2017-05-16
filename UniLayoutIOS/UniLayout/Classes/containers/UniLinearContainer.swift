@@ -43,7 +43,8 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
     // ---
     // MARK: Tap and highlight support
     // ---
-
+    
+    private let touchInsideTolerance: CGFloat = 64
     private var _highlighted = false
     private var _highlightedBackgroundColor: UIColor?
     private var _normalBackgroundColor: UIColor?
@@ -101,7 +102,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
         if _tapDelegate != nil {
             if let touch = touches.first {
                 let position = touch.location(in: self)
-                isHighlighted = position.x >= -100 && position.x < frame.width + 100 && position.y >= -100 && position.y < frame.height + 100
+                isHighlighted = position.x >= -touchInsideTolerance && position.x < frame.width + touchInsideTolerance && position.y >= -touchInsideTolerance && position.y < frame.height + touchInsideTolerance
                 return
             }
         }
@@ -113,7 +114,7 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             if let touch = touches.first {
                 isHighlighted = false
                 let position = touch.location(in: self)
-                if position.x >= -100 && position.x < frame.width + 100 && position.y >= -100 && position.y < frame.height + 100 {
+                if position.x >= -touchInsideTolerance && position.x < frame.width + touchInsideTolerance && position.y >= -touchInsideTolerance && position.y < frame.height + touchInsideTolerance {
                     _tapDelegate?.containerTapped(self)
                 }
                 return
