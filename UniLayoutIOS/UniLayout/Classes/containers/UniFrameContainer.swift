@@ -33,6 +33,76 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
 
     
     // ---
+    // MARK: Highlighted background color support
+    // ---
+    
+    private var _highlighted = false
+    private var _highlightedBackgroundColor: UIColor?
+    private var _normalBackgroundColor: UIColor?
+    
+    open var isHighlighted: Bool {
+        set {
+            _highlighted = newValue
+            super.backgroundColor = _highlighted ? _highlightedBackgroundColor : _normalBackgroundColor
+        }
+        get {
+            return _highlighted
+        }
+    }
+    
+    open var highlightedBackgroundColor: UIColor? {
+        set {
+            _highlightedBackgroundColor = newValue
+            if _highlightedBackgroundColor == nil {
+                isHighlighted = false
+            }
+            if _highlighted {
+                super.backgroundColor = _highlightedBackgroundColor
+            }
+        }
+        get {
+            return _highlightedBackgroundColor
+        }
+    }
+    
+    open override var backgroundColor: UIColor? {
+        didSet {
+            _normalBackgroundColor = backgroundColor
+        }
+    }
+    
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if _highlightedBackgroundColor != nil {
+            if let _ = touches.first {
+                isHighlighted = true
+                return
+            }
+        }
+        super.touchesBegan(touches, with: event)
+    }
+    
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if _highlightedBackgroundColor != nil {
+            if let _ = touches.first {
+                isHighlighted = false
+                return
+            }
+        }
+        super.touchesEnded(touches, with: event)
+    }
+    
+    open override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
+        if _highlightedBackgroundColor != nil {
+            if (touches?.first) != nil {
+                isHighlighted = false
+                return
+            }
+        }
+        super.touchesCancelled(touches ?? Set(), with: event)
+    }
+
+    
+    // ---
     // MARK: Custom layout
     // ---
 
