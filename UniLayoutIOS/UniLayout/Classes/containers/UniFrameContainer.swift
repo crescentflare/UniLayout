@@ -33,6 +33,100 @@ open class UniFrameContainer: UIView, UniLayoutView, UniLayoutPaddedView {
 
     
     // ---
+    // MARK: Tap and highlight support
+    // ---
+
+    private let touchInsideTolerance: CGFloat = 64
+    private var _highlighted = false
+    private var _highlightedBackgroundColor: UIColor?
+    private var _normalBackgroundColor: UIColor?
+    private weak var _tapDelegate: UniTapDelegate?
+    
+    open var tapDelegate: UniTapDelegate? {
+        set {
+            _tapDelegate = newValue
+            if _tapDelegate == nil {
+                isHighlighted = false
+            }
+        }
+        get {
+            return _tapDelegate
+        }
+    }
+    
+    open var isHighlighted: Bool {
+        set {
+            _highlighted = newValue
+            super.backgroundColor = _highlighted && _highlightedBackgroundColor != nil ? _highlightedBackgroundColor : _normalBackgroundColor
+        }
+        get {
+            return _highlighted
+        }
+    }
+    
+    open var highlightedBackgroundColor: UIColor? {
+        set {
+            _highlightedBackgroundColor = newValue
+            super.backgroundColor = _highlighted && _highlightedBackgroundColor != nil ? _highlightedBackgroundColor : _normalBackgroundColor
+        }
+        get {
+            return _highlightedBackgroundColor
+        }
+    }
+    
+    open override var backgroundColor: UIColor? {
+        didSet {
+            _normalBackgroundColor = backgroundColor
+        }
+    }
+    
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if _tapDelegate != nil {
+            if let _ = touches.first {
+                isHighlighted = true
+                return
+            }
+        }
+        super.touchesBegan(touches, with: event)
+    }
+    
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if _tapDelegate != nil {
+            if let touch = touches.first {
+                let position = touch.location(in: self)
+                isHighlighted = position.x >= -touchInsideTolerance && position.x < frame.width + touchInsideTolerance && position.y >= -touchInsideTolerance && position.y < frame.height + touchInsideTolerance
+                return
+            }
+        }
+        super.touchesMoved(touches, with: event)
+    }
+
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if _tapDelegate != nil {
+            if let touch = touches.first {
+                isHighlighted = false
+                let position = touch.location(in: self)
+                if position.x >= -touchInsideTolerance && position.x < frame.width + touchInsideTolerance && position.y >= -touchInsideTolerance && position.y < frame.height + touchInsideTolerance {
+                    _tapDelegate?.containerTapped(self)
+                }
+                return
+            }
+        }
+        super.touchesEnded(touches, with: event)
+    }
+    
+    open override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
+        if _tapDelegate != nil {
+            if (touches?.first) != nil {
+                isHighlighted = false
+                return
+            }
+        }
+        super.touchesCancelled(touches ?? Set(), with: event)
+    }
+
+ 
+    // ---
     // MARK: Custom layout
     // ---
 
