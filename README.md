@@ -13,6 +13,8 @@ UniLayout is a project to make multi-platform development easier for iOS and And
 * Ports the Android layout capabilities to iOS, including Linear Layout, Frame Layout and Scroll View
 * For iOS, the scroll view automatically updates its content size
 * Adds additional capabilities like minimum and maximum sizes and more flexibility in alignment (through gravity)
+* For iOS, the linear and frame containers also have built-in support for taps and highlighting
+* For Android, there is a custom reusing container which can be used as an alternative for the recycler view
 
 
 ### iOS integration guide
@@ -20,7 +22,7 @@ UniLayout is a project to make multi-platform development easier for iOS and And
 The library is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile.
 
 ```ruby
-pod "UniLayout", '~> 0.3.5'
+pod "UniLayout", '~> 0.3.6'
 ```
 
 
@@ -29,7 +31,7 @@ pod "UniLayout", '~> 0.3.5'
 When using gradle, the library can easily be imported into the build.gradle file of your project. Add the following dependency:
 
 ```
-compile 'com.crescentflare.unilayout:UniLayoutLib:0.3.1'
+compile 'com.crescentflare.unilayout:UniLayoutLib:0.3.6'
 ```
 
 Make sure that jcenter is added as a repository.
