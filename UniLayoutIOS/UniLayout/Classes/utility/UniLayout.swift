@@ -71,6 +71,8 @@ public class UniLayout {
         var result = obtainMeasuredSize(ofView: view, sizeSpec: viewSize, widthSpec: viewWidthSpec, heightSpec: viewHeightSpec)
         result.width = min(viewSize.width, max(viewMinWidth, result.width))
         result.height = min(viewSize.height, max(viewMinHeight, result.height))
+        result.width = max(0, result.width)
+        result.height = max(0, result.height)
         return result
     }
     
