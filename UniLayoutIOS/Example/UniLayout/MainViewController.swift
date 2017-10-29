@@ -80,11 +80,11 @@ class MainViewController: UIViewController {
         reusingContainerButton.addTarget(self, action: #selector(showReusingContainer), for: .touchUpInside)
     }
     
-    func showNestedLayouts() {
+    @objc func showNestedLayouts() {
         navigationController?.pushViewController(NestedLayoutsViewController(), animated: true)
     }
 
-    func showReusingContainer() {
+    @objc func showReusingContainer() {
         navigationController?.pushViewController(ReusingContainerViewController(), animated: true)
     }
 

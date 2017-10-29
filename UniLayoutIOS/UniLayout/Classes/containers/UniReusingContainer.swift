@@ -37,7 +37,7 @@ open class UniReusingContainer: UITableView, UniLayoutView {
     // ---
     
     open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
-        var result = systemLayoutSizeFitting(sizeSpec, withHorizontalFittingPriority: widthSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired, verticalFittingPriority: heightSpec == .unspecified ? UILayoutPriorityFittingSizeLevel : UILayoutPriorityRequired)
+        var result = systemLayoutSizeFitting(sizeSpec, withHorizontalFittingPriority: widthSpec == .unspecified ? UILayoutPriority.fittingSizeLevel : UILayoutPriority.required, verticalFittingPriority: heightSpec == .unspecified ? UILayoutPriority.fittingSizeLevel : UILayoutPriority.required)
         if widthSpec == .exactSize {
             result.width = sizeSpec.width
         } else if widthSpec == .limitSize {
