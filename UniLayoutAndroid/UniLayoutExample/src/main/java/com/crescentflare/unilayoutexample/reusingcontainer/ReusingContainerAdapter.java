@@ -4,9 +4,11 @@ import android.view.View;
 
 import com.crescentflare.unilayout.containers.UniReusingContainer;
 import com.crescentflare.unilayout.views.UniReusableView;
+import com.crescentflare.unilayoutexample.R;
 import com.crescentflare.unilayoutexample.reusingcontainer.views.SectionDividerView;
 import com.crescentflare.unilayoutexample.reusingcontainer.views.ItemView;
 import com.crescentflare.unilayoutexample.reusingcontainer.views.SectionView;
+import com.crescentflare.unilayoutexample.reusingcontainer.views.UnderItemView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,5 +122,27 @@ public class ReusingContainerAdapter extends UniReusingContainer.Adapter
                 container.getDividerView().setVisibility(nextItem == null || nextItem.getType() != ReusableItem.Type.Item ? View.GONE : View.VISIBLE);
                 break;
         }
+    }
+
+    @Override
+    public View onCreateUnderView(UniReusableView container, String viewType)
+    {
+        ReusableItem.Type type = null;
+        for (ReusableItem.Type checkType : ReusableItem.Type.values())
+        {
+            if (checkType.toString().equals(viewType))
+            {
+                type = checkType;
+                break;
+            }
+        }
+        if (type != null && type == ReusableItem.Type.Item)
+        {
+            UnderItemView underView = new UnderItemView(container.getContext());
+            underView.setTitle(container.getContext().getString(R.string.hidden_view_title));
+            underView.setAdditional(container.getContext().getString(R.string.hidden_view_text));
+            return underView;
+        }
+        return null;
     }
 }

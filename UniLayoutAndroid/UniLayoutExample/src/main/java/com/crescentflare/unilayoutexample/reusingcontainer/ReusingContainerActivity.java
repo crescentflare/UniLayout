@@ -51,7 +51,7 @@ public class ReusingContainerActivity extends AppCompatActivity
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Vertical scroll container", "Contains a single content view which can scroll vertically, use linear container as a content view for scrollable layouts", "Scroll"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Linear container", "Aligns items horizontally or vertically, depending on its orientation", "Layout"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Frame container", "A simple container to contain one view, or add multiple overlapping views", "Layout"));
-        adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Reusing container", "A vertical layout container with scrolling with reusable views, also supports selection", "Layout/Scroll"));
+        adapter.addItem(new ReusableItem(ReusableItem.Type.Item, "Reusing container", "A vertical layout container with scrolling with reusable views, also supports selection and swiping", "Layout/Scroll"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.BottomDivider));
         adapter.addItem(new ReusableItem(ReusableItem.Type.Section, "Supported views"));
         adapter.addItem(new ReusableItem(ReusableItem.Type.TopDivider));

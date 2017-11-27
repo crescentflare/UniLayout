@@ -7,6 +7,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.crescentflare.unilayout.containers.UniFrameContainer;
 import com.crescentflare.unilayout.helpers.UniLayoutParams;
@@ -22,8 +23,12 @@ public class UniReusableView extends UniFrameContainer
     // ---
 
     private View itemView;
+    private View underView;
+    private View itemBackgroundView;
+    private View underBackgroundView;
     private View dividerView;
     private int backgroundColor = 0xffffffff;
+    private int underBackgroundColor = 0xffefefef;
     private int highlightColor;
 
 
@@ -87,14 +92,61 @@ public class UniReusableView extends UniFrameContainer
         if (this.itemView != null)
         {
             removeView(this.itemView);
+            removeView(itemBackgroundView);
+            itemBackgroundView = null;
         }
         this.itemView = itemView;
         if (itemView != null)
         {
+            // First add background for the item view
+            itemBackgroundView = new View(getContext());
+            itemBackgroundView.setLayoutParams(new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            addView(itemBackgroundView, underView != null ? 2 : 0);
+            updateBackground();
+
+            // Attach the item view itself
             itemView.setLayoutParams(new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            addView(itemView, 0);
+            addView(itemView, underView != null ? 3 : 1);
             itemView.setSelected(isSelected());
             itemView.setEnabled(isEnabled());
+        }
+    }
+
+    public View getUnderView()
+    {
+        return underView;
+    }
+
+    public void setUnderView(View underView)
+    {
+        if (underView == this.underView)
+        {
+            return;
+        }
+        if (this.underView != null)
+        {
+            removeView(this.underView);
+            removeView(underBackgroundView);
+            underBackgroundView = null;
+        }
+        this.underView = underView;
+        if (underView != null)
+        {
+            // First add background for the under view
+            underBackgroundView = new View(getContext());
+            underBackgroundView.setLayoutParams(new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            addView(underBackgroundView, 0);
+            underBackgroundView.setBackgroundColor(underBackgroundColor);
+
+            // Attach the under view itself
+            int horizontalLayoutParam = LayoutParams.WRAP_CONTENT;
+            if (underView.getLayoutParams() != null)
+            {
+                horizontalLayoutParam = underView.getLayoutParams().width;
+            }
+            underView.setLayoutParams(new UniLayoutParams(horizontalLayoutParam, LayoutParams.WRAP_CONTENT));
+            addView(underView, 1);
+            underView.setEnabled(isEnabled());
         }
     }
 
@@ -108,6 +160,15 @@ public class UniReusableView extends UniFrameContainer
     {
         highlightColor = color;
         updateBackground();
+    }
+
+    public void setUnderBackgroundColor(int color)
+    {
+        underBackgroundColor = color;
+        if (underBackgroundView != null)
+        {
+            underBackgroundView.setBackgroundColor(underBackgroundColor);
+        }
     }
 
 
@@ -171,27 +232,30 @@ public class UniReusableView extends UniFrameContainer
     private void updateBackground()
     {
         Drawable setDrawable;
-        if (highlightColor != 0)
+        if (itemBackgroundView != null)
         {
-            StateListDrawable drawable = new StateListDrawable();
-            ColorDrawable selectedColorDrawable = new ColorDrawable(blendColor(backgroundColor, highlightColor));
-            drawable.addState(new int[]{android.R.attr.state_selected}, selectedColorDrawable);
-            drawable.addState(new int[]{android.R.attr.state_focused}, selectedColorDrawable);
-            drawable.addState(new int[]{android.R.attr.state_pressed}, selectedColorDrawable);
-            drawable.addState(new int[0], new ColorDrawable(backgroundColor));
-            setDrawable = drawable;
-        }
-        else
-        {
-            setDrawable = new ColorDrawable(backgroundColor);
-        }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
-        {
-            setBackgroundDrawable(setDrawable);
-        }
-        else
-        {
-            setBackground(setDrawable);
+            if (highlightColor != 0)
+            {
+                StateListDrawable drawable = new StateListDrawable();
+                ColorDrawable selectedColorDrawable = new ColorDrawable(blendColor(backgroundColor, highlightColor));
+                drawable.addState(new int[]{android.R.attr.state_selected}, selectedColorDrawable);
+                drawable.addState(new int[]{android.R.attr.state_focused}, selectedColorDrawable);
+                drawable.addState(new int[]{android.R.attr.state_pressed}, selectedColorDrawable);
+                drawable.addState(new int[0], new ColorDrawable(backgroundColor));
+                setDrawable = drawable;
+            }
+            else
+            {
+                setDrawable = new ColorDrawable(backgroundColor);
+            }
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+            {
+                itemBackgroundView.setBackgroundDrawable(setDrawable);
+            }
+            else
+            {
+                itemBackgroundView.setBackground(setDrawable);
+            }
         }
     }
 

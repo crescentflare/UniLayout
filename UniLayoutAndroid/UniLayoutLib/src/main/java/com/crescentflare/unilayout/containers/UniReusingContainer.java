@@ -503,6 +503,19 @@ public class UniReusingContainer extends ScrollView
             }
         }
 
+        private View createReusableUnderView(UniReusableView container, String viewType)
+        {
+            return adapter != null ? adapter.onCreateUnderView(container, viewType) : null;
+        }
+
+        private void updateReusableUnderView(UniReusableView container, View view, String viewType, int position)
+        {
+            if (adapter != null)
+            {
+                adapter.onUpdateUnderView(container, view, viewType, position);
+            }
+        }
+
 
         // ---
         // Track size measurement
@@ -714,6 +727,7 @@ public class UniReusingContainer extends ScrollView
                     reusableView = new UniReusableView(getContext());
                     reusableView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     reusableView.setItemView(createReusableView(reusableView, viewType));
+                    reusableView.setUnderView(createReusableUnderView(reusableView, viewType));
                     reusableView.setOnClickListener(new OnClickListener()
                     {
                         @Override
@@ -736,6 +750,7 @@ public class UniReusingContainer extends ScrollView
 
             // Populate and return result
             updateReusableView(reusableView, reusableView.getItemView(), viewType, position);
+            updateReusableUnderView(reusableView, reusableView.getUnderView(), viewType, position);
             return reusableView;
         }
 
@@ -758,6 +773,7 @@ public class UniReusingContainer extends ScrollView
                 reusableView = new UniReusableView(getContext());
                 reusableView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 reusableView.setItemView(createReusableView(reusableView, viewType));
+                reusableView.setUnderView(createReusableUnderView(reusableView, viewType));
                 usingView.view = reusableView;
                 usingView.viewType = viewType;
                 reusableView.setOnClickListener(new OnClickListener()
@@ -775,6 +791,7 @@ public class UniReusingContainer extends ScrollView
                 reusableView = usingView.view;
             }
             updateReusableView(reusableView, reusableView.getItemView(), viewType, position);
+            updateReusableUnderView(reusableView, reusableView.getItemView(), viewType, position);
             return reusableView;
         }
 
@@ -1005,6 +1022,15 @@ public class UniReusingContainer extends ScrollView
         public abstract View onCreateView(UniReusableView container, String viewType);
         public abstract void onUpdateView(UniReusableView container, View view, String viewType, int itemPosition);
         public abstract int getItemCount();
+
+        public View onCreateUnderView(UniReusableView container, String viewType)
+        {
+            return null;
+        }
+
+        public void onUpdateUnderView(UniReusableView container, View view, String viewType, int itemPosition)
+        {
+        }
 
         public String getItemViewType(int itemPosition)
         {
