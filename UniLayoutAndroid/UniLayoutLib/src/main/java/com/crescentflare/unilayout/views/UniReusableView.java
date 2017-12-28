@@ -5,12 +5,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.crescentflare.unilayout.containers.UniFrameContainer;
+import com.crescentflare.unilayout.helpers.UniLayout;
 import com.crescentflare.unilayout.helpers.UniLayoutParams;
+
+import java.lang.ref.WeakReference;
 
 /**
  * UniLayout view: a reusable view container
@@ -19,9 +23,19 @@ import com.crescentflare.unilayout.helpers.UniLayoutParams;
 public class UniReusableView extends UniFrameContainer
 {
     // ---
+    // Constants
+    // ---
+
+    private static final int SWIPE_ANIMATION_TIME = 200;
+
+
+    // ---
     // Members
     // ---
 
+    private WeakReference<OnClickListener> currentClickListener;
+    private UniFrameContainer itemViewContainer;
+    private UniFrameContainer underViewContainer;
     private View itemView;
     private View underView;
     private View itemBackgroundView;
@@ -30,6 +44,7 @@ public class UniReusableView extends UniFrameContainer
     private int backgroundColor = 0xffffffff;
     private int underBackgroundColor = 0xffefefef;
     private int highlightColor;
+    private boolean swipedOpen = false;
 
 
     // ---
@@ -91,22 +106,27 @@ public class UniReusableView extends UniFrameContainer
         }
         if (this.itemView != null)
         {
-            removeView(this.itemView);
-            removeView(itemBackgroundView);
+            removeView(itemViewContainer);
+            itemViewContainer = null;
             itemBackgroundView = null;
         }
         this.itemView = itemView;
         if (itemView != null)
         {
-            // First add background for the item view
+            // Create the container
+            itemViewContainer = new UniFrameContainer(getContext());
+            itemViewContainer.setLayoutParams(new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+            addView(itemViewContainer, underViewContainer != null ? 1 : 0);
+
+            // Add the background to the container
             itemBackgroundView = new View(getContext());
             itemBackgroundView.setLayoutParams(new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-            addView(itemBackgroundView, underView != null ? 2 : 0);
+            itemViewContainer.addView(itemBackgroundView);
             updateBackground();
 
-            // Attach the item view itself
+            // Add the item view to the container
             itemView.setLayoutParams(new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            addView(itemView, underView != null ? 3 : 1);
+            itemViewContainer.addView(itemView);
             itemView.setSelected(isSelected());
             itemView.setEnabled(isEnabled());
         }
@@ -125,27 +145,46 @@ public class UniReusableView extends UniFrameContainer
         }
         if (this.underView != null)
         {
-            removeView(this.underView);
-            removeView(underBackgroundView);
+            removeView(underViewContainer);
+            underViewContainer = null;
             underBackgroundView = null;
         }
         this.underView = underView;
         if (underView != null)
         {
-            // First add background for the under view
+            // Create the container
+            underViewContainer = new UniFrameContainer(getContext());
+            underViewContainer.setLayoutParams(new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            addView(underViewContainer, 0);
+
+            // Add the background to the container
             underBackgroundView = new View(getContext());
             underBackgroundView.setLayoutParams(new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-            addView(underBackgroundView, 0);
+            underViewContainer.addView(underBackgroundView);
             underBackgroundView.setBackgroundColor(underBackgroundColor);
 
-            // Attach the under view itself
-            int horizontalLayoutParam = LayoutParams.WRAP_CONTENT;
+            // Add the item view to the container
+            UniLayoutParams layoutParams = new UniLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             if (underView.getLayoutParams() != null)
             {
-                horizontalLayoutParam = underView.getLayoutParams().width;
+                layoutParams.width = underView.getLayoutParams().width;
+                if (underView.getLayoutParams() instanceof MarginLayoutParams)
+                {
+                    MarginLayoutParams marginLayoutParams = (MarginLayoutParams)underView.getLayoutParams();
+                    layoutParams.topMargin = marginLayoutParams.topMargin;
+                    layoutParams.bottomMargin = marginLayoutParams.bottomMargin;
+                    layoutParams.leftMargin = marginLayoutParams.leftMargin;
+                    layoutParams.rightMargin = marginLayoutParams.rightMargin;
+                }
+                if (underView.getLayoutParams() instanceof UniLayoutParams)
+                {
+                    UniLayoutParams uniLayoutParams = (UniLayoutParams)underView.getLayoutParams();
+                    layoutParams.horizontalGravity = uniLayoutParams.horizontalGravity;
+                    layoutParams.verticalGravity = uniLayoutParams.verticalGravity;
+                }
             }
-            underView.setLayoutParams(new UniLayoutParams(horizontalLayoutParam, LayoutParams.WRAP_CONTENT));
-            addView(underView, 1);
+            underView.setLayoutParams(layoutParams);
+            underViewContainer.addView(underView);
             underView.setEnabled(isEnabled());
         }
     }
@@ -168,6 +207,23 @@ public class UniReusableView extends UniFrameContainer
         if (underBackgroundView != null)
         {
             underBackgroundView.setBackgroundColor(underBackgroundColor);
+        }
+    }
+
+    @Override
+    public void setOnClickListener(@Nullable OnClickListener listener)
+    {
+        if (!swipedOpen)
+        {
+            super.setOnClickListener(listener);
+        }
+        if (listener != null)
+        {
+            currentClickListener = new WeakReference<OnClickListener>(listener);
+        }
+        else
+        {
+            currentClickListener = null;
         }
     }
 
@@ -221,6 +277,73 @@ public class UniReusableView extends UniFrameContainer
             {
                 itemView.setEnabled(enabled);
             }
+        }
+    }
+
+
+    // ---
+    // Swiping state
+    // ---
+
+    public void setSwipeTranslationX(float x)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1)
+        {
+            if (itemViewContainer != null)
+            {
+                itemViewContainer.setTranslationX(x);
+            }
+        }
+    }
+
+    public void swipeOpen(boolean animated)
+    {
+        if (itemViewContainer != null)
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1)
+            {
+                if (animated)
+                {
+                    itemViewContainer.animate().setDuration(SWIPE_ANIMATION_TIME).translationX(-getWidth());
+                }
+                else
+                {
+                    itemViewContainer.setTranslationX(-getWidth());
+                }
+            }
+            else
+            {
+                itemViewContainer.setVisibility(GONE);
+            }
+        }
+        swipedOpen = true;
+        super.setOnClickListener(null);
+    }
+
+    public void swipeClose(boolean animated)
+    {
+        if (itemViewContainer != null)
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1)
+            {
+                if (animated)
+                {
+                    itemViewContainer.animate().setDuration(SWIPE_ANIMATION_TIME).translationX(0);
+                }
+                else
+                {
+                    itemViewContainer.setTranslationX(0);
+                }
+            }
+            else
+            {
+                itemViewContainer.setVisibility(VISIBLE);
+            }
+        }
+        swipedOpen = false;
+        if (currentClickListener != null && currentClickListener.get() != null)
+        {
+            super.setOnClickListener(currentClickListener.get());
         }
     }
 

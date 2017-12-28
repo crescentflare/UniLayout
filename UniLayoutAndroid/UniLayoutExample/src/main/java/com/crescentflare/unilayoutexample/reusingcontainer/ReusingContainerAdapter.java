@@ -1,8 +1,10 @@
 package com.crescentflare.unilayoutexample.reusingcontainer;
 
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.crescentflare.unilayout.containers.UniReusingContainer;
+import com.crescentflare.unilayout.helpers.UniLayoutParams;
 import com.crescentflare.unilayout.views.UniReusableView;
 import com.crescentflare.unilayoutexample.R;
 import com.crescentflare.unilayoutexample.reusingcontainer.views.SectionDividerView;
@@ -139,6 +141,9 @@ public class ReusingContainerAdapter extends UniReusingContainer.Adapter
         if (type != null && type == ReusableItem.Type.Item)
         {
             UnderItemView underView = new UnderItemView(container.getContext());
+            UniLayoutParams layoutParams = new UniLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.verticalGravity = 0.5f;
+            underView.setLayoutParams(layoutParams);
             underView.setTitle(container.getContext().getString(R.string.hidden_view_title));
             underView.setAdditional(container.getContext().getString(R.string.hidden_view_text));
             return underView;

@@ -2,8 +2,16 @@ package com.crescentflare.unilayout.containers;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.os.Build;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.support.v4.view.MotionEventCompat;
+import android.support.v4.view.ViewConfigurationCompat;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
@@ -28,6 +36,16 @@ public class UniReusingContainer extends ScrollView
 
     private LayoutContainer contentView;
     private UniScrollListener scrollListener;
+    private DragState dragState = DragState.Idle;
+    private VelocityTracker velocityTracker;
+    private int draggingPosition = -1;
+    private int touchCounter = 0;
+    private int touchSlop;
+    private int minFlingVelocity;
+    private int maxFlingVelocity;
+    private int longPressTimeout;
+    private float startDragX;
+    private float startDragY;
     private boolean multiSelect;
 
 
@@ -58,6 +76,11 @@ public class UniReusingContainer extends ScrollView
 
     private void init(AttributeSet attrs)
     {
+        final ViewConfiguration configuration = ViewConfiguration.get(getContext());
+        touchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
+        minFlingVelocity = configuration.getScaledMinimumFlingVelocity();
+        maxFlingVelocity = configuration.getScaledMaximumFlingVelocity();
+        longPressTimeout = ViewConfiguration.getLongPressTimeout();
     }
 
 
@@ -187,6 +210,275 @@ public class UniReusingContainer extends ScrollView
 
 
     // ---
+    // Touch and swipe handling
+    // ---
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent event)
+    {
+        int action = MotionEventCompat.getActionMasked(event);
+        final float x = event.getX();
+        final float y = event.getY();
+        switch (action)
+        {
+            case MotionEvent.ACTION_DOWN:
+            {
+                int index = 0;
+                dragState = DragState.Idle;
+                startDragX = x;
+                startDragY = y;
+                draggingPosition = -1;
+                for (UsingView usingView : contentView.usingViews)
+                {
+                    if (usingView.view != null && startDragY + getScrollY() >= usingView.view.getTop() && startDragY + getScrollY() < usingView.view.getBottom())
+                    {
+                        if (usingView.view.getUnderView() != null)
+                        {
+                            draggingPosition = index + contentView.usingViewStartPosition;
+                            velocityTracker = VelocityTracker.obtain();
+                            velocityTracker.addMovement(event);
+                        }
+                        break;
+                    }
+                    index++;
+                }
+                touchCounter++;
+                if (draggingPosition >= 0)
+                {
+                    final int checkTouchCounter = touchCounter;
+                    new Handler().postDelayed(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            if (checkTouchCounter == touchCounter)
+                            {
+                                if (draggingPosition >= contentView.usingViewStartPosition && draggingPosition < contentView.usingViewStartPosition + contentView.usingViews.size())
+                                {
+                                    MotionEvent cancelMotion = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_CANCEL, x, y, 0);
+                                    dispatchTouchEvent(cancelMotion);
+                                    cancelMotion.recycle();
+                                    if (draggingPosition == getSwipedOpen())
+                                    {
+                                        closeSwipedOpen();
+                                    }
+                                    else
+                                    {
+                                        setSwipedOpen(draggingPosition);
+                                    }
+                                }
+                            }
+                        }
+                    }, longPressTimeout);
+                }
+                break;
+            }
+            case MotionEvent.ACTION_MOVE:
+                if (dragState == DragState.Idle)
+                {
+                    if (velocityTracker != null)
+                    {
+                        velocityTracker.addMovement(event);
+                        velocityTracker.computeCurrentVelocity(1000);
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                    {
+                        if (Math.abs(startDragX - x) >= touchSlop && draggingPosition >= 0)
+                        {
+                            dragState = DragState.Swiping;
+                            if (draggingPosition != getSwipedOpen())
+                            {
+                                closeSwipedOpen();
+                            }
+                            touchCounter++;
+                            return true;
+                        }
+                    }
+                    if (Math.abs(startDragY - y) >= touchSlop)
+                    {
+                        touchCounter++;
+                        dragState = DragState.Scrolling;
+                        break;
+                    }
+                }
+                if (dragState == DragState.Swiping)
+                {
+                    return true;
+                }
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                dragState = DragState.Idle;
+                break;
+            case MotionEvent.ACTION_UP:
+            {
+                boolean wasIntercepted = dragState != DragState.Idle;
+                dragState = DragState.Idle;
+                touchCounter++;
+                return wasIntercepted;
+            }
+            default:
+                break;
+        }
+        return super.onInterceptTouchEvent(event);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        // Handle touches for swiping
+        int action = MotionEventCompat.getActionMasked(event);
+        boolean handled = false;
+        if (dragState == DragState.Swiping)
+        {
+            final float x = event.getX();
+            switch (action)
+            {
+                case MotionEvent.ACTION_DOWN:
+                    break; // Handled in interceptor
+                case MotionEvent.ACTION_MOVE:
+                    if (velocityTracker != null)
+                    {
+                        velocityTracker.addMovement(event);
+                        velocityTracker.computeCurrentVelocity(1000);
+                    }
+                    if (draggingPosition >= contentView.usingViewStartPosition && draggingPosition < contentView.usingViewStartPosition + contentView.usingViews.size())
+                    {
+                        int index = draggingPosition - contentView.usingViewStartPosition;
+                        if (draggingPosition == getSwipedOpen())
+                        {
+                            int viewWidth = contentView.usingViews.get(index).view.getWidth();
+                            contentView.usingViews.get(index).view.setSwipeTranslationX(-viewWidth + Math.max(0, x - startDragX));
+                        }
+                        else
+                        {
+                            contentView.usingViews.get(index).view.setSwipeTranslationX(Math.min(0, x - startDragX));
+                        }
+                    }
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                    if (velocityTracker != null)
+                    {
+                        velocityTracker.recycle();
+                        velocityTracker = null;
+                    }
+                    if (draggingPosition >= contentView.usingViewStartPosition && draggingPosition < contentView.usingViewStartPosition + contentView.usingViews.size())
+                    {
+                        int index = draggingPosition - contentView.usingViewStartPosition;
+                        if (draggingPosition == getSwipedOpen())
+                        {
+                            contentView.usingViews.get(index).view.swipeOpen(true);
+                        }
+                        else
+                        {
+                            contentView.usingViews.get(index).view.swipeClose(true);
+                        }
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                {
+                    boolean willSwipe = false;
+                    if (velocityTracker != null && Math.abs(velocityTracker.getXVelocity()) > Math.abs(velocityTracker.getYVelocity()))
+                    {
+                        float checkVelocitySpeed = Math.abs(velocityTracker.getXVelocity());
+                        if ((draggingPosition == getSwipedOpen() && velocityTracker.getXVelocity() > 0) || (draggingPosition != getSwipedOpen() && velocityTracker.getXVelocity() < 0))
+                        {
+                            willSwipe = checkVelocitySpeed >= minFlingVelocity && checkVelocitySpeed < maxFlingVelocity;
+                        }
+                    }
+                    if (willSwipe)
+                    {
+                        if (draggingPosition == getSwipedOpen())
+                        {
+                            closeSwipedOpen();
+                        }
+                        else
+                        {
+                            setSwipedOpen(draggingPosition);
+                        }
+                    }
+                    else
+                    {
+                        if (draggingPosition >= contentView.usingViewStartPosition && draggingPosition < contentView.usingViewStartPosition + contentView.usingViews.size())
+                        {
+                            int index = draggingPosition - contentView.usingViewStartPosition;
+                            if (draggingPosition == getSwipedOpen())
+                            {
+                                contentView.usingViews.get(index).view.swipeOpen(true);
+                            }
+                            else
+                            {
+                                contentView.usingViews.get(index).view.swipeClose(true);
+                            }
+                        }
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+            handled = true;
+        }
+
+        // Main cleanup for up or cancel events
+        if (velocityTracker != null && (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP))
+        {
+            velocityTracker.recycle();
+            velocityTracker = null;
+        }
+        if (handled)
+        {
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    public void setSwipedOpen(int position)
+    {
+        // Do nothing if already open
+        if (getSwipedOpen() == position)
+        {
+            return;
+        }
+
+        // Close view that was already open
+        if (getSwipedOpen() >= 0 && getSwipedOpen() >= contentView.usingViewStartPosition && getSwipedOpen() < contentView.usingViewStartPosition + contentView.usingViews.size())
+        {
+            int index = getSwipedOpen() - contentView.usingViewStartPosition;
+            contentView.usingViews.get(index).view.swipeClose(true);
+        }
+        if (getAdapter() != null)
+        {
+            getAdapter().itemSwipedOpen = -1;
+        }
+
+        // Open view
+        if (getAdapter() != null)
+        {
+            getAdapter().itemSwipedOpen = position;
+            if (getSwipedOpen() >= 0 && getSwipedOpen() >= contentView.usingViewStartPosition && getSwipedOpen() < contentView.usingViewStartPosition + contentView.usingViews.size())
+            {
+                int index = getSwipedOpen() - contentView.usingViewStartPosition;
+                contentView.usingViews.get(index).view.swipeOpen(true);
+            }
+        }
+    }
+
+    public void closeSwipedOpen()
+    {
+        setSwipedOpen(-1);
+    }
+
+    private int getSwipedOpen()
+    {
+        if (getAdapter() != null)
+        {
+            return getAdapter().itemSwipedOpen;
+        }
+        return -1;
+    }
+
+
+    // ---
     // Get reusable views manually
     // ---
 
@@ -305,6 +597,18 @@ public class UniReusingContainer extends ScrollView
         {
             contentView.layout(getPaddingLeft(), getPaddingTop(), getPaddingLeft() + contentView.getMeasuredWidth(), getPaddingTop() + contentView.getMeasuredHeight());
         }
+    }
+
+
+    // ---
+    // Drag state enum
+    // ---
+
+    private enum DragState
+    {
+        Idle,
+        Scrolling,
+        Swiping
     }
 
 
@@ -488,31 +792,36 @@ public class UniReusingContainer extends ScrollView
             return adapter == null || adapter.isItemEnabled(position);
         }
 
-        private View createReusableView(UniReusableView container, String viewType)
-        {
-            return adapter != null ? adapter.onCreateView(container, viewType) : null;
-        }
-
-        private void updateReusableView(UniReusableView container, View view, String viewType, int position)
+        private void initReusableView(UniReusableView container, String viewType)
         {
             if (adapter != null)
             {
-                adapter.onUpdateView(container, view, viewType, position);
-                container.setSelected(isItemSelected(position), false);
-                container.setEnabled(isItemEnabled(position), false);
+                container.setItemView(adapter.onCreateView(container, viewType));
+                container.setUnderView(adapter.onCreateUnderView(container, viewType));
+            }
+            else
+            {
+                container.setItemView(null);
+                container.setUnderView(null);
             }
         }
 
-        private View createReusableUnderView(UniReusableView container, String viewType)
-        {
-            return adapter != null ? adapter.onCreateUnderView(container, viewType) : null;
-        }
-
-        private void updateReusableUnderView(UniReusableView container, View view, String viewType, int position)
+        private void updateReusableView(UniReusableView container, String viewType, int position)
         {
             if (adapter != null)
             {
-                adapter.onUpdateUnderView(container, view, viewType, position);
+                adapter.onUpdateView(container, container.getItemView(), viewType, position);
+                adapter.onUpdateUnderView(container, container.getUnderView(), viewType, position);
+                container.setSelected(isItemSelected(position), false);
+                container.setEnabled(isItemEnabled(position), false);
+                if (position == adapter.itemSwipedOpen)
+                {
+                    container.swipeOpen(false);
+                }
+                else
+                {
+                    container.swipeClose(false);
+                }
             }
         }
 
@@ -726,8 +1035,7 @@ public class UniReusingContainer extends ScrollView
                     usingView = new UsingView();
                     reusableView = new UniReusableView(getContext());
                     reusableView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    reusableView.setItemView(createReusableView(reusableView, viewType));
-                    reusableView.setUnderView(createReusableUnderView(reusableView, viewType));
+                    initReusableView(reusableView, viewType);
                     reusableView.setOnClickListener(new OnClickListener()
                     {
                         @Override
@@ -749,8 +1057,7 @@ public class UniReusingContainer extends ScrollView
             }
 
             // Populate and return result
-            updateReusableView(reusableView, reusableView.getItemView(), viewType, position);
-            updateReusableUnderView(reusableView, reusableView.getUnderView(), viewType, position);
+            updateReusableView(reusableView, viewType, position);
             return reusableView;
         }
 
@@ -772,8 +1079,7 @@ public class UniReusingContainer extends ScrollView
                 usingView = new UsingView();
                 reusableView = new UniReusableView(getContext());
                 reusableView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                reusableView.setItemView(createReusableView(reusableView, viewType));
-                reusableView.setUnderView(createReusableUnderView(reusableView, viewType));
+                initReusableView(reusableView, viewType);
                 usingView.view = reusableView;
                 usingView.viewType = viewType;
                 reusableView.setOnClickListener(new OnClickListener()
@@ -790,8 +1096,7 @@ public class UniReusingContainer extends ScrollView
             {
                 reusableView = usingView.view;
             }
-            updateReusableView(reusableView, reusableView.getItemView(), viewType, position);
-            updateReusableUnderView(reusableView, reusableView.getItemView(), viewType, position);
+            updateReusableView(reusableView, viewType, position);
             return reusableView;
         }
 
@@ -1018,6 +1323,7 @@ public class UniReusingContainer extends ScrollView
         private List<DataSetChangedListener> dataSetChangedListeners = new ArrayList<>();
         private boolean[] itemsSelected;
         private boolean[] itemsEnabled;
+        private int itemSwipedOpen = -1;
 
         public abstract View onCreateView(UniReusableView container, String viewType);
         public abstract void onUpdateView(UniReusableView container, View view, String viewType, int itemPosition);
