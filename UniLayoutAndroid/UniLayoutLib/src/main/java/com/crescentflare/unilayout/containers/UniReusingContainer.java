@@ -176,6 +176,7 @@ public class UniReusingContainer extends ScrollView
         {
             contentView.setOffsetY(y);
         }
+        touchCounter++;
     }
 
     public void scrollToPosition(int itemPosition)
@@ -308,6 +309,7 @@ public class UniReusingContainer extends ScrollView
                 break;
             case MotionEvent.ACTION_CANCEL:
                 dragState = DragState.Idle;
+                touchCounter++;
                 break;
             case MotionEvent.ACTION_UP:
             {
@@ -417,6 +419,10 @@ public class UniReusingContainer extends ScrollView
                     break;
             }
             handled = true;
+        }
+        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)
+        {
+            touchCounter++;
         }
 
         // Main cleanup for up or cancel events
