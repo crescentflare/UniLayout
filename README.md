@@ -14,7 +14,7 @@ UniLayout is a project to make multi-platform development easier for iOS and And
 * For iOS, the scroll view automatically updates its content size
 * Adds additional capabilities like minimum and maximum sizes and more flexibility in alignment (through gravity)
 * For iOS, the linear and frame containers also have built-in support for taps and highlighting
-* For Android, there is a custom reusing container which can be used as an alternative for the recycler view
+* For Android, there is a custom reusing container which can be used as an alternative for the recycler view, includes standard support for selection and swiping
 
 
 ### iOS integration guide
@@ -39,7 +39,7 @@ pod "UniLayout", '~> 0.3.7'
 When using gradle, the library can easily be imported into the build.gradle file of your project. Add the following dependency:
 
 ```
-compile 'com.crescentflare.unilayout:UniLayoutLib:0.3.6'
+compile 'com.crescentflare.unilayout:UniLayoutLib:0.3.9'
 ```
 
 Make sure that jcenter is added as a repository.
