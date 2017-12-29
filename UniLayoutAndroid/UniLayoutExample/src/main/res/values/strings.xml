@@ -9,4 +9,6 @@
     <string name="nested_layouts_frame_container_title">Frame container</string>
     <string name="nested_layouts_frame_container_description">These containers are used as the most simple container but can also be used to stack views on top of each other for complex layouts.</string>
     <string name="example_reusing_container">Reusing container</string>
+    <string name="hidden_view_title">Hidden view</string>
+    <string name="hidden_view_text">Create these hidden under views through the reusing container adapter</string>
 </resources>
