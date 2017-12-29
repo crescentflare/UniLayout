@@ -8,10 +8,11 @@ import com.crescentflare.unilayout.containers.UniLinearContainer;
 import com.crescentflare.unilayoutexample.R;
 
 /**
- * Reusing container example: item view
- * A view type in the reusing container showing an information item
+ * Reusing container example: under item view
+ * A view type in the reusing container showing a piece of hidden text which can be shown by
+ * swiping an item to the side
  */
-public class ItemView extends UniLinearContainer
+public class UnderItemView extends UniLinearContainer
 {
     // ---
     // Members
@@ -19,22 +20,20 @@ public class ItemView extends UniLinearContainer
 
     private TextView titleView;
     private TextView additionalView;
-    private TextView valueView;
 
 
     // ---
     // Initialization
     // ---
 
-    public ItemView(Context context)
+    public UnderItemView(Context context)
     {
         super(context);
 
-        LayoutInflater.from(getContext()).inflate(R.layout.view_item, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.view_under_item, this, true);
         setOrientation(VERTICAL);
-        titleView = (TextView)findViewById(R.id.view_item_title);
-        additionalView = (TextView)findViewById(R.id.view_item_additional);
-        valueView = (TextView)findViewById(R.id.view_item_value);
+        titleView = (TextView)findViewById(R.id.view_under_item_title);
+        additionalView = (TextView)findViewById(R.id.view_under_item_additional);
     }
 
     @Override
@@ -59,11 +58,5 @@ public class ItemView extends UniLinearContainer
     {
         additionalView.setText(text);
         additionalView.setVisibility(text.length() > 0 ? VISIBLE : GONE);
-    }
-
-    public void setValue(String text)
-    {
-        valueView.setText(text);
-        valueView.setVisibility(text.length() > 0 ? VISIBLE : GONE);
     }
 }
