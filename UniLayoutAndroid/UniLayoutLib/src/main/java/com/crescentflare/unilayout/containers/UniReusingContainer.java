@@ -1042,14 +1042,20 @@ public class UniReusingContainer extends ScrollView
                     reusableView = new UniReusableView(getContext());
                     reusableView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     initReusableView(reusableView, viewType);
-                    reusableView.setOnClickListener(new OnClickListener()
+                    if (reusableView.getItemContainerView() != null)
                     {
-                        @Override
-                        public void onClick(View view)
+                        reusableView.getItemContainerView().setOnClickListener(new OnClickListener()
                         {
-                            onReusableViewClick(view);
-                        }
-                    });
+                            @Override
+                            public void onClick(View view)
+                            {
+                                if (view != null && view.getParent() instanceof UniReusableView)
+                                {
+                                    onReusableViewClick((UniReusableView)view.getParent());
+                                }
+                            }
+                        });
+                    }
                     addView(reusableView);
                 }
                 else
@@ -1088,14 +1094,20 @@ public class UniReusingContainer extends ScrollView
                 initReusableView(reusableView, viewType);
                 usingView.view = reusableView;
                 usingView.viewType = viewType;
-                reusableView.setOnClickListener(new OnClickListener()
+                if (reusableView.getItemContainerView() != null)
                 {
-                    @Override
-                    public void onClick(View view)
+                    reusableView.getItemContainerView().setOnClickListener(new OnClickListener()
                     {
-                        onReusableViewClick(view);
-                    }
-                });
+                        @Override
+                        public void onClick(View view)
+                        {
+                            if (view != null && view.getParent() instanceof UniReusableView)
+                            {
+                                onReusableViewClick((UniReusableView)view.getParent());
+                            }
+                        }
+                    });
+                }
                 reserveViews.add(usingView);
             }
             else
@@ -1106,11 +1118,11 @@ public class UniReusingContainer extends ScrollView
             return reusableView;
         }
 
-        private void onReusableViewClick(View view)
+        private void onReusableViewClick(UniReusableView view)
         {
-            if (getParent() instanceof UniReusingContainer && view instanceof UniReusableView && adapter != null)
+            if (getParent() instanceof UniReusingContainer && adapter != null)
             {
-                int position = ((UniReusingContainer)getParent()).getAdapterPosition((UniReusableView)view);
+                int position = ((UniReusingContainer)getParent()).getAdapterPosition(view);
                 if (isItemEnabled(position))
                 {
                     adapter.setItemSelected(position, !isItemSelected(position));

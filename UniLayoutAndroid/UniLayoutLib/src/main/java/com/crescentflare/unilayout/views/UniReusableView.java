@@ -93,6 +93,16 @@ public class UniReusableView extends UniFrameContainer
         return dividerView;
     }
 
+    public UniFrameContainer getItemContainerView()
+    {
+        return itemViewContainer;
+    }
+
+    public UniFrameContainer getUnderContainerView()
+    {
+        return underViewContainer;
+    }
+
     public View getItemView()
     {
         return itemView;
