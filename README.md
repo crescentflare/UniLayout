@@ -39,7 +39,7 @@ pod "UniLayout", '~> 0.3.7'
 When using gradle, the library can easily be imported into the build.gradle file of your project. Add the following dependency:
 
 ```
-compile 'com.crescentflare.unilayout:UniLayoutLib:0.3.10'
+compile 'com.crescentflare.unilayout:UniLayoutLib:0.3.11'
 ```
 
 Make sure that jcenter is added as a repository.
