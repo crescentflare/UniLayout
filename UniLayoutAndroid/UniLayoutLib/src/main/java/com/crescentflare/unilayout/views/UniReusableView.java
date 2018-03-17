@@ -135,7 +135,29 @@ public class UniReusableView extends UniFrameContainer
             updateBackground();
 
             // Add the item view to the container
-            itemView.setLayoutParams(new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+            UniLayoutParams layoutParams = new UniLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            if (itemView.getLayoutParams() != null)
+            {
+                if (itemView.getLayoutParams() instanceof MarginLayoutParams)
+                {
+                    MarginLayoutParams marginLayoutParams = (MarginLayoutParams)itemView.getLayoutParams();
+                    layoutParams.topMargin = marginLayoutParams.topMargin;
+                    layoutParams.bottomMargin = marginLayoutParams.bottomMargin;
+                    layoutParams.leftMargin = marginLayoutParams.leftMargin;
+                    layoutParams.rightMargin = marginLayoutParams.rightMargin;
+                }
+                if (itemView.getLayoutParams() instanceof UniLayoutParams)
+                {
+                    UniLayoutParams uniLayoutParams = (UniLayoutParams)itemView.getLayoutParams();
+                    layoutParams.horizontalGravity = uniLayoutParams.horizontalGravity;
+                    layoutParams.verticalGravity = uniLayoutParams.verticalGravity;
+                    layoutParams.minWidth = uniLayoutParams.minWidth;
+                    layoutParams.minHeight = uniLayoutParams.minHeight;
+                    layoutParams.maxWidth = uniLayoutParams.maxWidth;
+                    layoutParams.maxHeight = uniLayoutParams.maxHeight;
+                }
+            }
+            itemView.setLayoutParams(layoutParams);
             itemViewContainer.addView(itemView);
             itemView.setSelected(isSelected());
             itemView.setEnabled(isEnabled());
@@ -173,7 +195,7 @@ public class UniReusableView extends UniFrameContainer
             underViewContainer.addView(underBackgroundView);
             underBackgroundView.setBackgroundColor(underBackgroundColor);
 
-            // Add the item view to the container
+            // Add the under view to the container
             UniLayoutParams layoutParams = new UniLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             if (underView.getLayoutParams() != null)
             {
@@ -191,6 +213,10 @@ public class UniReusableView extends UniFrameContainer
                     UniLayoutParams uniLayoutParams = (UniLayoutParams)underView.getLayoutParams();
                     layoutParams.horizontalGravity = uniLayoutParams.horizontalGravity;
                     layoutParams.verticalGravity = uniLayoutParams.verticalGravity;
+                    layoutParams.minWidth = uniLayoutParams.minWidth;
+                    layoutParams.minHeight = uniLayoutParams.minHeight;
+                    layoutParams.maxWidth = uniLayoutParams.maxWidth;
+                    layoutParams.maxHeight = uniLayoutParams.maxHeight;
                 }
             }
             underView.setLayoutParams(layoutParams);
