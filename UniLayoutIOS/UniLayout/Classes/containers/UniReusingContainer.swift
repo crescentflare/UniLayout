@@ -18,7 +18,7 @@ open class UniReusingContainer: UITableView, UniLayoutView {
     
     public var layoutProperties = UniLayoutProperties()
     
-    public var visibility: UniVisibility {
+    open var visibility: UniVisibility {
         set {
             isHidden = newValue != .visible
             layoutProperties.hiddenTakesSpace = newValue == .invisible
