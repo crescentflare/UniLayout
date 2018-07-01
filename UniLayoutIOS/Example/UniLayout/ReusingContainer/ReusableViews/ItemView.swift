@@ -27,21 +27,21 @@ class ItemView: UniLinearContainer {
     var title: String? {
         didSet {
             titleView.text = title
-            titleView.isHidden = title?.characters.count == 0
+            titleView.isHidden = title?.count == 0
         }
     }
     
     var additional: String? {
         didSet {
             additionalView.text = additional
-            additionalView.isHidden = additional?.characters.count == 0
+            additionalView.isHidden = additional?.count == 0
         }
     }
     
     var value: String? {
         didSet {
             valueView.text = value
-            valueView.isHidden = value?.characters.count == 0
+            valueView.isHidden = value?.count == 0
         }
     }
     

@@ -260,7 +260,7 @@ open class UniSwitchView: UIView, UniLayoutView, UniLayoutPaddedView {
     open func measuredSize(sizeSpec: CGSize, widthSpec: UniMeasureSpec, heightSpec: UniMeasureSpec) -> CGSize {
         var result = CGSize(width: padding.left + padding.right, height: padding.top + padding.bottom)
         var measuredTextSize = CGSize.zero
-        if textView.text?.characters.count ?? 0 > 0 {
+        if textView.text?.count ?? 0 > 0 {
             measuredTextSize = UniLayout.measure(view: textView, sizeSpec: CGSize(width: sizeSpec.width - padding.left - padding.right - switchView.intrinsicContentSize.width - UniSwitchView.textPadding, height: sizeSpec.height - padding.top - padding.bottom), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
             result.width += measuredTextSize.width + UniSwitchView.textPadding
         }

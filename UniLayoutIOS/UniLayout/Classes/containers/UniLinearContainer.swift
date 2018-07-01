@@ -24,9 +24,9 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
     // ---
     
     public var layoutProperties = UniLayoutProperties()
-    public var padding = UIEdgeInsets.zero
+    open var padding = UIEdgeInsets.zero
     
-    public var visibility: UniVisibility {
+    open var visibility: UniVisibility {
         set {
             isHidden = newValue != .visible
             layoutProperties.hiddenTakesSpace = newValue == .invisible
