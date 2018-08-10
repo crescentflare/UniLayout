@@ -13,8 +13,10 @@ UniLayout is a project to make multi-platform development easier for iOS and And
 * Ports the Android layout capabilities to iOS, including Linear Layout, Frame Layout and Scroll View
 * For iOS, the scroll view automatically updates its content size
 * Adds additional capabilities like minimum and maximum sizes and more flexibility in alignment (through gravity)
+* Adds a new margin property to be used between views, this will be ignored if it's the first view that's set to visible or invisible
 * For iOS, the linear and frame containers also have built-in support for taps and highlighting
 * For Android, there is a custom reusing container which can be used as an alternative for the recycler view, includes standard support for selection and swiping
+* Provides a textview fix for Android, to have a correct measure result when having multiple lines
 
 
 ### iOS integration guide
