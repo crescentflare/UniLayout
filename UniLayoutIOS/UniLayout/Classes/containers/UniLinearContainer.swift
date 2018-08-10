@@ -156,6 +156,15 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             paddedSize.height = 0xFFFFFF
         }
 
+        // Determine first sizable view for spacing margin support
+        var firstSizableView: UIView?
+        for view in subviews {
+            if !view.isHidden || ((view as? UniLayoutView)?.layoutProperties.hiddenTakesSpace ?? false) {
+                firstSizableView = view
+                break
+            }
+        }
+
         // Measure the views without any weight
         var subviewSizes: [CGSize] = []
         var totalWeight: CGFloat = 0
@@ -173,6 +182,9 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 if viewLayoutProperties.weight > 0 {
                     totalWeight += viewLayoutProperties.weight
                     remainingHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom + viewLayoutProperties.minHeight
+                    if view !== firstSizableView {
+                        remainingHeight -= viewLayoutProperties.spacingMargin
+                    }
                     totalMinHeightForWeight += viewLayoutProperties.minHeight
                     subviewSizes.append(CGSize.zero)
                     continue
@@ -184,6 +196,9 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
                 limitWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
                 remainingHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
+                if view !== firstSizableView {
+                    remainingHeight -= viewLayoutProperties.spacingMargin
+                }
             }
             let result = UniLayout.measure(view: view, sizeSpec: CGSize(width: limitWidth, height: remainingHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
             remainingHeight = max(0, remainingHeight - result.height)
@@ -227,6 +242,9 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
                 x += viewLayoutProperties.margin.left
                 y += viewLayoutProperties.margin.top
+                if view !== firstSizableView {
+                    y += viewLayoutProperties.spacingMargin
+                }
                 if adjustFrames {
                     x += (paddedSize.width - viewLayoutProperties.margin.left - viewLayoutProperties.margin.right - size.width) * viewLayoutProperties.horizontalGravity
                 }
@@ -270,6 +288,15 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             paddedSize.height = 0xFFFFFF
         }
         
+        // Determine first sizable view for spacing margin support
+        var firstSizableView: UIView?
+        for view in subviews {
+            if !view.isHidden || ((view as? UniLayoutView)?.layoutProperties.hiddenTakesSpace ?? false) {
+                firstSizableView = view
+                break
+            }
+        }
+        
         // Measure the views without any weight
         var subviewSizes: [CGSize] = []
         var totalWeight: CGFloat = 0
@@ -287,6 +314,9 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
                 if viewLayoutProperties.weight > 0 {
                     totalWeight += viewLayoutProperties.weight
                     remainingWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right + viewLayoutProperties.minWidth
+                    if view !== firstSizableView {
+                        remainingWidth -= viewLayoutProperties.spacingMargin
+                    }
                     totalMinWidthForWeight += viewLayoutProperties.minWidth
                     subviewSizes.append(CGSize.zero)
                     continue
@@ -298,6 +328,9 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
                 remainingWidth -= viewLayoutProperties.margin.left + viewLayoutProperties.margin.right
                 limitHeight -= viewLayoutProperties.margin.top + viewLayoutProperties.margin.bottom
+                if view !== firstSizableView {
+                    remainingWidth -= viewLayoutProperties.spacingMargin
+                }
             }
             let result = UniLayout.measure(view: view, sizeSpec: CGSize(width: remainingWidth, height: limitHeight), parentWidthSpec: widthSpec, parentHeightSpec: heightSpec, forceViewWidthSpec: .unspecified, forceViewHeightSpec: .unspecified)
             remainingWidth = max(0, remainingWidth - result.width)
@@ -341,6 +374,9 @@ open class UniLinearContainer: UIView, UniLayoutView, UniLayoutPaddedView {
             if let viewLayoutProperties = (view as? UniLayoutView)?.layoutProperties {
                 x += viewLayoutProperties.margin.left
                 y += viewLayoutProperties.margin.top
+                if view !== firstSizableView {
+                    x += viewLayoutProperties.spacingMargin
+                }
                 if adjustFrames {
                     y += (paddedSize.height - viewLayoutProperties.margin.top - viewLayoutProperties.margin.bottom - size.height) * viewLayoutProperties.verticalGravity
                 }
