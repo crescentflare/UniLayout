@@ -80,6 +80,7 @@ class ItemView: UniLinearContainer {
         titleView.font = UIFont.boldSystemFont(ofSize: 17)
         container.addSubview(titleView)
         additionalView.font = UIFont.systemFont(ofSize: 15)
+        additionalView.layoutProperties.spacingMargin = 2
         container.addSubview(additionalView)
         
         // Add and configure the value view

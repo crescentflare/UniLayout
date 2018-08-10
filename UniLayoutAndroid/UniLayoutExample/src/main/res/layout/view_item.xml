@@ -32,7 +32,7 @@
                 android:id="@+id/view_item_additional"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                app:uni_spacing_margin="4dp"
                 android:textColor="#202020"
                 android:textSize="15sp"/>
         </com.crescentflare.unilayout.containers.UniLinearContainer>

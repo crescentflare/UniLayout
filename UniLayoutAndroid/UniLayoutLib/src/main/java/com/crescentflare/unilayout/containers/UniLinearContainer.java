@@ -122,11 +122,23 @@ public class UniLinearContainer extends ViewGroup
             paddedHeightSize = 0xFFFFFF;
         }
 
+        // Determine first sizable view for spacing margin support
+        int firstSizableView = 0xFFFFFF;
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++)
+        {
+            View view = getChildAt(i);
+            if (view.getVisibility() != GONE)
+            {
+                firstSizableView = i;
+                break;
+            }
+        }
+
         // Measure the views without any weight
         float totalWeight = 0;
         int remainingHeight = paddedHeightSize;
         float totalMinHeightForWeight = 0;
-        int childCount = getChildCount();
         for (int i = 0; i < childCount; i++)
         {
             // Skip hidden views if they are not part of the layout
@@ -145,6 +157,10 @@ public class UniLinearContainer extends ViewGroup
                 {
                     totalWeight += uniLayoutParams.weight;
                     remainingHeight -= uniLayoutParams.topMargin + uniLayoutParams.bottomMargin + uniLayoutParams.minHeight;
+                    if (i > firstSizableView)
+                    {
+                        remainingHeight -= uniLayoutParams.spacingMargin;
+                    }
                     totalMinHeightForWeight += uniLayoutParams.minHeight;
                     continue;
                 }
@@ -156,6 +172,10 @@ public class UniLinearContainer extends ViewGroup
             {
                 limitWidth -= ((MarginLayoutParams)viewLayoutParams).leftMargin + ((MarginLayoutParams)viewLayoutParams).rightMargin;
                 remainingHeight -= ((MarginLayoutParams)viewLayoutParams).topMargin + ((MarginLayoutParams)viewLayoutParams).bottomMargin;
+            }
+            if (i > firstSizableView && viewLayoutParams instanceof UniLayoutParams)
+            {
+                remainingHeight -= ((UniLayoutParams)viewLayoutParams).spacingMargin;
             }
             UniLayout.measure(view, limitWidth, remainingHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
             remainingHeight = Math.max(0, remainingHeight - view.getMeasuredHeight());
@@ -207,6 +227,10 @@ public class UniLinearContainer extends ViewGroup
                 UniLayoutParams uniLayoutParams = (UniLayoutParams)view.getLayoutParams();
                 x += uniLayoutParams.leftMargin;
                 y += uniLayoutParams.topMargin;
+                if (i > firstSizableView)
+                {
+                    y += uniLayoutParams.spacingMargin;
+                }
                 if (adjustLayout)
                 {
                     x += (paddedWidthSize - uniLayoutParams.leftMargin - uniLayoutParams.rightMargin - width) * uniLayoutParams.horizontalGravity;
@@ -264,11 +288,23 @@ public class UniLinearContainer extends ViewGroup
             paddedHeightSize = 0xFFFFFF;
         }
 
+        // Determine first sizable view for spacing margin support
+        int firstSizableView = 0xFFFFFF;
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++)
+        {
+            View view = getChildAt(i);
+            if (view.getVisibility() != GONE)
+            {
+                firstSizableView = i;
+                break;
+            }
+        }
+
         // Measure the views without any weight
         float totalWeight = 0;
         int remainingWidth = paddedWidthSize;
         float totalMinWidthForWeight = 0;
-        int childCount = getChildCount();
         for (int i = 0; i < childCount; i++)
         {
             // Skip hidden views if they are not part of the layout
@@ -287,6 +323,10 @@ public class UniLinearContainer extends ViewGroup
                 {
                     totalWeight += uniLayoutParams.weight;
                     remainingWidth -= uniLayoutParams.leftMargin + uniLayoutParams.rightMargin + uniLayoutParams.minWidth;
+                    if (i > firstSizableView)
+                    {
+                        remainingWidth -= uniLayoutParams.spacingMargin;
+                    }
                     totalMinWidthForWeight += uniLayoutParams.minWidth;
                     continue;
                 }
@@ -298,6 +338,10 @@ public class UniLinearContainer extends ViewGroup
             {
                 remainingWidth -= ((MarginLayoutParams)viewLayoutParams).leftMargin + ((MarginLayoutParams)viewLayoutParams).rightMargin;
                 limitHeight -= ((MarginLayoutParams)viewLayoutParams).topMargin + ((MarginLayoutParams)viewLayoutParams).bottomMargin;
+            }
+            if (i > firstSizableView && viewLayoutParams instanceof UniLayoutParams)
+            {
+                remainingWidth -= ((UniLayoutParams)viewLayoutParams).spacingMargin;
             }
             UniLayout.measure(view, remainingWidth, limitHeight, widthSpec, heightSpec, MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
             remainingWidth = Math.max(0, remainingWidth - view.getMeasuredWidth());
@@ -349,6 +393,10 @@ public class UniLinearContainer extends ViewGroup
                 UniLayoutParams uniLayoutParams = (UniLayoutParams)view.getLayoutParams();
                 x += uniLayoutParams.leftMargin;
                 y += uniLayoutParams.topMargin;
+                if (i > firstSizableView)
+                {
+                    x += uniLayoutParams.spacingMargin;
+                }
                 if (adjustLayout)
                 {
                     y += (paddedHeightSize - uniLayoutParams.topMargin - uniLayoutParams.bottomMargin - height) * uniLayoutParams.verticalGravity;

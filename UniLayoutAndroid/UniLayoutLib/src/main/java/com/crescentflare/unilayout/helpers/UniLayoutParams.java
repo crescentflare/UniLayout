@@ -33,6 +33,7 @@ public class UniLayoutParams extends ViewGroup.MarginLayoutParams
     public int maxWidth = 0xFFFFFF;
     public int minHeight = 0;
     public int maxHeight = 0xFFFFFF;
+    public int spacingMargin = 0;
     public float horizontalGravity = 0;
     public float verticalGravity = 0;
     public float weight = 0;
@@ -60,6 +61,7 @@ public class UniLayoutParams extends ViewGroup.MarginLayoutParams
         maxWidth = a.getDimensionPixelSize(R.styleable.UniLayoutParams_uni_max_width, 0xFFFFFF);
         minHeight = a.getDimensionPixelSize(R.styleable.UniLayoutParams_uni_min_height, 0);
         maxHeight = a.getDimensionPixelSize(R.styleable.UniLayoutParams_uni_max_height, 0xFFFFFF);
+        spacingMargin = a.getDimensionPixelSize(R.styleable.UniLayoutParams_uni_spacing_margin, 0);
         gravity = a.getInt(R.styleable.UniLayoutParams_uni_gravity, 0);
         if ((gravity & GRAVITY_FLAG_HORIZONTAL_MASK) == GRAVITY_FLAG_RIGHT)
         {
