@@ -6,6 +6,7 @@
         <attr name="uni_max_width" format="dimension"/>
         <attr name="uni_min_height" format="dimension"/>
         <attr name="uni_max_height" format="dimension"/>
+        <attr name="uni_spacing_margin" format="dimension"/>
         <attr name="uni_gravity">
             <flag name="left" value="0x0"/>
             <flag name="center_horizontal" value="0x1"/>
