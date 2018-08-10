@@ -1,6 +1,7 @@
 package com.crescentflare.unilayout.views;
 
 import android.content.Context;
+import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -9,10 +10,17 @@ import com.crescentflare.unilayout.helpers.UniLayoutParams;
 
 /**
  * UniLayout view: a view with simple text
- * Extends TextView, currently it's just an alias to have the same name as the iOS class
+ * Extends TextView, provides a bug fix for multi-line measurement of width
  */
 public class UniTextView extends TextView
 {
+    // ---
+    // Members
+    // ---
+
+    private boolean disableLineWidthFix = false;
+
+
     // ---
     // Initialization
     // ---
@@ -40,5 +48,47 @@ public class UniTextView extends TextView
 
     private void init(AttributeSet attrs)
     {
+    }
+
+
+    // ---
+    // Custom layout
+    // ---
+
+    public void setDisableLineWidthFix(boolean disableLineWidthFix)
+    {
+        this.disableLineWidthFix = disableLineWidthFix;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if (!disableLineWidthFix && MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.AT_MOST)
+        {
+            Layout layout = getLayout();
+            if (layout != null)
+            {
+                int lines = layout.getLineCount();
+                if (lines > 1)
+                {
+                    int fixedWidth = getCompoundPaddingLeft() + (int)Math.ceil(getMaxLineWidth(layout, lines)) + getCompoundPaddingRight();
+                    if (fixedWidth < getMeasuredWidth())
+                    {
+                        super.onMeasure(MeasureSpec.makeMeasureSpec(fixedWidth, MeasureSpec.EXACTLY), heightMeasureSpec);
+                    }
+                }
+            }
+        }
+    }
+
+    private float getMaxLineWidth(Layout layout, int lines)
+    {
+        float maxWidth = 0.0f;
+        for (int i = 0; i < lines; i++)
+        {
+            maxWidth = Math.max(maxWidth, layout.getLineWidth(i));
+        }
+        return maxWidth;
     }
 }

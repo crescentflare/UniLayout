@@ -6,7 +6,7 @@ import android.support.v7.widget.SwitchCompat;
 
 /**
  * UniLayout view: a switch including text
- * Extends ProgressBar, currently it's just an alias to have the same name as the iOS class
+ * Extends SwitchCompat, currently it's just an alias to have the same name as the iOS class
  */
 public class UniSwitchView extends SwitchCompat
 {
