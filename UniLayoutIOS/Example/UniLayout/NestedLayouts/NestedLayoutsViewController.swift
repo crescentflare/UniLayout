@@ -14,7 +14,7 @@ class NestedLayoutsViewController: UIViewController {
     // MARK: Access typed view instance
     // --
 
-    var containerView: UniVerticalScrollContainer! { return self.view as! UniVerticalScrollContainer }
+    var containerView: UniVerticalScrollContainer! { return self.view as? UniVerticalScrollContainer }
 
     
     // --
@@ -49,7 +49,7 @@ class NestedLayoutsViewController: UIViewController {
         let horizontalLayout = UniLinearContainer()
         horizontalLayout.orientation = .horizontal
         horizontalLayout.layoutProperties.width = UniLayoutProperties.stretchToParent
-        horizontalLayout.padding = UIEdgeInsetsMake(16, 8, 16, 8)
+        horizontalLayout.padding = UIEdgeInsets.init(top: 16, left: 8, bottom: 16, right: 8)
         
         // Add the image
         let imageView = UniImageView()

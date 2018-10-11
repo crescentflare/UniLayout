@@ -43,12 +43,12 @@ open class UniSpinnerView: UIView, UniLayoutView, UniLayoutPaddedView {
     // MARK: UIActivityIndicatorView properties
     // ---
 
-    public var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
+    public var activityIndicatorViewStyle: UIActivityIndicatorView.Style {
         get {
-            return indicatorView.activityIndicatorViewStyle
+            return indicatorView.style
         }
         set {
-            indicatorView.activityIndicatorViewStyle = newValue
+            indicatorView.style = newValue
         }
     }
 
@@ -167,7 +167,7 @@ class UniNotifyingActivityIndicatorView: UIActivityIndicatorView {
     // MARK: Hook layout into style changes
     // ---
     
-    override var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
+    override var style: UIActivityIndicatorView.Style {
         didSet {
             UniLayout.setNeedsLayout(view: self)
         }

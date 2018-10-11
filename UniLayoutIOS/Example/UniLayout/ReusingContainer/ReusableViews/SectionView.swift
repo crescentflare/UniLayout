@@ -48,7 +48,7 @@ class SectionView: UniFrameContainer {
     
     func initialize() {
         // Set padding
-        padding = UIEdgeInsetsMake(4, 8, 0, 8)
+        padding = UIEdgeInsets.init(top: 4, left: 8, bottom: 0, right: 8)
         
         // Add and configure text view
         textView.font = UIFont.boldSystemFont(ofSize: 17)

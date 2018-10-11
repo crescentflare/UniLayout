@@ -14,7 +14,7 @@ class ReusingContainerViewController: UIViewController {
     // MARK: Access typed view instance
     // --
 
-    var reusingContainer: ReusingContainerView! { return self.view as! ReusingContainerView }
+    var reusingContainer: ReusingContainerView! { return self.view as? ReusingContainerView }
     let editButton = UIButton()
 
     
