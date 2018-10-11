@@ -1,5 +1,7 @@
 use_frameworks!
 
+platform :ios, '8.0'
+
 target 'UniLayout_Example' do
   pod 'UniLayout', :path => '../../'
 
