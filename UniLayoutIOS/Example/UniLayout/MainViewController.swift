@@ -14,7 +14,7 @@ class MainViewController: UIViewController {
     // MARK: Access typed view instance
     // --
 
-    var containerView: UniVerticalScrollContainer! { return self.view as! UniVerticalScrollContainer }
+    var containerView: UniVerticalScrollContainer! { return self.view as? UniVerticalScrollContainer }
 
     
     // --
