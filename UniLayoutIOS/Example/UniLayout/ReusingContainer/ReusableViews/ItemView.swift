@@ -67,7 +67,7 @@ class ItemView: UniLinearContainer {
     func initialize() {
         // Set orientation and padding
         orientation = .horizontal
-        padding = UIEdgeInsetsMake(4, 8, 4, 8)
+        padding = UIEdgeInsets.init(top: 4, left: 8, bottom: 4, right: 8)
         layoutProperties.minHeight = 50
         
         // Add and configure nested container

@@ -36,7 +36,7 @@ class MainViewController: UIViewController {
         let verticalLayout = UniLinearContainer()
         verticalLayout.orientation = .vertical
         verticalLayout.layoutProperties.width = UniLayoutProperties.stretchToParent
-        verticalLayout.padding = UIEdgeInsetsMake(16, 16, 16, 16)
+        verticalLayout.padding = UIEdgeInsets.init(top: 16, left: 16, bottom: 16, right: 16)
         containerView.contentView = verticalLayout
         
         // Add a text explaining the example
@@ -53,7 +53,7 @@ class MainViewController: UIViewController {
         let nestedLayoutButton = UniButtonView()
         nestedLayoutButton.layoutProperties.margin.top = 16
         nestedLayoutButton.layoutProperties.width = UniLayoutProperties.stretchToParent
-        nestedLayoutButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
+        nestedLayoutButton.padding = UIEdgeInsets.init(top: 4, left: 8, bottom: 4, right: 8)
         nestedLayoutButton.setTitle("Nested layouts", for: .normal)
         nestedLayoutButton.setTitleColor(self.view.tintColor, for: .normal)
         nestedLayoutButton.setTitleColor(self.view.tintColor.withAlphaComponent(0.35), for: .highlighted)
@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
         let reusingContainerButton = UniButtonView()
         reusingContainerButton.layoutProperties.margin.top = 8
         reusingContainerButton.layoutProperties.width = UniLayoutProperties.stretchToParent
-        reusingContainerButton.padding = UIEdgeInsetsMake(4, 8, 4, 8)
+        reusingContainerButton.padding = UIEdgeInsets.init(top: 4, left: 8, bottom: 4, right: 8)
         reusingContainerButton.setTitle("Reusing container", for: .normal)
         reusingContainerButton.setTitleColor(self.view.tintColor, for: .normal)
         reusingContainerButton.setTitleColor(self.view.tintColor.withAlphaComponent(0.35), for: .highlighted)

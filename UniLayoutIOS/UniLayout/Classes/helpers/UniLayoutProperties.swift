@@ -68,7 +68,7 @@ public class UniLayoutProperties {
     // MARK: Properties for layout
     // ---
 
-    public var margin = UIEdgeInsetsMake(0, 0, 0, 0)
+    public var margin = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
     public var spacingMargin: CGFloat = 0
     public var minWidth: CGFloat = 0
     public var maxWidth: CGFloat = 0xFFFFFF

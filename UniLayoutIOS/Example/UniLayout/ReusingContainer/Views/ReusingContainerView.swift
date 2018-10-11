@@ -75,7 +75,7 @@ class ReusingContainerView: UniFrameContainer, UITableViewDataSource, UITableVie
         container.tableFooterView = tableFooter
         
         // Set the container properties
-        container.rowHeight = UITableViewAutomaticDimension
+        container.rowHeight = UITableView.automaticDimension
         container.estimatedRowHeight = 40
         container.dataSource = self
         container.delegate = self

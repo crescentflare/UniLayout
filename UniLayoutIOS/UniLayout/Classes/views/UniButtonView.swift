@@ -76,7 +76,7 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     }
     
     private func setup() {
-        padding = UIEdgeInsetsMake(0, 0, 0, 0)
+        padding = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     
@@ -113,22 +113,22 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     // MARK: Override functions to update the layout
     // ---
 
-    open override func setTitle(_ title: String?, for state: UIControlState) {
+    open override func setTitle(_ title: String?, for state: UIControl.State) {
         super.setTitle(title, for: state)
         UniLayout.setNeedsLayout(view: self)
     }
 
-    open override func setImage(_ image: UIImage?, for state: UIControlState) {
+    open override func setImage(_ image: UIImage?, for state: UIControl.State) {
         super.setImage(image, for: state)
         UniLayout.setNeedsLayout(view: self)
     }
 
-    open override func setBackgroundImage(_ image: UIImage?, for state: UIControlState) {
+    open override func setBackgroundImage(_ image: UIImage?, for state: UIControl.State) {
         super.setBackgroundImage(image, for: state)
         UniLayout.setNeedsLayout(view: self)
     }
 
-    open override func setAttributedTitle(_ title: NSAttributedString?, for state: UIControlState) {
+    open override func setAttributedTitle(_ title: NSAttributedString?, for state: UIControl.State) {
         super.setAttributedTitle(title, for: state)
         UniLayout.setNeedsLayout(view: self)
     }
@@ -161,8 +161,8 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
         set { setBackgroundColor(newValue, for: .normal) }
     }
 
-    public func setBackgroundColor(_ color: UIColor?, for state: UIControlState) {
-        let currentState = !isEnabled ? UIControlState.disabled : (isHighlighted ? UIControlState.highlighted : UIControlState.normal)
+    public func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
+        let currentState = !isEnabled ? UIControl.State.disabled : (isHighlighted ? UIControl.State.highlighted : UIControl.State.normal)
         if state == .normal {
             backgroundColorNormalState = color
         } else if state == .highlighted {
@@ -175,8 +175,8 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
         }
     }
     
-    public func setBorderColor(_ color: UIColor?, for state: UIControlState) {
-        let currentState = !isEnabled ? UIControlState.disabled : (isHighlighted ? UIControlState.highlighted : UIControlState.normal)
+    public func setBorderColor(_ color: UIColor?, for state: UIControl.State) {
+        let currentState = !isEnabled ? UIControl.State.disabled : (isHighlighted ? UIControl.State.highlighted : UIControl.State.normal)
         if state == .normal {
             borderColorNormalState = color
         } else if state == .highlighted {

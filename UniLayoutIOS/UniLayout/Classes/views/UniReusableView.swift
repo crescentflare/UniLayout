@@ -22,7 +22,7 @@ open class UniReusableView : UITableViewCell {
     private let coreContainer = UniLinearContainer()
     private var _view: UIView? = nil
     private var _accessoryView: UIView? = nil
-    private var _simulatedAccessoryType = UITableViewCellAccessoryType.none
+    private var _simulatedAccessoryType = UITableViewCell.AccessoryType.none
     private var _simulatingSpacing = true
     
     
@@ -51,10 +51,10 @@ open class UniReusableView : UITableViewCell {
         set {
             _simulatingSpacing = newValue
             if _simulatingSpacing {
-                mainContainer.padding = UIEdgeInsetsMake(4, 8, 4, 8)
+                mainContainer.padding = UIEdgeInsets.init(top: 4, left: 8, bottom: 4, right: 8)
                 mainContainer.layoutProperties.minHeight = 44
             } else {
-                mainContainer.padding = UIEdgeInsetsMake(0, 0, 0, 0)
+                mainContainer.padding = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
                 mainContainer.layoutProperties.minHeight = 0
             }
         }
@@ -82,7 +82,7 @@ open class UniReusableView : UITableViewCell {
     // MARK: Override and simulate disclosure indicator
     // --
     
-    open override var accessoryType: UITableViewCellAccessoryType {
+    open override var accessoryType: UITableViewCell.AccessoryType {
         set {
             _simulatedAccessoryType = newValue
             if _simulatedAccessoryType == .disclosureIndicator {
@@ -99,7 +99,7 @@ open class UniReusableView : UITableViewCell {
     // MARK: Initialize
     // --
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
     }
@@ -117,7 +117,7 @@ open class UniReusableView : UITableViewCell {
         // Set up and add the main container view
         mainContainer.layoutProperties.width = UniLayoutProperties.stretchToParent
         mainContainer.orientation = .horizontal
-        mainContainer.padding = UIEdgeInsetsMake(4, 8, 4, 8)
+        mainContainer.padding = UIEdgeInsets.init(top: 4, left: 8, bottom: 4, right: 8)
         mainContainer.layoutProperties.minHeight = 44
         coreContainer.addSubview(mainContainer)
         
