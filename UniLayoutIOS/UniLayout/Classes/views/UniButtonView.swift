@@ -116,6 +116,9 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     open override func setTitle(_ title: String?, for state: UIControl.State) {
         super.setTitle(title, for: state)
         UniLayout.setNeedsLayout(view: self)
+        if adjustsTintColorToMatchTitle {
+            refreshTintColor()
+        }
     }
 
     open override func setImage(_ image: UIImage?, for state: UIControl.State) {
@@ -144,6 +147,9 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
             if borderColorNormalState != nil || borderColorHighlightedState != nil || borderColorDisabledState != nil {
                 refreshStateBorder()
             }
+            if adjustsTintColorToMatchTitle {
+                refreshTintColor()
+            }
         }
     }
     
@@ -153,6 +159,15 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
             if borderColorNormalState != nil || borderColorHighlightedState != nil || borderColorDisabledState != nil {
                 refreshStateBorder()
             }
+            if adjustsTintColorToMatchTitle {
+                refreshTintColor()
+            }
+        }
+    }
+    
+    open var adjustsTintColorToMatchTitle: Bool = false {
+        didSet {
+            refreshTintColor()
         }
     }
     
@@ -186,6 +201,14 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
         }
         if state == .normal || state == currentState {
             refreshStateBorder()
+        }
+    }
+    
+    private func refreshTintColor() {
+        if adjustsTintColorToMatchTitle {
+            tintColor = titleColor(for: isEnabled ? (isHighlighted ? .highlighted : .normal) : .disabled)
+        } else {
+            tintColor = nil
         }
     }
 
