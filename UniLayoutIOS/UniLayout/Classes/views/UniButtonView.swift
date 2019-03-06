@@ -116,9 +116,6 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     open override func setTitle(_ title: String?, for state: UIControl.State) {
         super.setTitle(title, for: state)
         UniLayout.setNeedsLayout(view: self)
-        if adjustsTintColorToMatchTitle {
-            refreshTintColor()
-        }
     }
 
     open override func setImage(_ image: UIImage?, for state: UIControl.State) {
@@ -171,6 +168,13 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
         }
     }
     
+    open override func setTitleColor(_ color: UIColor?, for state: UIControl.State) {
+        super.setTitleColor(color, for: state)
+        if adjustsTintColorToMatchTitle {
+            refreshTintColor()
+        }
+    }
+    
     open override var backgroundColor: UIColor? {
         get { return backgroundColorNormalState }
         set { setBackgroundColor(newValue, for: .normal) }
@@ -206,7 +210,7 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     
     private func refreshTintColor() {
         if adjustsTintColorToMatchTitle {
-            tintColor = titleColor(for: isEnabled ? (isHighlighted ? .highlighted : .normal) : .disabled)
+            tintColor = titleColor(for: state)
         } else {
             tintColor = nil
         }
