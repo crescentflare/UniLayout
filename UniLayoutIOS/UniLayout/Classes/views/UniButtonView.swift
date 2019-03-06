@@ -210,7 +210,7 @@ open class UniButtonView: UIButton, UniLayoutView, UniLayoutPaddedView {
     
     private func refreshTintColor() {
         if adjustsTintColorToMatchTitle {
-            tintColor = titleColor(for: isEnabled ? (isHighlighted ? .highlighted : .normal) : .disabled)
+            tintColor = titleColor(for: state)
         } else {
             tintColor = nil
         }
