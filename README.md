@@ -24,7 +24,7 @@ UniLayout is a project to make multi-platform development easier for iOS and And
 The library is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
-pod "UniLayout", '~> 0.4.2'
+pod "UniLayout", '~> 0.4.3'
 ```
 
 The above version is for Swift 4.2. For older Swift versions use the following:
