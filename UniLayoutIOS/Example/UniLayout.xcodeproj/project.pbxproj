@@ -331,7 +331,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-UniLayout_Example/Pods-UniLayout_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-UniLayout_Example/Pods-UniLayout_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/UniLayout/UniLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -340,7 +340,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniLayout_Example/Pods-UniLayout_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UniLayout_Example/Pods-UniLayout_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D935B2DFBE24EB6142984221 /* [CP] Check Pods Manifest.lock */ = {
