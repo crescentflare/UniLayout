@@ -9,6 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'UniLayout'
   s.version          = '0.4.4'
+  s.swift_version    = '5.0'
   s.summary          = 'A uniform layout system for iOS and Android.'
 
 # This description is used to generate tags and improve search results.
