@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UniLayout'
-  s.version          = '0.4.4'
+  s.version          = '0.4.5'
   s.swift_version    = '5.0'
   s.summary          = 'A uniform layout system for iOS and Android.'
 
