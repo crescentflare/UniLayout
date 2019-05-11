@@ -13,13 +13,13 @@
 		04326C711DCF7FE600C23580 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04326C6E1DCF7FE600C23580 /* ItemView.swift */; };
 		04326C721DCF7FE600C23580 /* SectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04326C6F1DCF7FE600C23580 /* SectionView.swift */; };
 		04326C751DCF803100C23580 /* ReusingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04326C741DCF803100C23580 /* ReusingContainerView.swift */; };
+		0463D8372285F2840044DDA5 /* AutoLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463D8362285F2840044DDA5 /* AutoLayoutTests.swift */; };
 		0479B51C1DCDDCF2009DE6CC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479B51B1DCDDCF1009DE6CC /* MainViewController.swift */; };
 		37F0E96D30C93FEBC6387649 /* Pods_UniLayout_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100BA9DD4EBD3741A32ED194 /* Pods_UniLayout_Example.framework */; };
 		458C6D31B10B06F89B9CF3AA /* Pods_UniLayout_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C853DB47181D86C9BAFA109 /* Pods_UniLayout_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +41,7 @@
 		04326C741DCF803100C23580 /* ReusingContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusingContainerView.swift; sourceTree = "<group>"; };
 		044E6E711DB7972500F02D54 /* UniLayout.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = UniLayout.podspec; path = ../../UniLayout.podspec; sourceTree = "<group>"; };
 		044E6E731DB7973B00F02D54 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		0463D8362285F2840044DDA5 /* AutoLayoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutTests.swift; sourceTree = "<group>"; };
 		0479B51B1DCDDCF1009DE6CC /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		100BA9DD4EBD3741A32ED194 /* Pods_UniLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniLayout_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C853DB47181D86C9BAFA109 /* Pods_UniLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniLayout_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,7 +52,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* UniLayout_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniLayout_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		832BB783871E5F430D691D48 /* Pods-UniLayout_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniLayout_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniLayout_Tests/Pods-UniLayout_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B04159541751E4A8FD2DBD32 /* Pods-UniLayout_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniLayout_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniLayout_Example/Pods-UniLayout_Example.release.xcconfig"; sourceTree = "<group>"; };
 		C50BFD6E010D0E8D2755818C /* Pods-UniLayout_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniLayout_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniLayout_Tests/Pods-UniLayout_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,7 +171,6 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -180,6 +179,7 @@
 		607FACE91AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0463D8362285F2840044DDA5 /* AutoLayoutTests.swift */,
 				607FACEA1AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -383,7 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				0463D8372285F2840044DDA5 /* AutoLayoutTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C50BFD6E010D0E8D2755818C /* Pods-UniLayout_Tests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -558,7 +559,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UniLayout_Example.app/UniLayout_Example";
 			};
 			name = Debug;
 		};
@@ -566,6 +569,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 832BB783871E5F430D691D48 /* Pods-UniLayout_Tests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -575,6 +579,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UniLayout_Example.app/UniLayout_Example";
 			};
 			name = Release;
 		};
