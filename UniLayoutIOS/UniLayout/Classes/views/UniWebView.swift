@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 /// A UniLayout enabled UIWebView, adding padding and layout properties
 open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
@@ -40,21 +41,30 @@ open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     
     // ---
-    // MARK: UIWebView properties
+    // MARK: WKWebView properties
     // ---
     
-    public var delegate: UIWebViewDelegate? {
+    public var navigationDelegate: WKNavigationDelegate? {
         get {
-            return webView.delegate
+            return webView.navigationDelegate
         }
         set {
-            webView.delegate = newValue
+            webView.navigationDelegate = newValue
         }
     }
     
-    public var request: URLRequest? {
+    public var uiDelegate: WKUIDelegate? {
         get {
-            return webView.request
+            return webView.uiDelegate
+        }
+        set {
+            webView.uiDelegate = newValue
+        }
+    }
+
+    public var url: URL? {
+        get {
+            return webView.url
         }
     }
 
@@ -76,7 +86,7 @@ open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
         }
     }
     
-    public var internalWebView: UIWebView {
+    public var internalWebView: WKWebView {
         get {
             return webView
         }
@@ -118,15 +128,16 @@ open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
     // ---
 
     public func loadRequest(_ request: URLRequest) {
-        webView.loadRequest(request)
+        webView.load(request)
     }
 
     public func loadHTMLString(_ string: String, baseURL: URL? = nil) {
         webView.loadHTMLString(string, baseURL: baseURL)
     }
 
-    public func loadData(_ data: Data, mimeType: String, textEncodingName: String, baseURL: URL) {
-        webView.load(data, mimeType: mimeType, textEncodingName: textEncodingName, baseURL: baseURL)
+    @available(iOS 9.0, *)
+    public func loadData(_ data: Data, mimeType: String, characterEncodingName: String, baseURL: URL) {
+        webView.load(data, mimeType: mimeType, characterEncodingName: characterEncodingName, baseURL: baseURL)
     }
 
     public func reload() {
@@ -179,7 +190,7 @@ open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
     
 }
 
-class UniNotifyingWebView: UIWebView {
+class UniNotifyingWebView: WKWebView {
     
     // ---
     // MARK: Hook layout into content changes
