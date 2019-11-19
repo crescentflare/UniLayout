@@ -1,6 +1,6 @@
 {
   "name": "UniLayout",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "swift_versions": "5.0",
   "summary": "A uniform layout system for iOS and Android.",
   "description": "A uniform layout system for both iOS and Android. Based on the layout container system from Android (like LinearLayout and FrameLayout).",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/crescentflare/UniLayout.git",
-    "tag": "0.4.5"
+    "tag": "0.4.6"
   },
   "platforms": {
     "ios": "8.0"
@@ -24,5 +24,6 @@
     "UniLayout": [
       "UniLayoutIOS/UniLayout/Assets/**/*"
     ]
-  }
+  },
+  "swift_version": "5.0"
 }
