@@ -24,5 +24,6 @@
     "UniLayout": [
       "UniLayoutIOS/UniLayout/Assets/**/*"
     ]
-  }
+  },
+  "swift_version": "5.0"
 }
