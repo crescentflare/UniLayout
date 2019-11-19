@@ -41,9 +41,11 @@ class AutoLayoutTests: XCTestCase {
     // The status bar is always translucent
     // The view goes also below the status bar and takes up the entire screen
     func testBasicViewControllerView() {
+        // Assert the default root view
         XCTAssertEqual(viewController.view.frame, CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         print("Screen bounds are: ", UIScreen.main.bounds)
 
+        // Wait for the layout pass to complete and print out information of layout events
         simpleWait(time: 1)
         LayoutAnalyzer.shared.printEvents()
     }
