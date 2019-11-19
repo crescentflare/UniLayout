@@ -1,5 +1,5 @@
 PODS:
-  - UniLayout (0.4.5)
+  - UniLayout (0.4.6)
 
 DEPENDENCIES:
   - UniLayout (from `../../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  UniLayout: 680ee3ed6e5c4331313fbc2721374073b7a42da5
+  UniLayout: 6625421bfc9173f721d3d9010110605770c4b4f6
 
 PODFILE CHECKSUM: bbed6189b4ffb0fb96a634acf2bf1c933f9a3673
 
