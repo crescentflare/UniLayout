@@ -3,13 +3,13 @@
 //  UniLayout Pod
 //
 //  Library view: a web view
-//  Extends UIView containing a UIWebView to support properties for UniLayout containers and padding
+//  Extends UIView containing a WKWebView to support properties for UniLayout containers and padding
 //
 
 import UIKit
 import WebKit
 
-/// A UniLayout enabled UIWebView, adding padding and layout properties
+/// A UniLayout enabled WKWebView, adding padding and layout properties
 open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
 
     // ---
@@ -124,7 +124,7 @@ open class UniWebView: UIView, UniLayoutView, UniLayoutPaddedView {
     
     
     // ---
-    // MARK: UIWebView methods
+    // MARK: WKWebView methods
     // ---
 
     public func loadRequest(_ request: URLRequest) {
