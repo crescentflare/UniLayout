@@ -1,27 +1,20 @@
 apply plugin: 'com.android.library'
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'UniLayoutLib'
+    PUBLISH_GROUP_ID = 'com.crescentflare.unilayout'
+    PUBLISH_ARTIFACT_ID = 'UniLayoutLib'
+    PUBLISH_VERSION = library_version
 
-    publishedGroupId = 'com.crescentflare.unilayout'
-    libraryName = 'UniLayoutAndroid'
-    artifact = 'UniLayoutLib'
+    PUBLISH_DESCRIPTION = "A uniform layout system for both iOS and Android"
+    PUBLISH_SITE_URL = "https://github.com/crescentflare/UniLayout"
+    PUBLISH_GIT_URL = "github.com/crescentflare/UniLayout"
 
-    libraryDescription = 'A uniform layout system for both iOS and Android'
+    PUBLISH_LICENSE_NAME = "The MIT License (MIT)"
+    PUBLISH_LICENSE_URL = "https://opensource.org/licenses/MIT"
 
-    siteUrl = 'https://github.com/crescentflare/UniLayout'
-    gitUrl = 'https://github.com/crescentflare/UniLayout.git'
-
-    libraryVersion = '0.4.0'
-
-    developerId = 'crescentflare'
-    developerName = 'Johan Bos'
-    developerEmail = 'johan@crescentflare.com'
-
-    licenseName = 'The MIT License (MIT)'
-    licenseUrl = 'https://opensource.org/licenses/MIT'
-    allLicenses = ["MIT"]
+    PUBLISH_DEVELOPER_ID = "crescentflare"
+    PUBLISH_DEVELOPER_NAME = "Crescent Flare Apps"
+    PUBLISH_DEVELOPER_EMAIL = "info@crescentflare.com"
 }
 
 android {
@@ -32,7 +25,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 22
         versionCode 1
-        versionName "0.4.0"
+        versionName library_version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,5 +47,4 @@ dependencies {
     testCompile 'org.json:org.json:2.0'
 }
 
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+apply from: "publish-mavencentral.gradle"

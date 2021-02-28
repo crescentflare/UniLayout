@@ -1,19 +1,24 @@
 buildscript {
+    ext.library_version = '0.4.0'
+
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.0"
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        google()
     }
     configurations.all {
         resolutionStrategy.force 'com.android.support:support-annotations:22.1.1'
     }
 }
+
+apply plugin: 'io.codearte.nexus-staging'
