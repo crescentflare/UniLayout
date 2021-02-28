@@ -3,9 +3,11 @@
 [![CI Status](http://img.shields.io/travis/crescentflare/UniLayout.svg?style=flat)](https://travis-ci.org/crescentflare/UniLayout)
 [![License](https://img.shields.io/cocoapods/l/UniLayout.svg?style=flat)](http://cocoapods.org/pods/UniLayout)
 [![Version](https://img.shields.io/cocoapods/v/UniLayout.svg?style=flat)](http://cocoapods.org/pods/UniLayout)
-[![Version](https://img.shields.io/bintray/v/crescentflare/maven/UniLayoutLib.svg?style=flat)](https://bintray.com/crescentflare/maven/UniLayoutLib)
+[![Version](https://img.shields.io/maven-central/v/com.crescentflare.unilayout/UniLayoutLib.svg?style=flat)](https://repo1.maven.org/maven2/com/crescentflare/unilayout/UniLayoutLib)
 
 UniLayout is a project to make multi-platform development easier for iOS and Android regarding layouts. The goal is to have a uniform layout system to port the flexibility of Android layouts to iOS while adding more features to Android. Based on the layout container system from Android (like LinearLayout and FrameLayout).
+
+⚠️ **Notice for Android developers**: JCenter plans to shut down in may 2021. To mitigate this, the UniLayout library has moved to Maven Central from version 0.4.0 onwards. Make sure to update to the latest version in time.
 
 
 ### Features

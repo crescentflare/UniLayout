@@ -1,1 +1,2 @@
-../gradlew clean bintrayUpload
+../gradlew clean publishReleasePublicationToMavencentralRepository
+../gradlew closeAndReleaseRepository
